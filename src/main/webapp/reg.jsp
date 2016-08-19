@@ -60,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    </tr>
 			    <tr>
 			    	<td class="label">性别：</td>
-			    	<td class="controler"><input type="radio" name="UserName" checked="checked" value="Male">Male<input type="radio" name="gender" value="Female">Female</td>
+			    	<td class="controler"><input type="radio" name="UserSex" checked="checked" value="Male">Male<input type="radio" name="gender" value="Female">Female</td>
 			    	
 			    </tr>
 			   

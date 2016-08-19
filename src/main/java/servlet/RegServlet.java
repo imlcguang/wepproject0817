@@ -71,12 +71,17 @@ public class RegServlet extends HttpServlet {
 		*/
 			try
 			{
-				loginName = request.getParameter("loginName");
-				password = request.getParameter("password");
-				userName = request.getParameter("userName");
-				userSex  = request.getParameter("userSex");
-				functionPopedom = request.getParameter("functionPopedom");
+				loginName = request.getParameter("LoginName");
+				password = request.getParameter("Password");
+				userName = request.getParameter("UserName");
+				userSex  = request.getParameter("UserSex");
+				functionPopedom = request.getParameter("FunctionPopedom");
 				
+				System.out.println("loginName:"+loginName);
+				System.out.println("userName:"+userName);
+				System.out.println("functionPopedom:"+functionPopedom);
+				
+		
 				u.setLoginName(loginName);
 				u.setPassword(password);
 				u.setUserName(userName);

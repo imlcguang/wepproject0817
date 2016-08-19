@@ -17,6 +17,20 @@
 		<servlet-name>RegServlet</servlet-name>
 		<servlet-class>servlet.RegServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>OutServlet</display-name>
+		<servlet-name>OutServlet</servlet-name>
+		<servlet-class>servlet.OutServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>AddUserServlet</display-name>
+		<servlet-name>AddUserServlet</servlet-name>
+		<servlet-class>servlet.AddUserServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>a</servlet-name>
 		<url-pattern>/a</url-pattern>
@@ -24,6 +38,14 @@
 	<servlet-mapping>
 		<servlet-name>RegServlet</servlet-name>
 		<url-pattern>/RegServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>OutServlet</servlet-name>
+		<url-pattern>/OutServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AddUserServlet</servlet-name>
+		<url-pattern>/AddUserServlet</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>/index.jsp</welcome-file>

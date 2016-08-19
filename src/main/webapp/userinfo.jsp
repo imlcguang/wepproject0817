@@ -45,11 +45,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </tr>
         <tr>
           <td class="title">密码：</td>
-          <td class="content">&nbsp;<jsp:getProperty name="regUser" property="Password"/></td>
+          <td class="content">&nbsp;<jsp:getProperty name="regUser" property="password"/></td>
         </tr>
         <tr>
           <td class="title">用户名：</td>
-          <td class="content">&nbsp;<jsp:getProperty name="regUser" property="UserName"/></td>
+          <td class="content">&nbsp;<jsp:getProperty name="regUser" property="userName"/></td>
         </tr>
         <tr>
           <td class="title">性别：</td>

@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>注册成功!</h1>
+<h1>客户信息维护</h1>
 </body>
 </html>

@@ -6,13 +6,13 @@ public class T_User {
 	private String Password;
 	private String UserName;
 	private String UserSex;
-	private String FunctionPopedom;
+	private String[] FunctionPopedom;
 
 	public T_User() {
 	}
 
 	public T_User(Integer userID, String loginName, String password, String userName, String userSex,
-			String functionPopedom) {
+			String[] functionPopedom) {
 		// super();
 		UserID = userID;
 		LoginName = loginName;
@@ -62,12 +62,12 @@ public class T_User {
 		UserSex = userSex;
 	}
 
-	public String getFunctionPopedom() {
+	public String[] getFunctionPopedom() {
 		return FunctionPopedom;
 	}
 
-	public void setFunctionPopedom(String functionPopedom) {
-		FunctionPopedom = functionPopedom;
+	public void setFunctionPopedom(String[] functionPopedom2) {
+		FunctionPopedom = functionPopedom2;
 	}
 
 	@Override

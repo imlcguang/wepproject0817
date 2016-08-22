@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>注册成功!</h1>
+<a href=user.jsp >用户信息管理</a>
+<a href=customer.jsp >客户信息维护</a>
+<a href=model.jsp >样机信息维护</a>
 </body>
 </html>

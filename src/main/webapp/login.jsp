@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>注册成功!</h1>
+<h2>用户登录</h2>
+<form name="form1" method="post" action="<%=request.getContextPath()%>/UserLogin" onSubmit="return check()">
+   登录帐号：<input type="text" id="userName" name="userName"><br>
+   登录密码：<input type="password" id="userPWD" name="userPWD"><br>
+  <input type="submit" name="submit" value="提交">
+</form>
 </body>
 </html>

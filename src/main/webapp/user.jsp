@@ -35,9 +35,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <h1>用户注册</h1>
+    <h1>用户信息管理</h1>
+    <h2>用户注册</h2>
     <hr>
-    <form name="regForm" action="servlet/RegServlet" method="post" >
+    <form name="regForm" action="<%=request.getContextPath()%>/UserServlet" method="post" >
 			  <table border="0" width="800" cellspacing="0" cellpadding="0">
 			    <tr>
 			    	<td class="lalel">登录名：</td>
@@ -60,7 +61,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    </tr>
 			    <tr>
 			    	<td class="label">性别：</td>
-			    	<td class="controler"><input type="radio" name="UserSex" checked="checked" value="Male">Male<input type="radio" name="gender" value="Female">Female</td>
+			    	<td class="controler">
+			    	<input type="radio" name="UserSex" checked="checked" value="Male">Male
+			    	<input type="radio" name="UserSex" value="Female">Female</td>
 			    	
 			    </tr>
 			   
@@ -76,13 +79,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    <tr>
 			    	<td class="label">权限：</td>
 			    	<td class="controler">
-			    	<input type="checkbox" name="FunctionPopedom" value="借机登记"> 借机登记 &nbsp;
-			    	  <input type="checkbox" name="FunctionPopedom" value="样机归还"> 样机归还 &nbsp;
-			    	  <input type="checkbox" name="FunctionPopedom" value="客户信息维护">客户信息维护 &nbsp;<br/>
-			    	  <input type="checkbox" name="FunctionPopedom" value="样机信息维护"> 样机信息维护 &nbsp;
-			    	  <input type="checkbox" name="FunctionPopedom" value="借机明细查询"> 借机明细查询 &nbsp;
-			    	  <input type="checkbox" name="FunctionPopedom" value="借机统计"> 借机统计 &nbsp;
-			    	  <input type="checkbox" name="FunctionPopedom" value="用户信息管理"> 用户信息管理 &nbsp;
+			    	<input type="checkbox" name="FunctionPopedom" value="1" > 借机登记 &nbsp;
+			    	  <input type="checkbox" name="FunctionPopedom" value="2" > 样机归还 &nbsp;
+			    	  <input type="checkbox" name="FunctionPopedom" value="3" >客户信息维护 &nbsp;<br/>
+			    	  <input type="checkbox" name="FunctionPopedom" value="4" > 样机信息维护 &nbsp;
+			    	  <input type="checkbox" name="FunctionPopedom" value="5" > 借机明细查询 &nbsp;
+			    	  <input type="checkbox" name="FunctionPopedom" value="6" > 借机统计 &nbsp;
+			    	  <input type="checkbox" name="FunctionPopedom" value="7" > 用户信息管理 &nbsp;
 			    	</td>
 			    </tr>
 			   
@@ -95,5 +98,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    </tr>
 			  </table>
 			</form>
+			
+			
   </body>
 </html>

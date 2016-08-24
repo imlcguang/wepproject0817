@@ -8,5 +8,8 @@
 </head>
 <body>
 <h1>注册成功!</h1>
+<p>欢迎你</p>
+${regUser.loginName}
+
 </body>
 </html>

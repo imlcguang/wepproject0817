@@ -1,7 +1,6 @@
-package servlet;
+package com.imlc.demo.servlet;
 
 import java.io.IOException;
-import java.util.Enumeration;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;

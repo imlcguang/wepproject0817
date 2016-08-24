@@ -13,7 +13,7 @@
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
 		<property name="hbm2ddl.auto">update</property>
-		<mapping resource="com/imlc/demo/mapper/T_User.hbm.xml" />
+		<mapping resource="T_User.hbm.xml" />
 	<!-- 	<mapping resource="model/T_Customer.hbm.xml" />
 		<mapping resource="model/T_BorrowRecord.hbm.xml" />
 		<mapping resource="model/T_Model.hbm.xml" /> -->

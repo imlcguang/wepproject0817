@@ -1,4 +1,4 @@
-package servlet;
+package com.imlc.demo.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletConfig;

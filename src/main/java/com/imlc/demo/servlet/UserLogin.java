@@ -1,4 +1,4 @@
-package servlet;
+package com.imlc.demo.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,7 +6,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entity.T_User;
+import com.imlc.demo.dao.LoginDao;
+import com.imlc.demo.entity.T_User;
 
 /**
  * Servlet implementation class UserLogin
@@ -57,6 +58,8 @@ public class UserLogin extends HttpServlet {
 			u.setPassword(password);
 			System.out.println(loginName);
 			System.out.println(password);
+			LoginDao ld=new LoginDao();
+			ld.findByLoginName(loginName);
 
 			// request.getSession().setAttribute("regUser", u);
 			// ��ת��ע��ɹ�ҳ��

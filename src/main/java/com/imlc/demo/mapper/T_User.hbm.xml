@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2016-8-23 10:52:54 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.imlc.demo.entity.T_User" table="T_USER">
+    <class name="com.imlc.demo.entity.T_User" table="T_USER" lazy="false">
         <id name="UserID" type="java.lang.Integer">
             <column name="USERID" />
             <generator class="native" />

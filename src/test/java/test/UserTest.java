@@ -1,19 +1,17 @@
 package test;
 
-import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.query.Query;
 import org.hibernate.service.ServiceRegistry;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.imlc.demo.entity.T_User;
+
 
 public class UserTest {
 	private SessionFactory sessionFactory;// 声明私有会话工厂对象类
@@ -52,7 +50,7 @@ public class UserTest {
 
 	 
 	// 增加
-	@Test
+	/*@Test
 	public void testSaveUser() {
 		T_User u = new T_User();
 		u.setLoginName("cici");
@@ -65,7 +63,7 @@ public class UserTest {
 		// T_User u=new T_User(02, "01", "lily", "lily", "1",
 		// "1111111");
 
-	}
+	}*/
 
 	/*// 修改
 	public void testUpdateUser() {
@@ -122,12 +120,12 @@ public class UserTest {
   
 
 	// 查询
-	@Test
+
 	/*public void testGetUser() {
 		T_User u = new T_User();
 		u = (T_User) session.get(T_User.class, 9);
 		System.out.println(u);*/
-	public  List<T_User> findByLoginName(String rname) throws Exception {
+	/*public  List<T_User> findByLoginName(String rname) throws Exception {
 		Query query = session.createQuery("from T_User  where s.LoginName=?");
 		
 		query.setString(0,rname );
@@ -146,7 +144,7 @@ public class UserTest {
 
 		}
 		return result;
-	}
+	}*/
 	
 
 }

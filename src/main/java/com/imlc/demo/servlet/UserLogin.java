@@ -1,5 +1,7 @@
 package com.imlc.demo.servlet;
 
+import static org.hamcrest.CoreMatchers.nullValue;
+
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -56,14 +58,22 @@ public class UserLogin extends HttpServlet {
 
 			u.setLoginName(loginName);
 			u.setPassword(password);
-			System.out.println(loginName);
-			System.out.println(password);
+			System.out.println("测试输入结果 loginName: "+loginName);
+			System.out.println("测试输入结果 password: "+password);
 			LoginDao ld=new LoginDao();
-			ld.findByLoginName(loginName);
-
-			// request.getSession().setAttribute("regUser", u);
-			// ��ת��ע��ɹ�ҳ��
-			// request.getRequestDispatcher("/userinfo.jsp").forward(request,response);
+			
+			//if(!ld.findpassword(password))
+			//if(!ld.finduser(loginName).isEmpty()){
+			if(!ld.finduser(loginName,password).isEmpty()){
+			 request.getSession().setAttribute("regUser", u);
+			//成功跳转到功能选择页面
+			 request.getRequestDispatcher("/selfunc.jsp").forward(request,response);
+			 
+			}
+			else {
+				request.getRequestDispatcher("/loginfail.jsp").forward(request,response);
+			}
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

@@ -107,6 +107,7 @@ public class UserServlet extends HttpServlet {
 			u.setFunctionPopedom(functionPopedom);
 			
 			System.out.println(u.toString());
+			
 			UserDao ud=new UserDao();
 			ud.testSaveUser(u);
 

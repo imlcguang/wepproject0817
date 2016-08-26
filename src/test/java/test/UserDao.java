@@ -1,4 +1,4 @@
-package com.imlc.demo.dao;
+package test;
 
 import java.util.List;
 
@@ -7,8 +7,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import com.imlc.demo.entity.T_User;
-import com.imlc.demo.hibernate.SessionFactoryUtil;
 
 public class UserDao {
 	private SessionFactory sessionFactory;// 声明私有会话工厂对象类

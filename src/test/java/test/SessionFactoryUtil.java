@@ -1,4 +1,4 @@
-package com.imlc.demo.hibernate;
+package test;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

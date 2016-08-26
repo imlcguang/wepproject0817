@@ -1,6 +1,5 @@
 package com.imlc.demo.servlet;
 
-
 import java.io.IOException;
 
 import javax.servlet.ServletConfig;
@@ -11,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.imlc.demo.dao.UserDao;
 import com.imlc.demo.entity.T_User;
+import com.imlc.demo.exception.MsgException;
+import com.imlc.demo.service.UserService;
 
 /**
  * Servlet implementation class RegServlet
@@ -52,68 +53,81 @@ public class UserServlet extends HttpServlet {
 	}
 
 	/**
+	 * 用户注册
+	 * 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("utf-8");
 
 		T_User u = new T_User();
 		// Integer userID;
-		String loginName, password, userName, userSex;
+		String loginName, password,password2, userName, userSex;
 		String[] functionPopedom1;
 		String functionPopedom = "0";
 		int temp = 0, num = 0;
 
-		/*
-		 * String username,mypassword,gender,email,introduce,isAccept; Date
-		 * birthday; String[] favorites; SimpleDateFormat sdf = new
-		 * SimpleDateFormat("yyyy-MM-dd");
-		 */
 		try {
+
+			request.setCharacterEncoding("utf-8");
+			response.setContentType("text/html;charset=utf-8");
+			UserService service = new UserService();
+			// 检验验证码
+			String valistr = request.getParameter("valistr");
+			String valistr2 = (String) request.getSession().getAttribute("valistr");
+			if (valistr == null || valistr2 == null || !valistr.equals(valistr2)) {
+				request.setAttribute("msg", "验证码不正确!");
+				request.getRequestDispatcher("/user.jsp").forward(request, response);
+				return;
+			}
+
+			// 获取表单数据
 			loginName = request.getParameter("LoginName");
 			password = request.getParameter("Password");
+			password2 = request.getParameter("Password2");
 			userName = request.getParameter("UserName");
 			userSex = request.getParameter("UserSex");
 			functionPopedom1 = request.getParameterValues("FunctionPopedom");
 
-			 //System.out.println(userSex);
-			// System.out.println(functionPopedom1);
-
-			
-				for (int i = 0; i < functionPopedom1.length; i++) {
-					// 获得权限
-					// System.out.println("functionPopedom1:" + i + ":" +
-					// functionPopedom1[i]);
-					temp = 1 << Integer.parseInt(functionPopedom1[i]) - 1;
-					num += temp;
-				
-
+			// 如果没选会出现空指针异常，这个问题还没解决
+			for (int i = 0; i < functionPopedom1.length; i++) {
+				// 获得权限
+				temp = 1 << Integer.parseInt(functionPopedom1[i]) - 1;
+				num += temp;
 			}
+
 			// 权限转换成二进制
 			functionPopedom = Integer.toBinaryString(num);
 			// 权限补成七位权限
 			while (functionPopedom.length() < 7)
 				functionPopedom = "0" + functionPopedom;
 
-			//System.out.println("functionPopedom" + functionPopedom);
-			
+			// 封装 优化方法：BeanUtils.populate(user, request.getParameterMap());
 			u.setLoginName(loginName);
 			u.setPassword(password);
+			u.setPassword(password2);
 			u.setUserName(userName);
 			u.setUserSex(userSex);
 			u.setFunctionPopedom(functionPopedom);
-			
-			System.out.println(u.toString());
-			
-			UserDao ud=new UserDao();
-			ud.testSaveUser(u);
+			// 验证填入的信息是否为空
+			System.out.println("password2"+password2);
+			u.checkValue();
 
+			System.out.println(u.toString());
+
+			UserService us=new UserService();
+			
+			us.registUser(u);
+			// 带数据过去
 			request.getSession().setAttribute("regUser", u);
-			// ��ת��ע��ɹ�ҳ��
+			// 请求转发
 			request.getRequestDispatcher("/userinfo.jsp").forward(request, response);
+		} catch (MsgException e) {
+			request.setAttribute("msg", e.getMessage());
+			request.getRequestDispatcher("/user.jsp").forward(request, response);
+			return;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

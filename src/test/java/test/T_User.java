@@ -1,15 +1,27 @@
 package test;
 
-public class T_User {
+import java.io.Serializable;
+//实现接口
+public class T_User implements Serializable{
 	private Integer UserID;
 	private String LoginName;
 	private String Password;
+	//Password2确认密码
+	private String Password2;
 	private String UserName;
 	private String UserSex;
 	private String FunctionPopedom;
 	//private String FunctionPopedom;
 
 	public T_User() {
+	}
+
+	public String getPassword2() {
+		return Password2;
+	}
+
+	public void setPassword2(String password2) {
+		Password2 = password2;
 	}
 
 	public T_User(Integer userID, String loginName, String password, String userName, String userSex,

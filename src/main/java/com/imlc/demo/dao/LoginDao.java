@@ -1,7 +1,5 @@
 package com.imlc.demo.dao;
 
-import static org.hamcrest.CoreMatchers.nullValue;
-
 import java.util.List;
 
 import org.hibernate.Session;
@@ -58,41 +56,9 @@ public class LoginDao {
 			System.out.println("id="+modelid);
 			c = (T_User) session.get(T_User.class, modelid);
 			System.out.println("这是找到了用户名"+c);
-
 		}
 		destory();
 		return result;
 		
 	}
-	/*public static List<T_User> findpassword(String password) throws Exception {
-		init();
-		String hql = "FROM T_User WHERE password = ? ";
-		List result = session.createQuery(hql).setString(0, password).list();
-	
-	
-		for (int i = 0; i < result.size(); i++) {
-			T_User c = new T_User();
-			T_User customer = (T_User) result.get(i);
-
-			int modelid = customer.getUserID();
-			System.out.println("id="+modelid);
-			c = (T_User) session.get(T_User.class, modelid);
-			System.out.println("这是找到了密码"+c);
-
-		}
-		destory();
-		return result;
-		
-	}*/
-	
-	/*public static void main(String[] args) throws Exception {
-		if(!finduser("c","d").isEmpty()){
-			System.out.println("yes ");
-		}
-		else {
-			System.out.println("no");
-		}
-			
-	}*/
-	
 }

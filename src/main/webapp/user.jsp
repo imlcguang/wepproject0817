@@ -31,18 +31,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  width: 80%	
 	 }
    </style>  
-   <script type="text/javascript" src="js/Calendar3.js"></script>
+   <script type="text/javascript">
+  		function changeImg(img){
+  			img.src = img.src+"?time="+new Date().getTime();
+  		}
+  	</script>
+   <!-- <script type="text/javascript" src="js/Calendar3.js"></script> -->
   </head>
   
-  <body>
+  <body >
     <h1>用户信息管理</h1>
     <h2>用户注册</h2>
     <hr>
-    <form name="regForm" action="<%=request.getContextPath()%>/UserServlet" method="post" >
+    <font color="red">${msg }</font>
+    <form name="regForm" action="${pageContext.request.contextPath}/UserServlet" method="post" >
+    <%-- <%=request.getContextPath()%>  --%>
 			  <table border="0" width="800" cellspacing="0" cellpadding="0">
 			    <tr>
 			    	<td class="lalel">登录名：</td>
-			    	<td class="controler"><input type="text" name="LoginName" /></td>
+			    	<td class="controler"><input type="text" name="LoginName" value="${param.LoginName }"/></td>
 			    </tr>
 			    <tr>
 			    	<td class="label">密码： </td>
@@ -51,18 +58,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    </tr>
 			    <tr>
 			    	<td class="label">确认密码：</td>
-			    	<td class="controler"><input type="password" name="confirmpass" ></td>
+			    	<td class="controler"><input type="password" name="Password2" ></td>
 			    	
 			    </tr>
 			    <tr>
 			    	<td class="label">用户名：</td>
-			    	<td class="controler"><input type="text" name="UserName" ></td>
+			    	<td class="controler"><input type="text" name="UserName" value="${param.UserName}"></td>
 			    	
 			    </tr>
 			    <tr>
-			    	<td class="label">性别：</td>
-			    	<td class="controler">
-			    	<input type="radio" name="UserSex" checked="checked" value="Male">Male
+			    	<td class="label" >性别：</td>
+			    	<td class="controler" >
+			    	<input type="radio" name="UserSex" checked="checked" value="Male" >Male
 			    	<input type="radio" name="UserSex" value="Female">Female</td>
 			    	
 			    </tr>
@@ -89,8 +96,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    	</td>
 			    </tr>
 			   
-			    
 			    <tr>
+  				     <td>验证码</td>
+  				     <td><input type="text" name="valistr" /></td>
+  				     <td><img src="${pageContext.request.contextPath }/ValiImg" style="cursor: pointer" onclick="changeImg(this)"/></td>
+  			    </tr>
+  			    
+  			
 			    	<td colspan="2" align="center">
 			    		<input type="submit" value="注册"/>&nbsp;&nbsp;
 			    	    <input type="reset" value="取消"/>&nbsp;&nbsp;

@@ -1,69 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	version="3.0">
-<!-- 	<servlet>
-		<description>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <servlet>
+    <description>
 		</description>
-		<display-name>a</display-name>
-		<servlet-name>a</servlet-name>
-		<servlet-class>com.imlc.demo.servlet.a</servlet-class>
-	</servlet>
-	<servlet>
-		<description>
+    <display-name>OutServlet</display-name>
+    <servlet-name>OutServlet</servlet-name>
+    <servlet-class>com.imlc.demo.servlet.OutServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>
 		</description>
-		<display-name>RegServlet</display-name>
-		<servlet-name>RegServlet</servlet-name>
-		<servlet-class>com.imlc.demo.servlet.RegServlet</servlet-class>
-	</servlet> -->
-	<servlet>
-		<description>
+    <display-name>AddUserServlet</display-name>
+    <servlet-name>AddUserServlet</servlet-name>
+    <servlet-class>com.imlc.demo.servlet.AddUserServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>
 		</description>
-		<display-name>OutServlet</display-name>
-		<servlet-name>OutServlet</servlet-name>
-		<servlet-class>com.imlc.demo.servlet.OutServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<description>
+    <display-name>UserServlet</display-name>
+    <servlet-name>UserServlet</servlet-name>
+    <servlet-class>com.imlc.demo.servlet.UserServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>
 		</description>
-		<display-name>AddUserServlet</display-name>
-		<servlet-name>AddUserServlet</servlet-name>
-		<servlet-class>com.imlc.demo.servlet.AddUserServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<description>
-		</description>
-		<display-name>UserServlet</display-name>
-		<servlet-name>UserServlet</servlet-name>
-		<servlet-class>com.imlc.demo.servlet.UserServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<description>
-		</description>
-		<display-name>UserLogin</display-name>
-		<servlet-name>UserLogin</servlet-name>
-		<servlet-class>com.imlc.demo.servlet.UserLogin</servlet-class>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>OutServlet</servlet-name>
-		<url-pattern>/OutServlet</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>AddUserServlet</servlet-name>
-		<url-pattern>/AddUserServlet</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>UserServlet</servlet-name>
-		<url-pattern>/UserServlet</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>UserLogin</servlet-name>
-		<url-pattern>/UserLogin</url-pattern>
-	</servlet-mapping>
-	<welcome-file-list>
-		<welcome-file>/index.jsp</welcome-file>
-	</welcome-file-list>
-
-</web-app>  
+    <display-name>UserLogin</display-name>
+    <servlet-name>UserLogin</servlet-name>
+    <servlet-class>com.imlc.demo.servlet.UserLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OutServlet</servlet-name>
+    <url-pattern>/OutServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddUserServlet</servlet-name>
+    <url-pattern>/AddUserServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserServlet</servlet-name>
+    <url-pattern>/UserServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserLogin</servlet-name>
+    <url-pattern>/UserLogin</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>/index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>

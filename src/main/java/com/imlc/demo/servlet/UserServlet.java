@@ -1,3 +1,4 @@
+//用户注册
 package com.imlc.demo.servlet;
 
 import java.io.IOException;
@@ -8,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.imlc.demo.dao.UserDao;
 import com.imlc.demo.entity.T_User;
 import com.imlc.demo.exception.MsgException;
 import com.imlc.demo.service.UserService;
@@ -63,7 +63,6 @@ public class UserServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		T_User u = new T_User();
-		// Integer userID;
 		String loginName, password,password2, userName, userSex;
 		String[] functionPopedom1;
 		String functionPopedom = "0";
@@ -107,12 +106,12 @@ public class UserServlet extends HttpServlet {
 			// 封装 优化方法：BeanUtils.populate(user, request.getParameterMap());
 			u.setLoginName(loginName);
 			u.setPassword(password);
-			u.setPassword(password2);
+			u.setPassword2(password2);
 			u.setUserName(userName);
 			u.setUserSex(userSex);
 			u.setFunctionPopedom(functionPopedom);
 			// 验证填入的信息是否为空
-			System.out.println("password2"+password2);
+	
 			u.checkValue();
 
 			System.out.println(u.toString());
@@ -120,10 +119,13 @@ public class UserServlet extends HttpServlet {
 			UserService us=new UserService();
 			
 			us.registUser(u);
-			// 带数据过去
+			// 带数据过去,登录用户
 			request.getSession().setAttribute("regUser", u);
 			// 请求转发
-			request.getRequestDispatcher("/userinfo.jsp").forward(request, response);
+			//request.getRequestDispatcher("/userinfo.jsp").forward(request, response);
+			//提示注册成功3秒回到主页
+			response.getWriter().write("恭喜您注册成功!3秒回到主页....");
+			response.setHeader("refresh", "3;url="+request.getContextPath()+"/index.jsp");
 		} catch (MsgException e) {
 			request.setAttribute("msg", e.getMessage());
 			request.getRequestDispatcher("/user.jsp").forward(request, response);

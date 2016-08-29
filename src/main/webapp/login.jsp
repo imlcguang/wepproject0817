@@ -7,9 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>用户登录</h2>
+<h1>用户登录</h1><hr>
+<font color="red">${msg}</font>
 <form name="form1" method="post" action="<%=request.getContextPath()%>/UserLogin" onSubmit="return check()">
-   登录帐号：<input type="text" id="userName" name="userName"><br>
+   登录帐号：<input type="text" id="loginName" name="loginName"><br>
    登录密码：<input type="password" id="userPWD" name="userPWD"><br>
   <input type="submit" name="submit" value="提交">
 </form>

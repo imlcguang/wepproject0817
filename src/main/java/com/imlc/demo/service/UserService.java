@@ -1,5 +1,5 @@
+//检查用户、添加用户
 package com.imlc.demo.service;
-
 
 import com.imlc.demo.dao.UserDao;
 import com.imlc.demo.entity.T_User;

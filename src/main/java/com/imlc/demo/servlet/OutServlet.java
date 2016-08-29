@@ -1,3 +1,4 @@
+//注销用户
 package com.imlc.demo.servlet;
 
 import java.io.IOException;
@@ -36,8 +37,7 @@ public class OutServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * 注销用户
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -46,9 +46,10 @@ public class OutServlet extends HttpServlet {
 		// ").append(request.getContextPath());
 		// response.setHeader("content-Type", "text/html;charset=utf-8");
 		// response.getOutputStream().write("加油".getBytes("utf-8"));
-		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write("加油");
-
+		if(request.getSession(false)!=null && request.getSession().getAttribute("regUser")!=null){
+			request.getSession().invalidate();
+		}
+		response.sendRedirect(request.getContextPath()+"/index.jsp");
 	}
 
 	/**

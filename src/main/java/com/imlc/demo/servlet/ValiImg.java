@@ -1,5 +1,5 @@
 package com.imlc.demo.servlet;
-
+//验证码
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ValiImg
  */
-@WebServlet("/ValiImg")
+//@WebServlet("/ValiImg")
 public class ValiImg extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

@@ -1,24 +1,27 @@
 package com.imlc.demo.servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.imlc.demo.entity.T_User;
-import com.imlc.demo.service.UserService;
+import com.imlc.demo.entity.T_Customer;
+import com.imlc.demo.service.CustomerService;
 
 /**
- * Servlet implementation class UserLogin
+ * Servlet implementation class ListCustServlet
  */
-public class UserLogin extends HttpServlet {
+public class ListCustServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public UserLogin() {
+	public ListCustServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -30,7 +33,10 @@ public class UserLogin extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doPost(request, response);
+		CustomerService cs = new CustomerService();
+		List<T_Customer> list =cs.findAllCus();
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("/listCust.jsp").forward(request, response);
 	}
 
 	/**
@@ -40,28 +46,7 @@ public class UserLogin extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=utf-8");
-
-		String loginName, password;
-		UserService us = new UserService();
-		// 获取
-		loginName = request.getParameter("loginName");
-		password = request.getParameter("userPWD");
-		// 查找
-		T_User user = us.isUser(loginName, password);
-
-		if (user == null) {
-			// 如果不正确则提示
-			request.setAttribute("msg", "用户名密码不正确!");
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
-			return;
-		} else {
-			// 正确则登录用户后重定向回到主页
-			request.getSession().setAttribute("regUser", user);
-			response.sendRedirect(request.getContextPath() + "/index.jsp");
-		}
-
+		doGet(request, response);
 	}
 
 }

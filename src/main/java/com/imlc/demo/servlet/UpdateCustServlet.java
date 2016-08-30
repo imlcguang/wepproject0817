@@ -7,22 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.beanutils.BeanUtils;
-
 import com.imlc.demo.entity.T_Customer;
-import com.imlc.demo.exception.MsgException;
 import com.imlc.demo.service.CustomerService;
 
 /**
- * Servlet implementation class CusServlet
+ * Servlet implementation class UpdateCustServlet
  */
-public class CusServlet extends HttpServlet {
+@WebServlet("/UpdateCustServlet")
+public class UpdateCustServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CusServlet() {
+	public UpdateCustServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -44,37 +42,30 @@ public class CusServlet extends HttpServlet {
 			String Address = request.getParameter("Address");
 			String Email = request.getParameter("Email");
 			String Remark = request.getParameter("Remark");
-
 			// 封装
-			//BeanUtils.populate(customer, request.getParameterMap());
+			// BeanUtils.populate(customer, request.getParameterMap());
 			customer.setCustomerName(CustomerName);
 			customer.setRelationName(RelationName);
 			customer.setRelationPhone(RelationPhone);
 			customer.setAddress(Address);
 			customer.setEmail(Email);
 			customer.setRemark(Remark);
-			
-			System.out.println("address: "+customer.getAddress());
-			
-			// 验证填入的信息是否为空
-			customer.checkValue();
-			System.out.println(customer.toString());
-			
-			CustomerService cs=new CustomerService();
-			//判断客户名是否已存在，否则添加客户
-			cs.registCustomer(customer);
-			
-			request.getSession().setAttribute("Customer", customer);
-			//提示注册成功3秒回到主页
-			response.getWriter().write("恭喜您注册成功!3秒回到主页....");
-			response.setHeader("refresh", "3;url="+request.getContextPath()+"/index.jsp");
-			
-		}catch (MsgException e) {
-			request.setAttribute("msg", e.getMessage());
-			request.getRequestDispatcher("/customer.jsp").forward(request, response);
-			return;
-		}catch (Exception e) {
-			// TODO: handle exception
+
+			// 1.获取要查询的客户id,转换为integer
+			String id1 = request.getParameter("id");
+			System.out.println("id=" + id1);
+			Integer id = Integer.parseInt(id1);
+			customer.setCustomerID(id);
+			// 2.调用Service中修改客户信息的方法
+			CustomerService cs = new CustomerService();
+			cs.updateCustomers(customer);
+
+			// 3.重定向到客户列表页面
+			request.getRequestDispatcher("/ListCustServlet").forward(request, response);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 
 	}

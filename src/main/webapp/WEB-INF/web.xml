@@ -35,14 +35,14 @@
     <servlet-name>CusServlet</servlet-name>
     <servlet-class>com.imlc.demo.servlet.CusServlet</servlet-class>
   </servlet>
-   <servlet>
+  <servlet>
     <description>
 		</description>
     <display-name>ListCustServlet</display-name>
     <servlet-name>ListCustServlet</servlet-name>
     <servlet-class>com.imlc.demo.servlet.ListCustServlet</servlet-class>
   </servlet>
-   <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>ListCustServlet</servlet-name>
     <url-pattern>/ListCustServlet</url-pattern>
   </servlet-mapping>

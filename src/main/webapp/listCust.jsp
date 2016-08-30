@@ -5,13 +5,32 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	function checkAll(allC) {
+		var otherCs = document.getElementsByName("delId");
+		for (var i = 0; i < otherCs.length; i++) {
+			otherCs[i].checked = allC.checked;
+		}
+	}
+</script>
 </head>
-<body>
+<body style="text-align: center;">
 	<h1>客户列表页面</h1>
 	<hr>
+	<font color="red">${msg }</font>
+	<form
+		action="${pageContext.request.contextPath }/FindCustByCondServlet"
+		method="POST">
+		客户名称:<input type="text" name="customerName" value="${param.customerName }" /> 
+			联系人姓名:<input type="text" name="relationName" value="${param.relationName }" /> 
+			联系电话:<input type="text" name="relationPhone" value="${param.relationPhone }" />
+		<input type="submit" value="条件查询客户" />
+	</form>
+
+	
 	<table border="1" width="100%">
 		<tr>
-			<th><input type="checkbox" onclick="checkAll(this)" />全选</th>
+			<th><input type="checkbox" onclick="checkAll(this)" />客户 ID</th>
 			<th>客户名称</th>
 			<th>联系人姓名</th>
 			<th>联系电话</th>
@@ -23,18 +42,19 @@
 		</tr>
 		<c:forEach items="${requestScope.list}" var="cust">
 			<tr>
-				<td><input type="checkbox" name="delId" value="${cust.CustomerID }" /></td>
-				<td><c:out value="${cust.CustomerName }" /></td>
-				<td><c:out value="${cust.RelationName }" /></td>
-				<td><c:out value="${cust.RelationPhone }" /></td>
-				<td><c:out value="${cust.Address }" /></td>
-				<td><c:out value="${cust.Email }" /></td>
-				<td><c:out value="${cust.Remark }" /></td>
-				
+				<td><input type="checkbox" name="delId"
+					value="${cust.customerID }" /> ${cust.customerID }</td>
+				<td><c:out value="${cust.customerName }" /></td>
+				<td><c:out value="${cust.relationName }" /></td>
+				<td><c:out value="${cust.relationPhone }" /></td>
+				<td><c:out value="${cust.address }" /></td>
+				<td><c:out value="${cust.email }" /></td>
+				<td><c:out value="${cust.remark }" /></td>
+
 				<td><a
-					href="${pageContext.request.contextPath }/CustInfoServlet?id=${cust.CustomerID }">修改</a></td>
+					href="${pageContext.request.contextPath }/CustInfoServlet?id=${cust.customerID }">修改</a></td>
 				<td><a
-					href="${pageContext.request.contextPath }/DelCustServlet?id=${cust.CustomerID }">删除</a></td>
+					href="${pageContext.request.contextPath }/DelCustServlet?id=${cust.customerID }">删除</a></td>
 			</tr>
 		</c:forEach>
 	</table>

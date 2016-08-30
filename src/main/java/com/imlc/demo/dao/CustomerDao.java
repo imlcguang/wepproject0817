@@ -1,5 +1,6 @@
 package com.imlc.demo.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -23,7 +24,7 @@ public class CustomerDao {
 		// 事务提交
 		transaction.commit();
 	}
-	
+
 	/**
 	 * 添加客户
 	 * 
@@ -37,38 +38,88 @@ public class CustomerDao {
 		System.out.println("新增成功！您的ID为：" + c.getCustomerID());
 		destory();
 	}
-	
+
 	/**
-	 * 根据客户名查找客户
+	 * 修改客户信息
+	 * 
+	 * @param id
+	 */
+	public void updateCustomers(T_Customer c) {
+		init();
+		session.update(c);
+		destory();
+	}
+
+	/**
+	 * 删除 根据ID删除
+	 */
+	public void deleteCustomers(T_Customer c) {
+		init();
+		session.delete(c);
+		destory();
+	}
+
+	/**
+	 * 根据客户名ID查找客户
+	 * 
+	 * @param CustomerID
+	 *            客户ID
+	 * @return 根据客户名找到用户信息，如果没找到返回null
+	 */
+	public T_Customer findByCustomerID(Integer CustomerID) {
+		init();
+		T_Customer customer = (T_Customer) session.get(T_Customer.class, CustomerID);
+		destory();
+		return customer;
+	}
+
+	/**
+	 * 根据客户名查找客户是否存在
 	 * 
 	 * @param CustomerName
 	 *            客户名
 	 * @return 根据客户名找到用户信息，如果没找到返回null
 	 */
-	public T_Customer findUserByCustomerName(String CustomerName) {
+	public T_Customer findCustomerName(String CustomerName) {
 		init();
 		String hql = "FROM T_Customer WHERE CustomerName = ? ";
 		List<T_Customer> result = session.createQuery(hql).setString(0, CustomerName).list();
 
 		T_Customer customer = null; // (User)list;
 		for (T_Customer customer2 : result)
-			customer = customer2 ;
+			customer = customer2;
 		destory();
 		return customer;
 	}
-	
+
 	/**
-	 * 模糊查询按名字
+	 * 模糊查询按姓名、联系人、联系电话模糊查询
+	 * 
 	 * @param sname
 	 * @return
 	 * @throws Exception
 	 */
-	public static List<T_Customer> findByCustomerName(String sname) throws Exception {
+	public static List<T_Customer> findCustByCond(T_Customer c) throws Exception {
 		init();
-		Query query = session.createQuery("from T_Customer as s where s.CustomerName like :name");
-		query.setString("name", "%" + sname + "%");
+		Query query = session.createQuery("from T_Customer as s where s.CustomerName like :cn and"
+				+ " s.RelationName like :rn and s.RelationPhone like :rp");
+		query.setString("cn", "%" + c.getCustomerName() + "%");
+		query.setString("rn", "%" + c.getRelationName() + "%");
+		query.setString("rp", "%" + c.getRelationPhone() + "%");
 		List result = query.list();
+		destory();
+		return result;
+	}
 
+	/**
+	 * 查询所有的信息
+	 * 
+	 * @return
+	 */
+	public List<T_Customer> findAllCus() {
+		init();
+		Query query = session.createQuery("from T_Customer ");
+		List result = query.list();
 		for (int i = 0; i < result.size(); i++) {
 			T_Customer c = new T_Customer();
 			T_Customer customer = (T_Customer) result.get(i);
@@ -77,99 +128,10 @@ public class CustomerDao {
 			c = (T_Customer) session.get(T_Customer.class, customerid);
 			System.out.println("查询成功！");
 			System.out.println(c);
-
 		}
 		destory();
 		return result;
+
 	}
 
-	/**
-	 * 模糊查询按联系人
-	 * @param rname
-	 * @return
-	 * @throws Exception
-	 */
-	public static List<T_Customer> findByRelationName(String rname) throws Exception {
-		init();
-		Query query = session.createQuery("from T_Customer as s where s.RelationName like :name");
-		query.setString("name", "%" + rname + "%");
-		List result = query.list();
-
-		for (int i = 0; i < result.size(); i++) {
-			T_Customer c = new T_Customer();
-			T_Customer customer = (T_Customer) result.get(i);
-
-			int customerid = customer.getCustomerID();
-			c = (T_Customer) session.get(T_Customer.class, customerid);
-			System.out.println("查询成功！");
-			System.out.println(c);
-
-		}
-		destory();
-		return result;
-	}
-	
-	/**
-	 * 模糊查询按联系人电话
-	 * @param rname
-	 * @return
-	 * @throws Exception
-	 */
-		public static List<T_Customer> findByRelationPhone(String rname) throws Exception {
-
-			// String strSQL = "from T_Customer as s where s.CustomerName like
-			// :name";
-			init();
-			Query query = session.createQuery("from T_Customer as s where s.RelationPhone like :name");
-			query.setString("name", "%" + rname + "%");
-			List result = query.list();
-
-			for (int i = 0; i < result.size(); i++) {
-				T_Customer c = new T_Customer();
-				T_Customer customer = (T_Customer) result.get(i);
-
-				int customerid = customer.getCustomerID();
-				c = (T_Customer) session.get(T_Customer.class, customerid);
-				System.out.println("查询成功！");
-				System.out.println(c);
-			}
-			destory();
-			return result;
-		}
-		
-		/**
-		 * 查询所有的信息
-		 * @return
-		 */
-		public List<T_Customer> findAllCus(){
-			init();
-			Query query = session.createQuery("from T_Customer ");
-			List result = query.list();
-			for (int i = 0; i < result.size(); i++) {
-				T_Customer c = new T_Customer();
-				T_Customer customer = (T_Customer) result.get(i);
-
-				int customerid = customer.getCustomerID();
-				c = (T_Customer) session.get(T_Customer.class, customerid);
-				System.out.println("查询成功！");
-				System.out.println(c);
-			}
-			destory();
-			return result;
-			
-		}
-		/**
-		 * 删除
-		 */
-		public void testDeleteCustomers(Integer id ) {
-			init();
-			T_Customer c = new T_Customer();
-			System.out.println("您将进行的是删除操作:");
-			c = (T_Customer) session.get(T_Customer.class, id);
-			session.delete(c);
-			System.out.println("删除成功！");
-			destory();
-		}
-	
-	
 }

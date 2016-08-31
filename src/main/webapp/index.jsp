@@ -18,7 +18,7 @@
 		
 		<p>用户信息管理：</p>
 		<a href=user.jsp>注册用户信息</a>
-		<a >查找用户信息</a>
+		<a href=${pageContext.request.contextPath}/ListUserServlet >用户信息管理（查改删）</a>
 		
 		
 		<p>客户信息维护：</p>
@@ -28,7 +28,7 @@
 		
 		<p>样机信息维护：</p>
 		<a href=model.jsp>注册样机信息</a>
-		<a>查找样机信息</a>
+		<a href=${pageContext.request.contextPath}/ListModelServlet >样机信息管理（查改删）</a>
 		
 	</c:if>
 </body>

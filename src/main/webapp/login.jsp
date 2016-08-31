@@ -14,5 +14,6 @@
    登录密码：<input type="password" id="userPWD" name="userPWD"><br>
   <input type="submit" name="submit" value="提交">
 </form>
+<a href=index.jsp>返回主页</a>
 </body>
 </html>

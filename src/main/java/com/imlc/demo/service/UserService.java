@@ -1,7 +1,10 @@
 //检查用户、添加用户
 package com.imlc.demo.service;
 
+import java.util.List;
+
 import com.imlc.demo.dao.UserDao;
+import com.imlc.demo.entity.T_Customer;
 import com.imlc.demo.entity.T_User;
 import com.imlc.demo.exception.MsgException;
 
@@ -22,6 +25,14 @@ public class UserService {
 		//如果不存在，调用dao方法添加用户
 		dao.testSaveUser(user);
 	}
+	/**
+	 * 根据用户名查找用户
+	 * @param userName
+	 * @return
+	 */
+	public List<T_User> findUserByName(String userName){
+		return dao.findUserByName(userName);
+	}
 	
 	/**
 	 * 检查用户名密码是否正确
@@ -30,5 +41,36 @@ public class UserService {
 	 */
 	public T_User isUser(String loginname,String password){
 		return dao.findUserByLNandPsd(loginname, password);
+	}
+	/**
+	 * 查询所有的用户信息
+	 * 
+	 * @return
+	 */
+	public List<T_User> findAllUser() {
+		return dao.findAllUser();
+	}
+	/**
+	 * 按用户ID查找用户
+	 * @param id
+	 * @return
+	 */
+	public T_User findUserByID(Integer id){
+		return dao.findUserByID(id);
+	}
+	/**
+	 * 更新用户信息
+	 * @param u
+	 * @return
+	 */
+	public void updateUser(T_User u){
+		 dao.updateUser(u);
+	}
+	/**
+	 * 删除用户信息
+	 * @param u
+	 */
+	public void deleteUser(T_User u){
+		dao.deleteUse(u);
 	}
 }

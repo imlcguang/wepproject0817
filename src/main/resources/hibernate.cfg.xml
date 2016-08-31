@@ -17,8 +17,9 @@
 		<property name="hbm2ddl.auto">update</property>
 		<mapping resource="com/imlc/demo/mapper/T_User.hbm.xml" />
 		<mapping resource="com/imlc/demo/mapper/T_Customer.hbm.xml" />
+		<mapping resource="com/imlc/demo/mapper/T_Model.hbm.xml" />
 	<!-- 	
 		<mapping resource="model/T_BorrowRecord.hbm.xml" />s
-		<mapping resource="model/T_Model.hbm.xml" /> -->
+	 -->
 	</session-factory>
 </hibernate-configuration>

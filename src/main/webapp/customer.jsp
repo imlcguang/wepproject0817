@@ -59,5 +59,6 @@
 			    </tr>
 			  </table>
 			</form>
+			<a href=index.jsp>返回主页</a>
 </body>
 </html>

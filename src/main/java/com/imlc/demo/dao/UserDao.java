@@ -6,7 +6,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
+import com.imlc.demo.entity.T_Customer;
 import com.imlc.demo.entity.T_User;
 import com.imlc.demo.hibernate.SessionFactoryUtil;
 
@@ -28,6 +30,34 @@ public class UserDao {
 	}
 
 	/**
+	 * 根据用户ID查找用户
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public T_User findUserByID(Integer id) {
+		init();
+		T_User user = session.get(T_User.class, id);
+		destory();
+		return user;
+
+	}
+	
+	/**
+	 * 根据用户名查找用户
+	 * 
+	 * @param userName
+	 * @return 根据用户名找到用户信息，如果没找到返回null
+	 */
+	public List<T_User> findUserByName(String userName) {
+		init();
+		String hql = "FROM T_User WHERE userName like ? ";
+		List<T_User> result = session.createQuery(hql).setString(0, "%" + userName + "%").list();
+		destory();
+		return result;
+	}
+	
+	/**
 	 * 根据用户名查找用户
 	 * 
 	 * @param LoginName
@@ -43,8 +73,51 @@ public class UserDao {
 		for (T_User user2 : result)
 			user = user2;
 		destory();
-		
+
 		return user;
+	}
+
+	/**
+	 * 查询所有的信息
+	 * 
+	 * @return
+	 */
+	public List<T_User> findAllUser() {
+		init();
+		Query query = session.createQuery("from T_User ");
+		List result = query.list();
+		for (int i = 0; i < result.size(); i++) {
+			T_User c = new T_User();
+			T_User user = (T_User) result.get(i);
+
+			int userid = user.getUserID();
+			c = (T_User) session.get(T_User.class, userid);
+			System.out.println("查询成功！");
+			System.out.println(c);
+		}
+		destory();
+		return result;
+
+	}
+	/**
+	 * 更新用户信息
+	 * @param u
+	 * @return
+	 */
+	public void  updateUser(T_User u){
+		init();
+		session.update(u);
+		destory();
+		
+	}
+	/**
+	 * 删除用户
+	 * @param u
+	 */
+	public void deleteUse(T_User u){
+		init();
+		session.delete(u);
+		destory();
 	}
 
 	/**

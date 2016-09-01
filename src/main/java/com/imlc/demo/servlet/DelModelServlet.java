@@ -7,22 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.imlc.demo.entity.T_Customer;
-import com.imlc.demo.entity.T_User;
-import com.imlc.demo.service.CustomerService;
-import com.imlc.demo.service.UserService;
+import com.imlc.demo.entity.T_Model;
+import com.imlc.demo.service.ModelService;
 
 /**
- * Servlet implementation class DelUserServlet
+ * Servlet implementation class DelModelServlet
  */
-@WebServlet("/DelUserServlet")
-public class DelUserServlet extends HttpServlet {
+@WebServlet("/DelModelServlet")
+public class DelModelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DelUserServlet() {
+    public DelModelServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,15 +30,15 @@ public class DelUserServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// 1.获取要查询的用户id
-				String id1 = request.getParameter("id");
-				Integer id = Integer.parseInt(id1);
-				// 2.调用Service中根据id查找用户的方法
-				UserService us=new UserService();
-				T_User u=us.findUserByID(id);
-				us.deleteUser(u);
-				//3.请求转发到用户列表页面
-				request.getRequestDispatcher("/ListUserServlet").forward(request, response);
+		//1.获取要查询的样机id
+		String id1 = request.getParameter("id");
+		//2.调用Service中根据id查找样机，删除样机信息的方法
+		ModelService ms = new ModelService();
+		Integer id=Integer.parseInt(id1);
+		T_Model model = ms.findModelById(id);
+		ms.DeleteModels(model);
+		//请求转发到样机列表页面
+		request.getRequestDispatcher("/ListModelServlet").forward(request, response);
 	}
 
 	/**

@@ -3,20 +3,15 @@ package com.imlc.demo.dao;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
-import com.imlc.demo.entity.T_Customer;
 import com.imlc.demo.entity.T_User;
 import com.imlc.demo.hibernate.SessionFactoryUtil;
 
 public class UserDao {
-	private SessionFactory sessionFactory;// 声明私有会话工厂对象类
 	private static Session session;// 声明私有会话对象类
 	private static Transaction transaction;// 声明私有事务对象类
-	private Configuration config;
 
 	public static void init() {
 		session = SessionFactoryUtil.getInstance().getCurrentSession();

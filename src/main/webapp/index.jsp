@@ -16,20 +16,25 @@
 		<br>
 		<p>功能选择</p><hr>
 		
-		<p>用户信息管理：</p>
+		<p>用户信息：</p>
 		<a href=user.jsp>注册用户信息</a>
 		<a href=${pageContext.request.contextPath}/ListUserServlet >用户信息管理（查改删）</a>
 		
 		
-		<p>客户信息维护：</p>
+		<p>客户信息：</p>
 		<a href=customer.jsp>注册客户信息</a>
 		<a href=${pageContext.request.contextPath}/ListCustServlet >客户信息管理（查改删）</a>
 		
 		
-		<p>样机信息维护：</p>
+		<p>样机信息：</p>
 		<a href=model.jsp>注册样机信息</a>
 		<a href=${pageContext.request.contextPath}/ListModelServlet >样机信息管理（查改删）</a>
 		
+		<p>借还信息：</p>
+		<a href=borrow.jsp>借机登记</a>
+		<a href=return.jsp >样机归还</a>
+		<a href=${pageContext.request.contextPath}/ListBorrowServlet>借机明细查询</a>
+		<a href=.jsp>借机统计</a>
 	</c:if>
 </body>
 </html>

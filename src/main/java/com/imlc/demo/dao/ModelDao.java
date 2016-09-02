@@ -82,8 +82,8 @@ public class ModelDao {
 	 */
 	public T_Model findModelName(String modelName) {
 		init();
-		String hql = "FROM T_Model WHERE modelName = ? ";
-		List<T_Model> result = session.createQuery(hql).setString(0, modelName).list();
+		String hql = "FROM T_Model WHERE modelName = :mdn ";
+		List<T_Model> result = session.createQuery(hql).setParameter("mdn", modelName).list();
 
 		T_Model model = null; // (User)list;
 		for (T_Model model2 : result)
@@ -101,8 +101,8 @@ public class ModelDao {
 	 */
 	public static List<T_Model> findByModelName(String modelName) throws Exception {
 		init();
-		String hql = "FROM T_Model WHERE modelName like ? ";
-		List<T_Model> result = session.createQuery(hql).setString(0, "%" + modelName + "%").list();
+		String hql = "FROM T_Model WHERE modelName like :mdn ";
+		List<T_Model> result = session.createQuery(hql).setParameter("mdn", "%" + modelName + "%").list();
 		destory();
 		return result;
 	}

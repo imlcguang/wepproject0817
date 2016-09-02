@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2016-8-10 16:21:49 by Hibernate Tools 3.5.0.Final -->
+"http://www.hibernate.org/dtd/hibernate-mapping">
+<!-- Generated 2016-9-2 8:54:28 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.imlc.demo.entity.T_BorrowRecord" table="T_BORROWRECORD">
         <id name="BorrowNo" type="java.lang.Integer">
             <column name="BORROWNO" />
-            <generator class="native" />
+            <generator class="identity" />
         </id>
         <many-to-one name="CustomerID" class="com.imlc.demo.entity.T_Customer" fetch="join">
             <column name="CUSTOMERID" />
         </many-to-one>
-        <property name="SendDatetime" type="java.util.Date">
+        <property name="SendDatetime" type="java.lang.String">
             <column name="SENDDATETIME" />
         </property>
         <many-to-one name="BorrowPermitPerson" class="com.imlc.demo.entity.T_User" fetch="join">
@@ -23,16 +23,16 @@
         <property name="BorrowOperatDatetime" type="java.util.Date">
             <column name="BORROWOPERATDATETIME" />
         </property>
-        <property name="PlanReturnDatetime" type="java.util.Date">
+        <property name="PlanReturnDatetime" type="java.lang.String">
             <column name="PLANRETURNDATETIME" />
         </property>
         <many-to-one name="ModelID" class="com.imlc.demo.entity.T_Model" fetch="join">
             <column name="MODELID" />
         </many-to-one>
-        <property name="BorrowNumber" type="java.lang.Integer">
+        <property name="BorrowNumber" type="java.lang.String">
             <column name="BORROWNUMBER" />
         </property>
-        <property name="BorrowCheckNo" type="java.lang.Integer">
+        <property name="BorrowCheckNo" type="java.lang.String">
             <column name="BORROWCHECKNO" />
         </property>
         <property name="ReturnDatetime" type="java.util.Date">
@@ -43,3 +43,4 @@
         </many-to-one>
     </class>
 </hibernate-mapping>
+        

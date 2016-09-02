@@ -1,6 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>样机管理系统</title>
+</head>
 <body style="text-align: center;">
 	<h1>样机管理系统</h1>
 	<c:if test="${sessionScope.regUser==null}">

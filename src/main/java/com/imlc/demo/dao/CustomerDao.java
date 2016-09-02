@@ -82,8 +82,8 @@ public class CustomerDao {
 	 */
 	public T_Customer findCustomerName(String CustomerName) {
 		init();
-		String hql = "FROM T_Customer WHERE CustomerName = ? ";
-		List<T_Customer> result = session.createQuery(hql).setString(0, CustomerName).list();
+		String hql = "FROM T_Customer WHERE CustomerName = :ctn ";
+		List<T_Customer> result = session.createQuery(hql).setParameter("ctn", CustomerName).list();
 
 		T_Customer customer = null; // (User)list;
 		for (T_Customer customer2 : result)
@@ -103,9 +103,9 @@ public class CustomerDao {
 		init();
 		Query query = session.createQuery("from T_Customer as s where s.CustomerName like :cn and"
 				+ " s.RelationName like :rn and s.RelationPhone like :rp");
-		query.setString("cn", "%" + c.getCustomerName() + "%");
-		query.setString("rn", "%" + c.getRelationName() + "%");
-		query.setString("rp", "%" + c.getRelationPhone() + "%");
+		query.setParameter("cn", "%" + c.getCustomerName() + "%");
+		query.setParameter("rn", "%" + c.getRelationName() + "%");
+		query.setParameter("rp", "%" + c.getRelationPhone() + "%");
 		List result = query.list();
 		destory();
 		return result;

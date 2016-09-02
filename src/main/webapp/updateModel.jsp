@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>修改样机信息</title>
 </head>
 <body>
 <h1>样机信息维护：修改样机信息</h1>

@@ -58,10 +58,9 @@ public class BorrowRecordDao {
 	 * 归还样机
 	 * @param id
 	 */
-	public void returnRecord(String id) {
+	public void returnRecord(T_BorrowRecord b) {
 		init();
-		T_BorrowRecord b=findBorrowByID(id);
-		session.save(b);
+		session.update(b);
 		destory();
 	}
 	
@@ -72,9 +71,8 @@ public class BorrowRecordDao {
 	 * 修改更新
 	 * @param id
 	 */
-	public void updateBorrowRecord(String id) {
+	public void updateBorrowRecord(T_BorrowRecord b) {
 		init();
-		T_BorrowRecord b=findBorrowByID(id);
 		session.update(b);
 		destory();
 	}

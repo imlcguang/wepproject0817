@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>修改客户信息</title>
 </head>
 <body >
 	<h1>客户信息维护：修改客户信息</h1>

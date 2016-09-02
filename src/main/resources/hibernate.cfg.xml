@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
                                          "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-	<session-factory >
+	<session-factory>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password">264530</property>
@@ -15,10 +15,22 @@
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
 		<property name="hbm2ddl.auto">update</property>
+
+		<!-- 配置C3P0连接池属性 -->
+		<property name="hibernate.c3p0.max_size">20</property>
+		<property name="hibernate.c3p0.min_size">5</property>
+		<property name="hibernate.c3p0.timeout">50000</property>
+		<property name="hibernate.c3p0.max_statements">100</property>
+		<property name="hibernate.c3p0.idle_test_period">3000</property>
+		<!-- 当连接池耗尽并接到获得连接的请求，则新增加连接的数量 -->
+		<property name="hibernate.c3p0.acquire_increment">2</property>
+		<!-- 是否验证，检查连接 -->
+		<property name="hibernate.c3p0.validate">false</property>
+
 		<mapping resource="com/imlc/demo/mapper/T_User.hbm.xml" />
 		<mapping resource="com/imlc/demo/mapper/T_Customer.hbm.xml" />
 		<mapping resource="com/imlc/demo/mapper/T_Model.hbm.xml" />
 		<mapping resource="com/imlc/demo/mapper/T_BorrowRecord.hbm.xml" />
-	
+
 	</session-factory>
 </hibernate-configuration>

@@ -46,8 +46,8 @@ public class UserDao {
 	 */
 	public List<T_User> findUserByName(String userName) {
 		init();
-		String hql = "FROM T_User WHERE userName like ? ";
-		List<T_User> result = session.createQuery(hql).setString(0, "%" + userName + "%").list();
+		String hql = "FROM T_User WHERE userName like :uname ";
+		List<T_User> result = session.createQuery(hql).setParameter("uname","%" + userName + "%").list();
 		destory();
 		return result;
 	}
@@ -61,8 +61,8 @@ public class UserDao {
 	 */
 	public T_User findUserByLoginName(String LoginName) {
 		init();
-		String hql = "FROM T_User WHERE loginname = ? ";
-		List<T_User> result = session.createQuery(hql).setString(0, LoginName).list();
+		String hql = "FROM T_User WHERE loginname = :lgn ";
+		List<T_User> result = session.createQuery(hql).setParameter("lgn", LoginName).list();
 
 		T_User user = null; // (User)list;
 		for (T_User user2 : result)
@@ -139,8 +139,8 @@ public class UserDao {
 
 	public T_User findUserByLNandPsd(String loginname, String password) {
 		init();
-		String hql = "FROM T_User WHERE loginname = ? AND password = ? ";
-		List<T_User> result = session.createQuery(hql).setString(0, loginname).setString(1, password).list();
+		String hql = "FROM T_User WHERE loginname = :lgn  AND password = :psw ";
+		List<T_User> result = session.createQuery(hql).setParameter("lgn", loginname).setParameter("psw", password).list();
 		// 上面这一句空指针，有几个地方可能为空 1.session 2.session.createQuery() 3....
 		// 因为是链式的引用，所以每一个为空都会异常。所以就一个个排插。
 		// 找bug不是乱找，不是就是百度，要多想一想

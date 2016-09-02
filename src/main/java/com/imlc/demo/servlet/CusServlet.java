@@ -74,7 +74,7 @@ public class CusServlet extends HttpServlet {
 			request.getRequestDispatcher("/customer.jsp").forward(request, response);
 			return;
 		}catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 
 	}

@@ -66,7 +66,7 @@ public class ModelServlet extends HttpServlet {
 			request.getRequestDispatcher("/model.jsp").forward(request, response);
 			return;
 		}catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 
 	}

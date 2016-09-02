@@ -1,26 +1,28 @@
 package com.imlc.demo.servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.imlc.demo.entity.T_User;
-import com.imlc.demo.service.UserService;
+import com.imlc.demo.entity.T_BorrowRecord;
+import com.imlc.demo.service.BorrowRecordService;
 
 /**
- * Servlet implementation class DelUserServlet
+ * Servlet implementation class ListBorrowServlet
  */
-@WebServlet("/DelUserServlet")
-public class DelUserServlet extends HttpServlet {
+@WebServlet("/ListBorrowServlet")
+public class ListBorrowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DelUserServlet() {
+    public ListBorrowServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,16 +31,12 @@ public class DelUserServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// 1.获取要查询的用户id
-				String id1 = request.getParameter("id");
-				Integer id = Integer.parseInt(id1);
-				// 2.调用Service中根据id查找用户的方法
-				UserService us=new UserService();
-				T_User u=us.findUserByID(id);
-				us.deleteUser(u);
-				//3.请求转发到用户列表页面
-				request.getRequestDispatcher("/ListUserServlet").forward(request, response);
+		BorrowRecordService bs=new BorrowRecordService();
+		List<T_BorrowRecord> list =bs.findAllBorrow();
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("/listBorrow.jsp").forward(request, response);
+	
+	
 	}
 
 	/**

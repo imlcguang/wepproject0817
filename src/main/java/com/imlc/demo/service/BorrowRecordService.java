@@ -41,8 +41,8 @@ UserDao daou=new UserDao();
 	 * 归还样机
 	 * @param id
 	 */
-	public void returnRecord(String id) {
-	daob.returnRecord(id);
+	public void returnRecord(T_BorrowRecord b) {
+	    daob.returnRecord(b);
 	}
 	
 	
@@ -52,8 +52,8 @@ UserDao daou=new UserDao();
 	 * 修改更新
 	 * @param id
 	 */
-	public void updateBorrowRecord(String id) {
-		daob.updateBorrowRecord(id);
+	public void updateBorrowRecord(T_BorrowRecord b) {
+		daob.updateBorrowRecord(b);
 	}
 
 	/**

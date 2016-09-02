@@ -17,16 +17,16 @@ import com.imlc.demo.exception.MsgException;
 import com.imlc.demo.service.BorrowRecordService;
 
 /**
- * Servlet implementation class BorrowServlet
+ * Servlet implementation class UpdateBorrowServlet
  */
-@WebServlet("/BorrowServlet")
-public class BorrowServlet extends HttpServlet {
+@WebServlet("/UpdateBorrowServlet")
+public class UpdateBorrowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public BorrowServlet() {
+	public UpdateBorrowServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -37,12 +37,10 @@ public class BorrowServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		T_BorrowRecord b = new T_BorrowRecord();
-		BorrowRecordService bs = new BorrowRecordService();
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		try {
-			//1 获取
+			// 1 获取
 			String CustomerID = request.getParameter("CustomerID");
 			String SendDatetime = request.getParameter("SendDatetime");
 			String BorrowPermitPerson = request.getParameter("BorrowPermitPerson");
@@ -51,11 +49,13 @@ public class BorrowServlet extends HttpServlet {
 			String ModelID = request.getParameter("ModelID");
 			String BorrowNumber = request.getParameter("BorrowNumber");
 			String BorrowCheckNo = request.getParameter("BorrowCheckNo");
+			String ReturnOperator = request.getParameter("ReturnOperator");
 
-			/*
-			 * BeanUtils.populate(b, request.getParameterMap()); Map map
-			 * =request.getParameterMap(); bs.borrowRecord(b);
-			 */
+			// 1.获取要查询的客户id
+			String id = request.getParameter("id");
+			// 2.调用Service中根据id查找借机表的方法
+			BorrowRecordService bs = new BorrowRecordService();
+			T_BorrowRecord b = bs.findBorrowByID(id);
 			// 2封装
 			T_Customer customer = bs.findCustById(CustomerID);
 			b.setCustomerID(customer);
@@ -66,7 +66,6 @@ public class BorrowServlet extends HttpServlet {
 			T_User useroper = bs.findUserById(BorrowOperator);
 			b.setBorrowPermitPerson(userpermit);
 			b.setBorrowOperator(useroper);
-			b.setBorrowOperatDatetime(new Date());
 			b.setPlanReturnDatetime(PlanReturnDatetime);
 
 			T_Model model = bs.findModelById(ModelID);
@@ -75,29 +74,29 @@ public class BorrowServlet extends HttpServlet {
 			b.setBorrowNumber(BorrowNumber);
 			b.setBorrowCheckNo(BorrowCheckNo);
 
+			T_User returnop = bs.findUserById(ReturnOperator);
+			b.setReturnOperator(returnop);
 			System.out.println(b.toString());
-			//3 检查是否为空
+			// 3 检查是否为空
 			b.checkValue();
-			// 4调用service中的增加方法
-			bs.borrowRecord(b);
+			// 4调用service中的修改方法
+			bs.updateBorrowRecord(b);
 			System.out.println(b.toString());
 
 			request.getSession().setAttribute("Borrow", b);
-			// 5提示注册成功3秒回到主页
-			response.getWriter().write("恭喜您注册成功!3秒回到主页....");
-			response.setHeader("refresh", "3;url=" + request.getContextPath() + "/index.jsp");
-
-		} catch (MsgException e) {
-			e.printStackTrace();
-			request.setAttribute("msg", e.getMessage());
-			request.getRequestDispatcher("/borrow.jsp").forward(request, response);
-			return;
-
+			// 3.重定向到客户列表页面
+			request.getRequestDispatcher("/ListBorrowServlet").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+			throw new RuntimeException(e);
 		
-		
+		}/*catch (MsgException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			request.setAttribute("msg", e.getMessage());
+			request.getRequestDispatcher("/updateBorrow.jsp").forward(request, response);
+			return;
+		}*/
 
 	}
 

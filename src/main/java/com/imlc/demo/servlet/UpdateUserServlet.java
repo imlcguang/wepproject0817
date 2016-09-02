@@ -74,7 +74,7 @@ public class UpdateUserServlet extends HttpServlet {
 			request.getRequestDispatcher("/ListUserServlet").forward(request, response);
 
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 

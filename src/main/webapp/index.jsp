@@ -36,9 +36,8 @@
 		
 		<p>借还信息：</p>
 		<a href=borrow.jsp>借机登记</a>
-		<a href=return.jsp >样机归还</a>
 		<a href=${pageContext.request.contextPath}/ListBorrowServlet>借机明细查询</a>
-		<a href=.jsp>借机统计</a>
+		<a href=count.jsp>借机统计</a>
 	</c:if>
 </body>
 </html>

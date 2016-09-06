@@ -60,8 +60,8 @@ UserDao daou=new UserDao();
 	 *  删除
 	 * @param id
 	 */
-	public void deleteBorrowRecord(String id) {
-		daob.deleteBorrowRecord(id);
+	public void deleteBorrowRecord(T_BorrowRecord b) {
+		daob.deleteBorrowRecord(b);
 	}
 
 	
@@ -74,28 +74,21 @@ UserDao daou=new UserDao();
 		return daob.findAllBorrow();
 
 	}
-	/**
-	 * 根据客户名称排序
-	 * @param 
-	 * @return
-	 */
-	public List<T_BorrowRecord> orderByCustomerID() {
-		return daob.orderByCustomerID();
-	}
 	
 	/**
-	 * 根据样机名称排序
-	 * @param 
+	 * 排序
+	 * @param string
 	 * @return
 	 */
-	public List<T_BorrowRecord> orderByModelID() {
-		return daob.orderByModelID();
+	public List<T_BorrowRecord> order(String string){
+		if("Cus".equals(string)){
+			return daob.orderByCustomerID();
+		}
+		else {
+			return daob.orderByModelID();
+		}
 	}
-	
-	
-	
-	
-	
+
 	/**
 	 * 通过ID查询用户
 	 * 
@@ -143,5 +136,9 @@ UserDao daou=new UserDao();
 		else {
 			return daom.findByModelID(i);
 		}
+	}
+	
+	public List<T_BorrowRecord> findBorrowByCond(T_BorrowRecord borrowRecord,String string) {
+			return daob.findBorrowByCond(borrowRecord,string);
 	}
 }

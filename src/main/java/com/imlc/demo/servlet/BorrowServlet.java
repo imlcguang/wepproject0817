@@ -66,6 +66,9 @@ public class BorrowServlet extends HttpServlet {
 			T_User useroper = bs.findUserById(BorrowOperator);
 			b.setBorrowPermitPerson(userpermit);
 			b.setBorrowOperator(useroper);
+			
+			//SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+			//b.setBorrowOperatDatetime(df.format(new Date()));
 			b.setBorrowOperatDatetime(new Date());
 			b.setPlanReturnDatetime(PlanReturnDatetime);
 

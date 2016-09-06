@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping">
 <!-- Generated 2016-9-2 8:54:28 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.imlc.demo.entity.T_BorrowRecord" table="T_BORROWRECORD">
+    <class name="com.imlc.demo.entity.T_BorrowRecord" table="T_BORROWRECORD" lazy="false">
         <id name="BorrowNo" type="java.lang.Integer">
             <column name="BORROWNO" />
             <generator class="identity" />

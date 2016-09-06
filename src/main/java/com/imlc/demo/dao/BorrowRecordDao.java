@@ -2,8 +2,11 @@ package com.imlc.demo.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 
 import com.imlc.demo.entity.T_BorrowRecord;
@@ -81,9 +84,8 @@ public class BorrowRecordDao {
 	 *  删除
 	 * @param id
 	 */
-	public void deleteBorrowRecord(String id) {
+	public void deleteBorrowRecord(T_BorrowRecord b) {
 		init();
-		T_BorrowRecord b=findBorrowByID(id);
 		session.delete(b);
 		destory();
 	}
@@ -115,6 +117,10 @@ public class BorrowRecordDao {
 		init();
 		String hql = "FROM T_BorrowRecord order by CustomerID, ModelID, BorrowNumber";
 		List<T_BorrowRecord> result = session.createQuery(hql).list();
+		for (int i = 0; i < result.size(); i++) {
+			T_BorrowRecord b = (T_BorrowRecord) result.get(i);
+			System.out.println(b);
+		}
 		destory();
 		return result;
 	}
@@ -128,6 +134,52 @@ public class BorrowRecordDao {
 		init();
 		String hql = "FROM T_BorrowRecord order by ModelID,CustomerID,  BorrowNumber";
 		List<T_BorrowRecord> result = session.createQuery(hql).list();
+		for (int i = 0; i < result.size(); i++) {
+			T_BorrowRecord b = (T_BorrowRecord) result.get(i);
+			System.out.println(b);
+		}
+		destory();
+		return result;
+	}
+	
+	/**
+	 * 根据客户名称、样机名称、借机时间、借机批准人、借条编号、归还日期等条件进行借机记录的查询
+	 * 
+	 * @return
+	 */
+	public List<T_BorrowRecord> findBorrowByCond(T_BorrowRecord b,String string){
+		init();
+		DetachedCriteria dc = DetachedCriteria.forClass(T_BorrowRecord.class);
+		if(b.getCustomerID()!=null){
+			dc.add(Restrictions.eq("CustomerID", b.getCustomerID()));
+		}
+		if(b.getModelID()!=null){
+			dc.add(Restrictions.eq("ModelID", b.getModelID()));
+		}
+		if(b.getBorrowOperatDatetime()!=null){
+			dc.add(Restrictions.eq("BorrowOperatDatetime", b.getBorrowOperatDatetime()));
+		}
+		if(b.getBorrowPermitPerson()!=null){
+			dc.add(Restrictions.eq("BorrowPermitPerson", b.getBorrowPermitPerson()));
+		}
+		if(b.getBorrowCheckNo()!=null){
+			dc.add(Restrictions.eq("BorrowCheckNo", b.getBorrowCheckNo()));
+		}
+		if(b.getReturnDatetime()!=null){
+			dc.add(Restrictions.eq("ReturnDatetime", b.getReturnDatetime()));
+		}
+		if("yes".equals(string)){
+			dc.add(Restrictions.isNotNull("ReturnDatetime"));
+		}
+		else if ("no".equals(string)) {
+			dc.add(Restrictions.isNull("ReturnDatetime"));
+		}
+		Criteria c = dc.getExecutableCriteria(session);
+	       List<T_BorrowRecord> result = c.list();
+		for (int i = 0; i < result.size(); i++) {
+			T_BorrowRecord b1 = (T_BorrowRecord) result.get(i);
+			System.out.println(b1);
+		}
 		destory();
 		return result;
 	}

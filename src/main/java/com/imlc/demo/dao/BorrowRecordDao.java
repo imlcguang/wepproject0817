@@ -6,6 +6,8 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 
@@ -109,6 +111,29 @@ public class BorrowRecordDao {
 
 	}
 	/**
+	 * 统计
+	 * @return
+	 */
+	public List<Object[]> cusSum() {
+		init();
+		Criteria criteria = session.createCriteria(T_BorrowRecord.class);
+		ProjectionList plist = Projections.projectionList();
+		plist.add(Projections.sum("BorrowNumber"));
+		plist.add(Projections.groupProperty("CustomerID"));
+		criteria.setProjection(plist);
+		List<Object[]> p=criteria.list();
+		for (Object[] d : p) {
+			System.out.println(d[0]);
+			System.out.println(d[1]);
+			System.out.println("***************");
+		}
+		destory();
+		return p;
+		
+
+	}
+	
+	/**
 	 * 根据客户名称排序
 	 * @param 
 	 * @return
@@ -138,6 +163,7 @@ public class BorrowRecordDao {
 			T_BorrowRecord b = (T_BorrowRecord) result.get(i);
 			System.out.println(b);
 		}
+		
 		destory();
 		return result;
 	}

@@ -3,6 +3,9 @@ package com.imlc.demo.entity;
 
 public class T_Count {
 	private T_Customer CustomerID ;
+	private T_Model ModelID;
+	private String BorrowNumber;	
+	
 	public T_Customer getCustomerID() {
 		return CustomerID;
 	}
@@ -21,6 +24,9 @@ public class T_Count {
 	public void setBorrowNumber(String borrowNumber) {
 		BorrowNumber = borrowNumber;
 	}
-	private T_Model ModelID;
-	private String BorrowNumber;	
+	@Override
+	public String toString() {
+		return "T_Count [CustomerID=" + CustomerID + ", ModelID=" + ModelID + ", BorrowNumber=" + BorrowNumber + "]";
+	}
+	
 }

@@ -33,9 +33,8 @@ public class ModelInfoServlet extends HttpServlet {
 		//1.获取要查询的样机id
 				String id1 = request.getParameter("id");
 				//2.调用Service中根据id查找样机的方法
-				ModelService ms = new ModelService();
 				Integer id=Integer.parseInt(id1);
-				T_Model model = ms.findModelById(id);
+				T_Model model = ModelService.getInstance().findModelById(id);
 				if (model == null) {
 					request.setAttribute("msg", "找不到该样机!");
 					request.getRequestDispatcher("/listModel.jsp").forward(request, response);

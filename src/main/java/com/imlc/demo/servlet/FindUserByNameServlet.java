@@ -41,8 +41,7 @@ public class FindUserByNameServlet extends HttpServlet {
 			T_User user =new T_User();
 			String userName=request.getParameter("userName");
 			
-			UserService us=new UserService();
-			List<T_User> list=us.findUserByName(userName);
+			List<T_User> list=UserService.getInstance().findUserByName(userName);
 			
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("/listUser.jsp").forward(request, response);

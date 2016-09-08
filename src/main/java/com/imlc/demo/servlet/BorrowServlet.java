@@ -38,7 +38,6 @@ public class BorrowServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		T_BorrowRecord b = new T_BorrowRecord();
-		BorrowRecordService bs = new BorrowRecordService();
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		try {
@@ -57,13 +56,13 @@ public class BorrowServlet extends HttpServlet {
 			 * =request.getParameterMap(); bs.borrowRecord(b);
 			 */
 			// 2封装
-			T_Customer customer = bs.findCustById(CustomerID);
+			T_Customer customer = BorrowRecordService.getInstance().findCustById(CustomerID);
 			b.setCustomerID(customer);
 
 			b.setSendDatetime(SendDatetime);
 			// 检查是否存在，存在则返回，否则报错
-			T_User userpermit = bs.findUserById(BorrowPermitPerson);
-			T_User useroper = bs.findUserById(BorrowOperator);
+			T_User userpermit = BorrowRecordService.getInstance().findUserById(BorrowPermitPerson);
+			T_User useroper = BorrowRecordService.getInstance().findUserById(BorrowOperator);
 			b.setBorrowPermitPerson(userpermit);
 			b.setBorrowOperator(useroper);
 			
@@ -72,7 +71,7 @@ public class BorrowServlet extends HttpServlet {
 			b.setBorrowOperatDatetime(new Date());
 			b.setPlanReturnDatetime(PlanReturnDatetime);
 
-			T_Model model = bs.findModelById(ModelID);
+			T_Model model = BorrowRecordService.getInstance().findModelById(ModelID);
 			b.setModelID(model);
 
 			b.setBorrowNumber(BorrowNumber);
@@ -82,7 +81,7 @@ public class BorrowServlet extends HttpServlet {
 			//3 检查是否为空
 			b.checkValue();
 			// 4调用service中的增加方法
-			bs.borrowRecord(b);
+			BorrowRecordService.getInstance().borrowRecord(b);
 			System.out.println(b.toString());
 
 			request.getSession().setAttribute("Borrow", b);

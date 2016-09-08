@@ -34,9 +34,8 @@ public class DelUserServlet extends HttpServlet {
 				String id1 = request.getParameter("id");
 				Integer id = Integer.parseInt(id1);
 				// 2.调用Service中根据id查找用户的方法
-				UserService us=new UserService();
-				T_User u=us.findUserByID(id);
-				us.deleteUser(u);
+				T_User u=UserService.getInstance().findUserByID(id);
+				UserService.getInstance().deleteUser(u);
 				//3.请求转发到用户列表页面
 				request.getRequestDispatcher("/ListUserServlet").forward(request, response);
 	}

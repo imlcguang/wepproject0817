@@ -1,6 +1,11 @@
 package com.imlc.demo.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -12,7 +17,11 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 
 import com.imlc.demo.entity.T_BorrowRecord;
+import com.imlc.demo.entity.T_Count;
+import com.imlc.demo.entity.T_Customer;
+import com.imlc.demo.entity.T_Model;
 import com.imlc.demo.hibernate.SessionFactoryUtil;
+import com.imlc.demo.service.BorrowRecordService;
 
 
 public class BorrowRecordDao {
@@ -111,25 +120,78 @@ public class BorrowRecordDao {
 
 	}
 	/**
-	 * 统计
+	 * 统计 按客户
 	 * @return
 	 */
-	public List<Object[]> cusSum() {
+	public List<Map<String, Object>> cusSum() {
 		init();
 		Criteria criteria = session.createCriteria(T_BorrowRecord.class);
 		ProjectionList plist = Projections.projectionList();
+		// 分组统计
 		plist.add(Projections.sum("BorrowNumber"));
 		plist.add(Projections.groupProperty("CustomerID"));
+		// 将ProjectionList添加到Criteria对象中
 		criteria.setProjection(plist);
-		List<Object[]> p=criteria.list();
+		List<Object[]> p = criteria.list();
+		List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
 		for (Object[] d : p) {
-			System.out.println(d[0]);
-			System.out.println(d[1]);
-			System.out.println("***************");
+			Map<String, Object> item = new HashMap<>();
+			// 把总数和客户名封装到T_Count
+			T_Count c = new T_Count();
+			c.setBorrowNumber((String) d[0]);
+			c.setCustomerID((T_Customer) d[1]);
+			// 存入map<客户名，T_Count类>
+			item.put("cal", c);
+			// 通过客户名找该用户的多条记录的详细信息
+			String hql = "FROM T_BorrowRecord WHERE CustomerID = :cid ";
+			List<T_BorrowRecord> result1 = session.createQuery(hql).setParameter("cid", (T_Customer) d[1]).list();
+			for (int i = 0; i < result1.size(); i++) {
+				T_BorrowRecord b = (T_BorrowRecord) result1.get(i);
+			}
+			item.put("detail", result1);
+			// 把一条记录信息的map：item存入list
+			result.add(item);
 		}
 		destory();
-		return p;
-		
+		return result;
+
+	}
+	
+	/**
+	 * 统计 按客户
+	 * @return
+	 */
+	public List<Map<String, Object>> modleSum() {
+		init();
+		Criteria criteria = session.createCriteria(T_BorrowRecord.class);
+		ProjectionList plist = Projections.projectionList();
+		// 分组统计
+		plist.add(Projections.sum("BorrowNumber"));
+		plist.add(Projections.groupProperty("ModelID"));
+		// 将ProjectionList添加到Criteria对象中
+		criteria.setProjection(plist);
+		List<Object[]> p = criteria.list();
+		List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
+		for (Object[] d : p) {
+			Map<String, Object> item = new HashMap<>();
+			// 把总数和客户名封装到T_Count
+			T_Count c = new T_Count();
+			c.setBorrowNumber((String) d[0]);
+			c.setModelID((T_Model) d[1]);
+			// 存入map<客户名，T_Count类>
+			item.put("cal", c);
+			// 通过客户名找该用户的多条记录的详细信息
+			String hql = "FROM T_BorrowRecord WHERE ModelID = :cid ";
+			List<T_BorrowRecord> result1 = session.createQuery(hql).setParameter("cid", (T_Model) d[1]).list();
+			for (int i = 0; i < result1.size(); i++) {
+				T_BorrowRecord b = (T_BorrowRecord) result1.get(i);
+			}
+			item.put("detail", result1);
+			// 把一条记录信息的map：item存入list
+			result.add(item);
+		}
+		destory();
+		return result;
 
 	}
 	

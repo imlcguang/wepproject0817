@@ -37,9 +37,8 @@ public class UserInfoServlet extends HttpServlet {
 		// 1.获取要查询的id
 		String id1 = request.getParameter("id");
 		// 2.调用Service中根据id查找用户的方法
-		UserService us=new UserService();
 		Integer id = Integer.parseInt(id1);
-		T_User user=us.findUserByID(id);
+		T_User user=UserService.getInstance().findUserByID(id);
 		
 		if (user  == null) {
 			request.setAttribute("msg", "找不到该客户!");

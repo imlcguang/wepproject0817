@@ -41,7 +41,6 @@ public class FindBorrowByCondServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		T_BorrowRecord b = new T_BorrowRecord();
-		BorrowRecordService bs = new BorrowRecordService();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
@@ -93,7 +92,7 @@ public class FindBorrowByCondServlet extends HttpServlet {
 			}
 			
 			// 4调用service中的增加方法
-			List<T_BorrowRecord> list = (List<T_BorrowRecord>) bs.findBorrowByCond(b, isreturn);
+			List<T_BorrowRecord> list = (List<T_BorrowRecord>) BorrowRecordService.getInstance().findBorrowByCond(b, isreturn);
 			System.out.println(b.toString());
 			System.out.println("list"+list);
 

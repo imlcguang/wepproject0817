@@ -35,8 +35,7 @@ public class FindModelByModelName extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			String ModelName = request.getParameter("ModelName");
-			ModelService ms = new ModelService();
-			List<T_Model> list = ms.findByModelName(ModelName);
+			List<T_Model> list = ModelService.getInstance().findByModelName(ModelName);
 			//请求转发
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("/listModel.jsp").forward(request, response);

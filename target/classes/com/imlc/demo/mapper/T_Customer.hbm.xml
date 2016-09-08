@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping">
 <!-- Generated 2016-8-10 16:21:49 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.imlc.demo.entity.T_Customer" table="T_CUSTOMER">
+    <class name="com.imlc.demo.entity.T_Customer" table="T_CUSTOMER" lazy="false">
         <id name="CustomerID" type="java.lang.Integer">
             <column name="CUSTOMERID" />
             <generator class="native" />

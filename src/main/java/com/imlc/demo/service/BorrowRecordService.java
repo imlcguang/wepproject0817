@@ -1,7 +1,7 @@
 package com.imlc.demo.service;
 
 import java.util.List;
-
+import java.util.Map;
 
 import com.imlc.demo.dao.BorrowRecordDao;
 import com.imlc.demo.dao.CustomerDao;
@@ -14,6 +14,20 @@ import com.imlc.demo.entity.T_User;
 import com.imlc.demo.exception.MsgException;
 
 public class BorrowRecordService {
+	
+	
+private static BorrowRecordService borrowRecordService=null;
+
+public static BorrowRecordService getInstance(){
+	if(borrowRecordService == null){
+		borrowRecordService = new BorrowRecordService();
+	}
+	return borrowRecordService;
+}
+
+private BorrowRecordService(){
+	
+}
 BorrowRecordDao daob  = new BorrowRecordDao();
 ModelDao daom=new ModelDao();
 CustomerDao daoc=new CustomerDao();
@@ -75,6 +89,18 @@ UserDao daou=new UserDao();
 
 	}
 	
+	/**
+	 * 统计，按客户
+	 * @return
+	 */
+	public List<Map<String, Object>> cusSum(String string) {
+		if("Cus".equals(string)){
+		return daob.cusSum();
+		}
+		else {
+			return daob.modleSum();
+		}
+	}
 	/**
 	 * 排序
 	 * @param string
@@ -141,4 +167,6 @@ UserDao daou=new UserDao();
 	public List<T_BorrowRecord> findBorrowByCond(T_BorrowRecord borrowRecord,String string) {
 			return daob.findBorrowByCond(borrowRecord,string);
 	}
+	
+	
 }

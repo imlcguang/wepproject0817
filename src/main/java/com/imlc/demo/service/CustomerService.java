@@ -9,6 +9,23 @@ import com.imlc.demo.entity.T_Customer;
 import com.imlc.demo.exception.MsgException;
 
 public class CustomerService {
+	
+	private static CustomerService CustomerService=null;
+
+	public static CustomerService getInstance(){
+		if(CustomerService == null){
+			CustomerService = new CustomerService();
+		}
+		return CustomerService;
+	}
+
+	private CustomerService(){
+		
+	}
+	
+	
+	
+	
 	private CustomerDao dao = new CustomerDao();
 
 	/**

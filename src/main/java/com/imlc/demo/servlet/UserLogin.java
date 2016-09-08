@@ -44,12 +44,11 @@ public class UserLogin extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 
 		String loginName, password;
-		UserService us = new UserService();
 		// 获取
 		loginName = request.getParameter("loginName");
 		password = request.getParameter("userPWD");
 		// 查找
-		T_User user = us.isUser(loginName, password);
+		T_User user = UserService.getInstance().isUser(loginName, password);
 
 		if (user == null) {
 			// 如果不正确则提示

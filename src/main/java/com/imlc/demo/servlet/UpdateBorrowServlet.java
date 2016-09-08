@@ -54,33 +54,32 @@ public class UpdateBorrowServlet extends HttpServlet {
 			// 1.获取要查询的客户id
 			String id = request.getParameter("id");
 			// 2.调用Service中根据id查找借机表的方法
-			BorrowRecordService bs = new BorrowRecordService();
-			T_BorrowRecord b = bs.findBorrowByID(id);
+			T_BorrowRecord b = BorrowRecordService.getInstance().findBorrowByID(id);
 			// 2封装
-			T_Customer customer = bs.findCustById(CustomerID);
+			T_Customer customer = BorrowRecordService.getInstance().findCustById(CustomerID);
 			b.setCustomerID(customer);
 
 			b.setSendDatetime(SendDatetime);
 			// 检查是否存在，存在则返回，否则报错
-			T_User userpermit = bs.findUserById(BorrowPermitPerson);
-			T_User useroper = bs.findUserById(BorrowOperator);
+			T_User userpermit = BorrowRecordService.getInstance().findUserById(BorrowPermitPerson);
+			T_User useroper = BorrowRecordService.getInstance().findUserById(BorrowOperator);
 			b.setBorrowPermitPerson(userpermit);
 			b.setBorrowOperator(useroper);
 			b.setPlanReturnDatetime(PlanReturnDatetime);
 
-			T_Model model = bs.findModelById(ModelID);
+			T_Model model = BorrowRecordService.getInstance().findModelById(ModelID);
 			b.setModelID(model);
 
 			b.setBorrowNumber(BorrowNumber);
 			b.setBorrowCheckNo(BorrowCheckNo);
 
-			T_User returnop = bs.findUserById(ReturnOperator);
+			T_User returnop = BorrowRecordService.getInstance().findUserById(ReturnOperator);
 			b.setReturnOperator(returnop);
 			System.out.println(b.toString());
 			// 3 检查是否为空
 			b.checkValue();
 			// 4调用service中的修改方法
-			bs.updateBorrowRecord(b);
+			BorrowRecordService.getInstance().updateBorrowRecord(b);
 			System.out.println(b.toString());
 
 			request.getSession().setAttribute("Borrow", b);

@@ -41,13 +41,12 @@ public class UpdateModelServlet extends HttpServlet {
 			String modelDesc=request.getParameter("modelDesc");
 			String id1=request.getParameter("id");
 			Integer id = Integer.parseInt(id1);
-			ModelService ms= new ModelService();
-			T_Model t=ms.findModelById(id);
+			T_Model t=ModelService.getInstance().findModelById(id);
 			t.setModelName(modelName);
 			t.setModelVersion(modelVersion);
 			t.setModelDesc(modelDesc);
 			//调用service中的update方法
-			ms.updateModels(t);
+			ModelService.getInstance().updateModels(t);
 			
 			request.getRequestDispatcher("/ListModelServlet").forward(request, response);
 			

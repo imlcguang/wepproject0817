@@ -36,11 +36,10 @@ public class UpdateUserServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		try {
-			UserService us = new UserService();
 			// 1.获取要查询的客户id,转换为integer,得到对应ID的用户
 			String id1 = request.getParameter("id");
 			Integer id = Integer.parseInt(id1);
-			T_User u =us.findUserByID(id);
+			T_User u =UserService.getInstance().findUserByID(id);
 			
 			String userName = request.getParameter("UserName");
 			String userSex = request.getParameter("UserSex");
@@ -68,7 +67,7 @@ public class UpdateUserServlet extends HttpServlet {
 			u.setUserSex(userSex);
 			u.setFunctionPopedom(functionPopedom);
 			// 2.调用Service中修改客户信息的方法
-			us.updateUser(u);
+			UserService.getInstance().updateUser(u);
 
 			// 3.重定向到客户列表页面
 			request.getRequestDispatcher("/ListUserServlet").forward(request, response);

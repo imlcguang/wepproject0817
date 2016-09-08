@@ -35,9 +35,8 @@ public class CustInfoServlet extends HttpServlet {
 		//1.获取要查询的客户id
 		String id1 = request.getParameter("id");
 		//2.调用Service中根据id查找客户的方法
-		CustomerService cs = new CustomerService();
 		Integer id=Integer.parseInt(id1);
-		T_Customer cust = cs.findCustById(id);
+		T_Customer cust = CustomerService.getInstance().findCustById(id);
 		if (cust == null) {
 			request.setAttribute("msg", "找不到该客户!");
 			request.getRequestDispatcher("/listCust.jsp").forward(request, response);

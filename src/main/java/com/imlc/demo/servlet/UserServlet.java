@@ -72,7 +72,6 @@ public class UserServlet extends HttpServlet {
 
 			request.setCharacterEncoding("utf-8");
 			response.setContentType("text/html;charset=utf-8");
-			UserService service = new UserService();
 			// 检验验证码
 			String valistr = request.getParameter("valistr");
 			String valistr2 = (String) request.getSession().getAttribute("valistr");
@@ -116,9 +115,8 @@ public class UserServlet extends HttpServlet {
 
 			System.out.println(u.toString());
 
-			UserService us=new UserService();
 			
-			us.registUser(u);
+			UserService.getInstance().registUser(u);
 			// 带数据过去,登录用户
 			request.getSession().setAttribute("regUser", u);
 			// 请求转发

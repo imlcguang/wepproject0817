@@ -10,6 +10,19 @@ import com.imlc.demo.exception.MsgException;
 
 
 public class UserService {
+	
+	private static UserService UserService=null;
+
+	public static UserService getInstance(){
+		if(UserService == null){
+			UserService = new UserService();
+		}
+		return UserService;
+	}
+
+	private UserService(){
+		
+	}
 	private UserDao dao=new UserDao();
 	
 /**

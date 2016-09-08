@@ -33,10 +33,9 @@ public class DelModelServlet extends HttpServlet {
 		//1.获取要查询的样机id
 		String id1 = request.getParameter("id");
 		//2.调用Service中根据id查找样机，删除样机信息的方法
-		ModelService ms = new ModelService();
 		Integer id=Integer.parseInt(id1);
-		T_Model model = ms.findModelById(id);
-		ms.DeleteModels(model);
+		T_Model model = ModelService.getInstance().findModelById(id);
+		ModelService.getInstance().DeleteModels(model);
 		//请求转发到样机列表页面
 		request.getRequestDispatcher("/ListModelServlet").forward(request, response);
 	}

@@ -7,6 +7,20 @@ import com.imlc.demo.entity.T_Model;
 import com.imlc.demo.exception.MsgException;
 
 public class ModelService {
+	
+	private static ModelService ModelService=null;
+
+	public static ModelService getInstance(){
+		if(ModelService == null){
+			ModelService = new ModelService();
+		}
+		return ModelService;
+	}
+
+	private ModelService(){
+		
+	}
+	
 	private  ModelDao dao = new ModelDao();
 
 	/**

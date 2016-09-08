@@ -34,10 +34,9 @@ public class DelCustServlet extends HttpServlet {
 		// 1.获取要查询的客户id
 		String id1 = request.getParameter("id");
 		// 2.调用Service中根据id查找客户的方法
-		CustomerService cs = new CustomerService();
 		Integer id = Integer.parseInt(id1);
-		T_Customer cust = cs.findCustById(id);
-		cs.DeleteCustomers(cust);
+		T_Customer cust = CustomerService.getInstance().findCustById(id);
+		CustomerService.getInstance().DeleteCustomers(cust);
 		//3.请求转发到客户列表页面
 		request.getRequestDispatcher("/ListCustServlet").forward(request, response);
 	}

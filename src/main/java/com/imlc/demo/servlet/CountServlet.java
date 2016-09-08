@@ -2,6 +2,7 @@ package com.imlc.demo.servlet;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,8 +35,7 @@ public class CountServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String countway = request.getParameter("Count");
-		BorrowRecordService bs=new BorrowRecordService();
-		List<T_BorrowRecord> list =bs.order(countway);
+		List<Map<String, Object>> list =BorrowRecordService.getInstance().cusSum(countway);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/count.jsp").forward(request, response);
 		

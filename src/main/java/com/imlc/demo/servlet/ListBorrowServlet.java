@@ -31,8 +31,7 @@ public class ListBorrowServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BorrowRecordService bs=new BorrowRecordService();
-		List<T_BorrowRecord> list =bs.findAllBorrow();
+		List<T_BorrowRecord> list =BorrowRecordService.getInstance().findAllBorrow();
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/listBorrow.jsp").forward(request, response);
 	

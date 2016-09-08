@@ -43,12 +43,11 @@ public class ReturnServlet extends HttpServlet {
 			// 1.获取要查询的客户id
 			String id = request.getParameter("id");
 			// 2.调用Service中根据id查找借机表的方法
-			BorrowRecordService bs = new BorrowRecordService();
-			T_BorrowRecord borrow = bs.findBorrowByID(id);
+			T_BorrowRecord borrow = BorrowRecordService.getInstance().findBorrowByID(id);
 			System.out.println(borrow.toString());
 			// 获取数据并封装
 			String ReturnOperator = request.getParameter("ReturnOperator");
-			T_User returnop = bs.findUserById(ReturnOperator);
+			T_User returnop = BorrowRecordService.getInstance().findUserById(ReturnOperator);
 			borrow.setReturnOperator(returnop);
 
 			 /*SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -57,7 +56,7 @@ public class ReturnServlet extends HttpServlet {
 
 			System.out.println(borrow.toString());
 			// 调用service中的return方法
-			bs.returnRecord(borrow);
+			BorrowRecordService.getInstance().returnRecord(borrow);
 			// 3.请求转发到list.jsp页面展示
 			request.getRequestDispatcher("/ListBorrowServlet").forward(request, response);
 		} catch (MsgException e) {

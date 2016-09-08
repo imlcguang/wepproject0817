@@ -32,8 +32,7 @@ public class ListModelServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ModelService cs = new ModelService();
-		List<T_Model> list =cs.findAllModel();
+		List<T_Model> list =ModelService.getInstance().findAllModel();
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/listModel.jsp").forward(request, response);
 	}

@@ -57,8 +57,7 @@ public class UpdateCustServlet extends HttpServlet {
 			Integer id = Integer.parseInt(id1);
 			customer.setCustomerID(id);
 			// 2.调用Service中修改客户信息的方法
-			CustomerService cs = new CustomerService();
-			cs.updateCustomers(customer);
+			CustomerService.getInstance().updateCustomers(customer);
 
 			// 3.重定向到客户列表页面
 			request.getRequestDispatcher("/ListCustServlet").forward(request, response);

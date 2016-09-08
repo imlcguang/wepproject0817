@@ -36,8 +36,7 @@ public class BorrowInfoServlet extends HttpServlet {
 		// 1.获取要查询的id
 		String id = request.getParameter("id");
 		// 2.调用Service中根据id查找客户的方法
-		BorrowRecordService bs = new BorrowRecordService();
-		T_BorrowRecord borrow = bs.findBorrowByID(id);
+		T_BorrowRecord borrow = BorrowRecordService.getInstance().findBorrowByID(id);
 		
 		System.out.println(borrow.toString());
 		// 3.将查找到的客户信息存入request域中,请求转发到updateCust.jsp页面展示

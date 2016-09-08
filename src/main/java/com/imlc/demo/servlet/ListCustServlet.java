@@ -33,8 +33,7 @@ public class ListCustServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		CustomerService cs = new CustomerService();
-		List<T_Customer> list =cs.findAllCus();
+		List<T_Customer> list =CustomerService.getInstance().findAllCus();
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/listCust.jsp").forward(request, response);
 	}

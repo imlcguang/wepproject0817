@@ -52,9 +52,8 @@ public class ModelServlet extends HttpServlet {
 			model.checkValue();
 			System.out.println(model.toString());
 			
-			ModelService cs=new ModelService();
 			//判断客户名是否已存在，否则添加客户
-			cs.registModel(model);
+			ModelService.getInstance().registModel(model);
 			
 			request.getSession().setAttribute("Model", model);
 			//提示注册成功3秒回到主页

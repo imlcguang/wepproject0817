@@ -11,6 +11,7 @@ import org.apache.commons.beanutils.BeanUtils;
 
 import com.imlc.demo.entity.T_Customer;
 import com.imlc.demo.exception.MsgException;
+import com.imlc.demo.service.BorrowRecordService;
 import com.imlc.demo.service.CustomerService;
 
 /**
@@ -60,9 +61,8 @@ public class CusServlet extends HttpServlet {
 			customer.checkValue();
 			System.out.println(customer.toString());
 			
-			CustomerService cs=new CustomerService();
 			//判断客户名是否已存在，否则添加客户
-			cs.registCustomer(customer);
+			CustomerService.getInstance().registCustomer(customer);
 			
 			request.getSession().setAttribute("Customer", customer);
 			//提示注册成功3秒回到主页

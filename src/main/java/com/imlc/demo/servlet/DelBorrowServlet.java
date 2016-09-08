@@ -33,9 +33,8 @@ public class DelBorrowServlet extends HttpServlet {
 		// 1.获取要查询的id
 		String id = request.getParameter("id");
 		// 2.调用Service中根据id查找的方法
-		BorrowRecordService bs= new BorrowRecordService();
-		T_BorrowRecord borrow=bs.findBorrowByID(id);
-		bs.deleteBorrowRecord(borrow);
+		T_BorrowRecord borrow=BorrowRecordService.getInstance().findBorrowByID(id);
+		BorrowRecordService.getInstance().deleteBorrowRecord(borrow);
 		//3.请求转发到列表页面
 		request.getRequestDispatcher("/ListBorrowServlet").forward(request, response);
 	}

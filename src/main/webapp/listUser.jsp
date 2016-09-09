@@ -13,12 +13,17 @@
 	<form
 		action="${pageContext.request.contextPath }/FindUserByNameServlet"
 		method="POST">
-			用户姓名:<input type="text" name="userName" value="${param.userName }" /> 
+		<select name="getid"  >
+		<option value="">请选择用户姓名</option>
+			<c:forEach items="${requestScope.list}" var="user" >
+				<option value="${user.userName }">${user.userName }</option>
+			</c:forEach>
+		</select> 
 		<input type="submit" value="条件查询用户" />
 	</form>
 
 	<p>权限备注：1（有权限），0（无权限）。功能按顺序分别为借机登记、样机归还、客户信息维护、样机信息维护、借机明细查询、借机统计、用户信息管理。</p>
-	<table border="1" width="100%">
+	<table border="1" width="100%" >
 		<tr>
 			<th><input type="checkbox" onclick="checkAll(this)" />用户 ID</th>
 			<th>登录名</th>
@@ -30,8 +35,8 @@
 		</tr>
 		<c:forEach items="${requestScope.list}" var="user">
 			<tr>
-				<td><input type="checkbox" name="delId"
-					value="${user.userID }" /> ${user.userID }</td>
+				<td><input type="checkbox" name="delId" value="${user.userID }" />
+					${user.userID }</td>
 				<td><c:out value="${user.loginName }" /></td>
 				<td><c:out value="${user.userName }" /></td>
 				<td><c:out value="${user.userSex }" /></td>

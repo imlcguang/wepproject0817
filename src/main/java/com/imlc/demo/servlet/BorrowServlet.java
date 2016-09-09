@@ -41,7 +41,7 @@ public class BorrowServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		try {
-			//1 获取
+			// 1 获取
 			String CustomerID = request.getParameter("CustomerID");
 			String SendDatetime = request.getParameter("SendDatetime");
 			String BorrowPermitPerson = request.getParameter("BorrowPermitPerson");
@@ -56,29 +56,58 @@ public class BorrowServlet extends HttpServlet {
 			 * =request.getParameterMap(); bs.borrowRecord(b);
 			 */
 			// 2封装
-			T_Customer customer = BorrowRecordService.getInstance().findCustById(CustomerID);
-			b.setCustomerID(customer);
-
-			b.setSendDatetime(SendDatetime);
+			if (CustomerID != null && (!"".equals(CustomerID))) {
+				if(!CustomerID.matches("[0-9]{1,}")){
+					throw new MsgException("id格式不正确!");
+				}
+				T_Customer customer = BorrowRecordService.getInstance().findCustById(CustomerID);
+				b.setCustomerID(customer);
+			}
+			if (SendDatetime != null && (!"".equals(SendDatetime))) {
+				b.setSendDatetime(SendDatetime);
+			}
 			// 检查是否存在，存在则返回，否则报错
-			T_User userpermit = BorrowRecordService.getInstance().findUserById(BorrowPermitPerson);
-			T_User useroper = BorrowRecordService.getInstance().findUserById(BorrowOperator);
-			b.setBorrowPermitPerson(userpermit);
-			b.setBorrowOperator(useroper);
-			
-			//SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-			//b.setBorrowOperatDatetime(df.format(new Date()));
+			if (BorrowPermitPerson != null && (!"".equals(BorrowPermitPerson))) {
+				if(!BorrowPermitPerson.matches("[0-9]{1,}")){
+					throw new MsgException("id格式不正确!");
+				}
+				T_User userpermit = BorrowRecordService.getInstance().findUserById(BorrowPermitPerson);
+				b.setBorrowPermitPerson(userpermit);
+			}
+			if (BorrowOperator != null && (!"".equals(BorrowOperator))) {
+				if(!BorrowOperator.matches("[0-9]{1,}")){
+					throw new MsgException("id格式不正确!");
+				}
+				T_User useroper = BorrowRecordService.getInstance().findUserById(BorrowOperator);
+				b.setBorrowOperator(useroper);
+			}
+			// SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+			// b.setBorrowOperatDatetime(df.format(new Date()));
 			b.setBorrowOperatDatetime(new Date());
-			b.setPlanReturnDatetime(PlanReturnDatetime);
-
-			T_Model model = BorrowRecordService.getInstance().findModelById(ModelID);
-			b.setModelID(model);
-
-			b.setBorrowNumber(BorrowNumber);
-			b.setBorrowCheckNo(BorrowCheckNo);
-
+			if (PlanReturnDatetime != null && (!"".equals(PlanReturnDatetime))) {
+				if(!PlanReturnDatetime.matches("(([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-02-29)")){
+					throw new MsgException("日期格式不正确!YYYY-MM-DD");
+				}
+				b.setPlanReturnDatetime(PlanReturnDatetime);
+			}
+			if (ModelID != null && (!"".equals(ModelID))) {
+				if(!ModelID.matches("[0-9]{1,}")){
+					throw new MsgException("id格式不正确!");
+				}
+				T_Model model = BorrowRecordService.getInstance().findModelById(ModelID);
+				b.setModelID(model);
+			}
+			if (BorrowNumber != null && (!"".equals(BorrowNumber))) {
+				if(!BorrowNumber.matches("[1-9]{1,}[0-9]{0,}")){
+					throw new MsgException("借机数量格式不正确!");
+				}
+				b.setBorrowNumber(BorrowNumber);
+			}
+			if (BorrowCheckNo != null && (!"".equals(BorrowCheckNo))) {
+				b.setBorrowCheckNo(BorrowCheckNo);
+			}
 			System.out.println(b.toString());
-			//3 检查是否为空
+			// 3 检查是否为空
 			b.checkValue();
 			// 4调用service中的增加方法
 			BorrowRecordService.getInstance().borrowRecord(b);
@@ -86,8 +115,8 @@ public class BorrowServlet extends HttpServlet {
 
 			request.getSession().setAttribute("Borrow", b);
 			// 5提示注册成功3秒回到主页
-			response.getWriter().write("恭喜您注册成功!3秒回到主页....");
-			response.setHeader("refresh", "3;url=" + request.getContextPath() + "/index.jsp");
+			response.getWriter().write("恭喜您注册成功!2秒回到主页....");
+			response.setHeader("refresh", "2;url=" + request.getContextPath() + "/index.jsp");
 
 		} catch (MsgException e) {
 			e.printStackTrace();
@@ -95,12 +124,7 @@ public class BorrowServlet extends HttpServlet {
 			request.getRequestDispatcher("/borrow.jsp").forward(request, response);
 			return;
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		
-
+		} 
 	}
 
 	/**

@@ -39,7 +39,7 @@ public class FindUserByNameServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		try {
 			T_User user =new T_User();
-			String userName=request.getParameter("userName");
+			String userName=request.getParameter("getid");
 			
 			List<T_User> list=UserService.getInstance().findUserByName(userName);
 			

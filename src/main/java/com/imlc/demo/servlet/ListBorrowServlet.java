@@ -15,7 +15,6 @@ import com.imlc.demo.service.BorrowRecordService;
 /**
  * Servlet implementation class ListBorrowServlet
  */
-@WebServlet("/ListBorrowServlet")
 public class ListBorrowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

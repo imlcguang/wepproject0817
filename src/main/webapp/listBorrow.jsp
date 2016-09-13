@@ -6,14 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>借机明细查询</title>
-<script type="text/javascript">
-	function checkAll(allC) {
-		var otherCs = document.getElementsByName("delId");
-		for (var i = 0; i < otherCs.length; i++) {
-			otherCs[i].checked = allC.checked;
-		}
-	}
-</script>
 </head>
 <body style="text-align: center;">
 	<h1>借机明细查询</h1>
@@ -22,19 +14,32 @@
 	<form
 		action="${pageContext.request.contextPath }/FindBorrowByCondServlet"
 		method="POST">
+		<%--   <p>客户：</p>
+		<select name="CustomerID"  >
+		<option value="">请选择客户</option>
+			<c:forEach items="${requestScope.list}" var="cust" >
+				<option value="${cust.customerID.customerID}">${cust.customerID.customerName}</option>
+			</c:forEach>
+		</select>  --%>
+		
 		客户ID:<input type="text" name="CustomerID" value="${param.CustomerID }" />
+		
 		样机ID:<input type="text" name="ModelID" value="${param.ModelID }" />
+		
 		借机时间:<input type="text" name="BorrowOperatDatetime"
-			value="${param.BorrowOperatDatetime }" /><br>
-		<br> 借机批准人ID:<input type="text" name="BorrowPermitPerson"
-			value="${param.BorrowPermitPerson}" /> 借条编号:<input type="text"
-			name="BorrowCheckNo" value="${param.BorrowCheckNo}" /> 归还日期:<input
-			type="text" name="ReturnDatetime" value="${param.ReturnDatetime}" /><br>
-		<br> 是否已归还:<input type="radio" name="Return" value="yes"
-			<c:if test="${param.Return=='yes'}">checked='checked'</c:if> />是 <input
-			type="radio" name="Return" value="no"
+			value="${param.BorrowOperatDatetime }" /><br> <br>
+		
+		借机批准人ID:<input type="text" name="BorrowPermitPerson"
+			value="${param.BorrowPermitPerson}" /> 
+		借条编号:<input type="text"
+			name="BorrowCheckNo" value="${param.BorrowCheckNo}" /> 
+		归还日期:<input
+			type="text" name="ReturnDatetime" value="${param.ReturnDatetime}" /><br><br> 
+		是否已归还:<input type="radio" name="Return" value="yes"
+			<c:if test="${param.Return=='yes'}">checked='checked'</c:if> />是 
+			<input type="radio" name="Return" value="no"
 			<c:if test="${param.Return=='no'}">checked='checked'</c:if>>否
-		<input type="radio" name="Return" value="any"
+		    <input type="radio" name="Return" value="any"
 			<c:if test="${param.Return=='any'}">checked='checked'</c:if>>无
 		<input type="submit" value="查询借机明细" /> <input type="reset" value="取消" />
 
@@ -44,7 +49,7 @@
 
 	<table border="1" width="100%">
 		<tr>
-			<th><input type="checkbox" onclick="checkAll(this)" /> 借机编号</th>
+			<th>借机编号</th>
 			<th>客户名称</th>
 			<th>发货时间</th>
 			<th>批准人</th>
@@ -63,8 +68,7 @@
 		</tr>
 		<c:forEach items="${requestScope.list}" var="borrow">
 			<tr>
-				<td><input type="checkbox" name="delId"
-					value="${borrow.borrowNo }" /> ${borrow.borrowNo }</td>
+				<td><c:out value="${borrow.borrowNo }" /></td>
 				<td><c:out value="${borrow.customerID.customerName }" /></td>
 				<td><c:out value="${borrow.sendDatetime }" /></td>
 				<td><c:out value="${borrow.borrowPermitPerson.loginName }" /></td>

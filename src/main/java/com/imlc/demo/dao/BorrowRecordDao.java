@@ -1,8 +1,8 @@
 package com.imlc.demo.dao;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -21,8 +21,6 @@ import com.imlc.demo.entity.T_Count;
 import com.imlc.demo.entity.T_Customer;
 import com.imlc.demo.entity.T_Model;
 import com.imlc.demo.hibernate.SessionFactoryUtil;
-import com.imlc.demo.service.BorrowRecordService;
-
 
 public class BorrowRecordDao {
 	private static Session session;// 声明私有会话对象类
@@ -39,19 +37,22 @@ public class BorrowRecordDao {
 		transaction.commit();
 	}
 
-
 	/**
 	 * 添加，借机登记
+	 * 
 	 * @param m
 	 */
 	public void borrowRecord(T_BorrowRecord b) {
-		init();
-		session.save(b);
-		System.out.println("新增成功！");
-		destory();
-
+		try {
+			init();
+			session.save(b);
+			destory();
+		} catch (Exception e) {
+			e.printStackTrace();
+			transaction.rollback();
+		}
 	}
-	
+
 	/**
 	 * 根据借机ID查找借机表
 	 * 
@@ -59,68 +60,100 @@ public class BorrowRecordDao {
 	 * @return
 	 */
 	public T_BorrowRecord findBorrowByID(String id) {
-		init();
-		Integer i=Integer.parseInt(id);
-		T_BorrowRecord b = session.get(T_BorrowRecord.class, i);
-		destory();
-		return b;
-
+		try {
+			init();
+			Integer i = Integer.parseInt(id);
+			T_BorrowRecord b = session.get(T_BorrowRecord.class, i);
+			destory();
+			return b;
+		} catch (Exception e) {
+			e.printStackTrace();
+			transaction.rollback();
+			T_BorrowRecord br=new T_BorrowRecord();
+			return br;
+		}
 	}
-	
-	
+
 	/**
 	 * 归还样机
+	 * 
 	 * @param id
 	 */
 	public void returnRecord(T_BorrowRecord b) {
-		init();
-		session.update(b);
-		destory();
+		try {
+			init();
+			session.update(b);
+			destory();
+		} catch (Exception e) {
+			e.printStackTrace();
+			transaction.rollback();
+		}
+
 	}
-	
-	
-	
 
 	/**
 	 * 修改更新
+	 * 
 	 * @param id
 	 */
 	public void updateBorrowRecord(T_BorrowRecord b) {
-		init();
-		session.update(b);
-		destory();
+		try {
+			init();
+			session.update(b);
+			destory();
+		} catch (Exception e) {
+			e.printStackTrace();
+			transaction.rollback();
+		}
+
 	}
 
 	/**
-	 *  删除
+	 * 删除
+	 * 
 	 * @param id
 	 */
 	public void deleteBorrowRecord(T_BorrowRecord b) {
-		init();
-		session.delete(b);
-		destory();
+		try {
+			init();
+			session.delete(b);
+			destory();
+		} catch (Exception e) {
+			e.printStackTrace();
+			transaction.rollback();
+		}
+
 	}
 
-	
 	/**
 	 * 查询所有的信息
 	 * 
 	 * @return
 	 */
 	public List<T_BorrowRecord> findAllBorrow() {
-		init();
-		Query query = session.createQuery("from T_BorrowRecord ");
-		List result = query.list();
-		for (int i = 0; i < result.size(); i++) {
-			T_BorrowRecord b = (T_BorrowRecord) result.get(i);
-			System.out.println(b);
+
+		try {
+			init();
+			Query query = session.createQuery("from T_BorrowRecord order by BorrowNo");
+			List result = query.list();
+			/*
+			 * for (int i = 0; i < result.size(); i++) { T_BorrowRecord b =
+			 * (T_BorrowRecord) result.get(i); System.out.println(b); }
+			 */
+			destory();
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			transaction.rollback();
+			List result1 = new ArrayList<T_BorrowRecord>();
+			return result1;
 		}
-		destory();
-		return result;
 
 	}
+
 	/**
 	 * 统计 按客户
+	 * 
 	 * @return
 	 */
 	public List<Map<String, Object>> cusSum() {
@@ -145,9 +178,10 @@ public class BorrowRecordDao {
 			// 通过客户名找该用户的多条记录的详细信息
 			String hql = "FROM T_BorrowRecord WHERE CustomerID = :cid ";
 			List<T_BorrowRecord> result1 = session.createQuery(hql).setParameter("cid", (T_Customer) d[1]).list();
-			for (int i = 0; i < result1.size(); i++) {
-				T_BorrowRecord b = (T_BorrowRecord) result1.get(i);
-			}
+			/*
+			 * for (int i = 0; i < result1.size(); i++) { T_BorrowRecord b =
+			 * (T_BorrowRecord) result1.get(i); }
+			 */
 			item.put("detail", result1);
 			// 把一条记录信息的map：item存入list
 			result.add(item);
@@ -156,9 +190,10 @@ public class BorrowRecordDao {
 		return result;
 
 	}
-	
+
 	/**
 	 * 统计 按客户
+	 * 
 	 * @return
 	 */
 	public List<Map<String, Object>> modleSum() {
@@ -183,9 +218,6 @@ public class BorrowRecordDao {
 			// 通过客户名找该用户的多条记录的详细信息
 			String hql = "FROM T_BorrowRecord WHERE ModelID = :cid ";
 			List<T_BorrowRecord> result1 = session.createQuery(hql).setParameter("cid", (T_Model) d[1]).list();
-			for (int i = 0; i < result1.size(); i++) {
-				T_BorrowRecord b = (T_BorrowRecord) result1.get(i);
-			}
 			item.put("detail", result1);
 			// 把一条记录信息的map：item存入list
 			result.add(item);
@@ -194,82 +226,88 @@ public class BorrowRecordDao {
 		return result;
 
 	}
-	
+
 	/**
 	 * 根据客户名称排序
-	 * @param 
+	 * 
+	 * @param
 	 * @return
 	 */
 	public List<T_BorrowRecord> orderByCustomerID() {
 		init();
 		String hql = "FROM T_BorrowRecord order by CustomerID, ModelID, BorrowNumber";
 		List<T_BorrowRecord> result = session.createQuery(hql).list();
-		for (int i = 0; i < result.size(); i++) {
-			T_BorrowRecord b = (T_BorrowRecord) result.get(i);
-			System.out.println(b);
-		}
+		/*
+		 * for (int i = 0; i < result.size(); i++) { T_BorrowRecord b =
+		 * (T_BorrowRecord) result.get(i); }
+		 */
 		destory();
 		return result;
 	}
-	
+
 	/**
 	 * 根据样机名称排序
-	 * @param 
+	 * 
+	 * @param
 	 * @return
 	 */
 	public List<T_BorrowRecord> orderByModelID() {
 		init();
 		String hql = "FROM T_BorrowRecord order by ModelID,CustomerID,  BorrowNumber";
 		List<T_BorrowRecord> result = session.createQuery(hql).list();
-		for (int i = 0; i < result.size(); i++) {
-			T_BorrowRecord b = (T_BorrowRecord) result.get(i);
-			System.out.println(b);
-		}
-		
+		/*
+		 * for (int i = 0; i < result.size(); i++) { T_BorrowRecord b =
+		 * (T_BorrowRecord) result.get(i); System.out.println(b); }
+		 */
 		destory();
 		return result;
 	}
-	
+
+	public Integer compare(T_BorrowRecord b1, T_BorrowRecord b2) {
+		Integer id = b1.getBorrowNo().compareTo(b2.getBorrowNo());
+		return id;
+	}
+
 	/**
 	 * 根据客户名称、样机名称、借机时间、借机批准人、借条编号、归还日期等条件进行借机记录的查询
 	 * 
 	 * @return
 	 */
-	public List<T_BorrowRecord> findBorrowByCond(T_BorrowRecord b,String string){
+	public List<T_BorrowRecord> findBorrowByCond(T_BorrowRecord b, String string) {
 		init();
 		DetachedCriteria dc = DetachedCriteria.forClass(T_BorrowRecord.class);
-		if(b.getCustomerID()!=null){
+		if (b.getCustomerID() != null) {
 			dc.add(Restrictions.eq("CustomerID", b.getCustomerID()));
 		}
-		if(b.getModelID()!=null){
+		if (b.getModelID() != null) {
 			dc.add(Restrictions.eq("ModelID", b.getModelID()));
 		}
-		if(b.getBorrowOperatDatetime()!=null){
+		if (b.getBorrowOperatDatetime() != null) {
 			dc.add(Restrictions.eq("BorrowOperatDatetime", b.getBorrowOperatDatetime()));
 		}
-		if(b.getBorrowPermitPerson()!=null){
+		if (b.getBorrowPermitPerson() != null) {
 			dc.add(Restrictions.eq("BorrowPermitPerson", b.getBorrowPermitPerson()));
 		}
-		if(b.getBorrowCheckNo()!=null){
+		if (b.getBorrowCheckNo() != null) {
 			dc.add(Restrictions.eq("BorrowCheckNo", b.getBorrowCheckNo()));
 		}
-		if(b.getReturnDatetime()!=null){
+		if (b.getReturnDatetime() != null) {
 			dc.add(Restrictions.eq("ReturnDatetime", b.getReturnDatetime()));
 		}
-		if("yes".equals(string)){
+		if ("yes".equals(string)) {
 			dc.add(Restrictions.isNotNull("ReturnDatetime"));
-		}
-		else if ("no".equals(string)) {
+		} else if ("no".equals(string)) {
 			dc.add(Restrictions.isNull("ReturnDatetime"));
 		}
 		Criteria c = dc.getExecutableCriteria(session);
-	       List<T_BorrowRecord> result = c.list();
-		for (int i = 0; i < result.size(); i++) {
-			T_BorrowRecord b1 = (T_BorrowRecord) result.get(i);
-			System.out.println(b1);
-		}
+		List<T_BorrowRecord> result = c.list();
+		/*
+		 * for (int i = 0; i < result.size(); i++) { T_BorrowRecord b1 =
+		 * (T_BorrowRecord) result.get(i); System.out.println(b1); }
+		 */
+		Collections.sort(result);
 		destory();
 		return result;
 	}
-	
+
 }

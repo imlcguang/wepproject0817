@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.imlc.demo.entity.T_User;
 import com.imlc.demo.service.UserService;
+import com.imlc.demo.util.MD5Util;
 
 /**
  * Servlet implementation class UserLogin
@@ -46,7 +47,8 @@ public class UserLogin extends HttpServlet {
 		String loginName, password;
 		// 获取
 		loginName = request.getParameter("loginName");
-		password = request.getParameter("userPWD");
+		password = MD5Util.MD5(request.getParameter("userPWD"));
+		
 		// 查找
 		T_User user = UserService.getInstance().isUser(loginName, password);
 

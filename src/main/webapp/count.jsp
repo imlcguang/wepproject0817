@@ -28,17 +28,18 @@
 			</tr>
 			<c:forEach items="${requestScope.list}" var="map">
 				<tr>
-					<td><c:out value="${map['cal'].customerID.customerName}" /></td>
+					<td rowspan="${map['detail'].size()+1}" align="center"><c:out value="${map['cal'].customerID.customerName}" /></td>
 					<td><c:out value="${map['cal'].modelID.modelName}" /></td>
 					<td><c:out value="${map['cal'].borrowNumber}" /></td>
 				</tr>
 				<c:forEach items="${map['detail']}" var="value">
 					<tr>
-						<td><c:out value="${value.customerID.customerName}" /></td>
+					<%-- ${value.customerID.customerName} --%>
 						<td><c:out value="${value.modelID.modelName }" /></td>
 						<td><c:out value="${value.borrowNumber }" /></td>
 					</tr>
 				</c:forEach>
+				
 			</c:forEach>
 		</table>
 	</c:if>
@@ -51,13 +52,12 @@
 			</tr>
 			<c:forEach items="${requestScope.list}" var="map">
 				<tr>
-					<td><c:out value="${map['cal'].modelID.modelName}" /></td>
+					<td rowspan="${map['detail'].size()+1}" align="center"><c:out value="${map['cal'].modelID.modelName}" /></td>
 					<td><c:out value="${map['cal'].customerID.customerName}" /></td>
 					<td><c:out value="${map['cal'].borrowNumber}" /></td>
 				</tr>
 				<c:forEach items="${map['detail']}" var="value">
 					<tr>
-						<td><c:out value="${value.modelID.modelName }" /></td>
 						<td><c:out value="${value.customerID.customerName}" /></td>
 						<td><c:out value="${value.borrowNumber }" /></td>
 					</tr>

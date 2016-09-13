@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.imlc.demo.entity.T_User;
 import com.imlc.demo.exception.MsgException;
 import com.imlc.demo.service.UserService;
+import com.imlc.demo.util.MD5Util;
 
 /**
  * Servlet implementation class RegServlet
@@ -63,7 +64,7 @@ public class UserServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		T_User u = new T_User();
-		String loginName, password,password2, userName, userSex;
+		String loginName, password, password2, userName, userSex;
 		String[] functionPopedom1;
 		String functionPopedom = "0";
 		int temp = 0, num = 0;
@@ -83,25 +84,28 @@ public class UserServlet extends HttpServlet {
 
 			// 获取表单数据
 			loginName = request.getParameter("LoginName");
-			password = request.getParameter("Password");
-			password2 = request.getParameter("Password2");
+			password = MD5Util.MD5(request.getParameter("Password"));
+			password2 = MD5Util.MD5(request.getParameter("Password2"));
 			userName = request.getParameter("UserName");
 			userSex = request.getParameter("UserSex");
 			functionPopedom1 = request.getParameterValues("FunctionPopedom");
 
-			// 如果没选会出现空指针异常，这个问题还没解决
-			for (int i = 0; i < functionPopedom1.length; i++) {
-				// 获得权限
-				temp = 1 << Integer.parseInt(functionPopedom1[i]) - 1;
-				num += temp;
+			if ("".equals(functionPopedom1) || functionPopedom1 == null) {
+				functionPopedom = "0000000";
+			} 
+			else {
+				for (int i = 0; i < functionPopedom1.length; i++) {
+					// 获得权限
+					temp = 1 << Integer.parseInt(functionPopedom1[i]) - 1;
+					num += temp;
+				}
+
+				// 权限转换成二进制
+				functionPopedom = Integer.toBinaryString(num);
+				// 权限补成七位权限
+				while (functionPopedom.length() < 7)
+					functionPopedom = "0" + functionPopedom;
 			}
-
-			// 权限转换成二进制
-			functionPopedom = Integer.toBinaryString(num);
-			// 权限补成七位权限
-			while (functionPopedom.length() < 7)
-				functionPopedom = "0" + functionPopedom;
-
 			// 封装 优化方法：BeanUtils.populate(user, request.getParameterMap());
 			u.setLoginName(loginName);
 			u.setPassword(password);
@@ -110,20 +114,20 @@ public class UserServlet extends HttpServlet {
 			u.setUserSex(userSex);
 			u.setFunctionPopedom(functionPopedom);
 			// 验证填入的信息是否为空
-	
+
 			u.checkValue();
 
 			System.out.println(u.toString());
 
-			
 			UserService.getInstance().registUser(u);
 			// 带数据过去,登录用户
 			request.getSession().setAttribute("regUser", u);
 			// 请求转发
-			//request.getRequestDispatcher("/userinfo.jsp").forward(request, response);
-			//提示注册成功3秒回到主页
+			// request.getRequestDispatcher("/userinfo.jsp").forward(request,
+			// response);
+			// 提示注册成功3秒回到主页
 			response.getWriter().write("恭喜您注册成功!3秒回到主页....");
-			response.setHeader("refresh", "3;url="+request.getContextPath()+"/index.jsp");
+			response.setHeader("refresh", "3;url=" + request.getContextPath() + "/index.jsp");
 		} catch (MsgException e) {
 			request.setAttribute("msg", e.getMessage());
 			request.getRequestDispatcher("/user.jsp").forward(request, response);

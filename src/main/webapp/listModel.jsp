@@ -5,14 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>样机列表</title>
-<script type="text/javascript">
-	function checkAll(allC) {
-		var otherCs = document.getElementsByName("delId");
-		for (var i = 0; i < otherCs.length; i++) {
-			otherCs[i].checked = allC.checked;
-		}
-	}
-</script>
+
 </head>
 <body style="text-align: center;">
 	<h1>样机列表页面</h1>
@@ -28,7 +21,7 @@
 	
 	<table border="1" width="100%">
 		<tr>
-			<th><input type="checkbox" onclick="checkAll(this)" />样机 ID</th>
+			<th>样机 ID</th>
 			<th>样机名称</th>
 			<th>样机版本</th>
 			<th>样机说明</th>
@@ -37,8 +30,7 @@
 		</tr>
 		<c:forEach items="${requestScope.list}" var="model">
 			<tr>
-				<td><input type="checkbox" name="delId"
-					value="${model.modelID }" /> ${model.modelID }</td>
+				<td><c:out value="${model.modelID }" /> </td>
 				<td><c:out value="${model.modelName }" /></td>
 				<td><c:out value="${model.modelVersion }" /></td>
 				<td><c:out value="${model.modelDesc }" /></td>

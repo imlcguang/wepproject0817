@@ -39,6 +39,7 @@
 			    </tr>
 			  </table>
 			</form>
-		
+		<a href=ListModelServlet>返回样机列表页面</a>
+			  	<a href=index.jsp>返回主页</a>
 </body>
 </html>

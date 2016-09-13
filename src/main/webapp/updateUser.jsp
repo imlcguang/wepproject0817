@@ -52,25 +52,25 @@
 			    	<td class="controler">
 			    	<!-- 复选框回显 -->
 			    	<input type="checkbox" name="FunctionPopedom" value="1" 
-			    	<c:if test="${fn:contains(1,fn:substring(user.functionPopedom, 0, 1))==true}">checked='checked'></c:if>
+			    	<c:if test="${fn:contains(1,fn:substring(user.functionPopedom, 6, 7))==true}">checked='checked'></c:if>
 			    	/> 借机登记 &nbsp;
 			    	  <input type="checkbox" name="FunctionPopedom" value="2" 
-			    	  <c:if test="${fn:contains(1,fn:substring(user.functionPopedom, 1, 2))==true}">checked='checked'</c:if>
+			    	  <c:if test="${fn:contains(1,fn:substring(user.functionPopedom, 5, 6))==true}">checked='checked'</c:if>
 			    	 /> 样机归还 &nbsp;
 			    	  <input type="checkbox" name="FunctionPopedom" value="3" 
-			    	  <c:if test="${fn:contains(1,fn:substring(user.functionPopedom, 2, 3))==true}">checked='checked'</c:if>
+			    	  <c:if test="${fn:contains(1,fn:substring(user.functionPopedom, 4, 5))==true}">checked='checked'</c:if>
 			    	 />客户信息维护 &nbsp;<br/>
 			    	  <input type="checkbox" name="FunctionPopedom" value="4" 
 			    	  <c:if test="${fn:contains(1,fn:substring(user.functionPopedom, 3, 4))==true}">checked='checked'</c:if>
 			    	 /> 样机信息维护 &nbsp;
 			    	  <input type="checkbox" name="FunctionPopedom" value="5" 
-			    	  <c:if test="${fn:contains(1,fn:substring(user.functionPopedom, 4, 5))==true}">checked='checked'</c:if>
+			    	  <c:if test="${fn:contains(1,fn:substring(user.functionPopedom, 2, 3))==true}">checked='checked'</c:if>
 			    	 /> 借机明细查询 &nbsp;
 			    	  <input type="checkbox" name="FunctionPopedom" value="6" 
-			    	  <c:if test="${fn:contains(1,fn:substring(user.functionPopedom, 5, 6))==true}">checked='checked'</c:if>
+			    	  <c:if test="${fn:contains(1,fn:substring(user.functionPopedom, 1, 2))==true}">checked='checked'</c:if>
 			    	 /> 借机统计 &nbsp;
 			    	  <input type="checkbox" name="FunctionPopedom" value="7" 
-			    	  <c:if test="${fn:contains(1,fn:substring(user.functionPopedom, 6, 7))==true}">checked='checked'</c:if>
+			    	  <c:if test="${fn:contains(1,fn:substring(user.functionPopedom, 0, 1))==true}">checked='checked'</c:if>
 			    	 /> 用户信息管理 &nbsp;
 			    	</td>
 			    </tr>
@@ -82,5 +82,7 @@
 			    </tr>
 			  </table>
 			  	</form>
+			  	<a href=ListCustServlet>返回客户列表页面</a>
+			  	<a href=index.jsp>返回主页</a>
 </body>
 </html>

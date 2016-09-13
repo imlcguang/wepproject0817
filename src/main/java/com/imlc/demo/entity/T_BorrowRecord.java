@@ -7,7 +7,7 @@ import com.imlc.demo.entity.T_Model;
 import com.imlc.demo.entity.T_User;
 import com.imlc.demo.exception.MsgException;
 
-public class T_BorrowRecord {
+public class T_BorrowRecord implements Comparable {
 	private Integer BorrowNo;
 	private T_Customer CustomerID ;
 	private String SendDatetime;
@@ -187,6 +187,16 @@ public class T_BorrowRecord {
 			throw new MsgException("预计归还时间的日期格式不正确!YYYY-MM-DD");
 		}
 	}
+
+
+
+	@Override
+	public int compareTo(Object o) {
+		T_BorrowRecord b = (T_BorrowRecord)o;
+	       int id = b.getBorrowNo();
+	      return this.BorrowNo.compareTo(id);
+	}
+	
 
 }
 

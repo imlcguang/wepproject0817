@@ -93,6 +93,7 @@ public class FindBorrowByCondServlet extends HttpServlet {
 			
 			// 4调用service中的增加方法
 			List<T_BorrowRecord> list = (List<T_BorrowRecord>) BorrowRecordService.getInstance().findBorrowByCond(b, isreturn);
+			
 			System.out.println(b.toString());
 			System.out.println("list"+list);
 

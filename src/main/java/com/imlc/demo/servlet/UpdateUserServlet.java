@@ -39,29 +39,32 @@ public class UpdateUserServlet extends HttpServlet {
 			// 1.获取要查询的客户id,转换为integer,得到对应ID的用户
 			String id1 = request.getParameter("id");
 			Integer id = Integer.parseInt(id1);
-			T_User u =UserService.getInstance().findUserByID(id);
-			
+			T_User u = UserService.getInstance().findUserByID(id);
+
 			String userName = request.getParameter("UserName");
 			String userSex = request.getParameter("UserSex");
 			String[] functionPopedom1 = request.getParameterValues("FunctionPopedom");
 			String functionPopedom = "0";
 			int temp = 0, num = 0;
 			String password, password2;
-		
-			//System.out.println("id=" + id1 + "password" + 	u.getPassword());
-			// 如果没选会出现空指针异常，这个问题还没解决
-			for (int i = 0; i < functionPopedom1.length; i++) {
-				// 获得权限
-				temp = 1 << Integer.parseInt(functionPopedom1[i]) - 1;
-				num += temp;
+
+			if ("".equals(functionPopedom1) || functionPopedom1 == null) {
+				functionPopedom = "0000000";
+			} else {
+				for (int i = 0; i < functionPopedom1.length; i++) {
+					// 获得权限
+					temp = 1 << Integer.parseInt(functionPopedom1[i]) - 1;
+					System.out.println(i+" : "+functionPopedom1[i]);
+					num += temp;
+				}
+
+				// 权限转换成二进制
+				functionPopedom = Integer.toBinaryString(num);
+				// 权限补成七位权限
+				while (functionPopedom.length() < 7)
+					functionPopedom = "0" + functionPopedom;
 			}
-
-			// 权限转换成二进制
-			functionPopedom = Integer.toBinaryString(num);
-			// 权限补成七位权限
-			while (functionPopedom.length() < 7)
-				functionPopedom = "0" + functionPopedom;
-
+			System.out.println("functionPepodom:"+functionPopedom);
 			// 封装
 			u.setUserName(userName);
 			u.setUserSex(userSex);

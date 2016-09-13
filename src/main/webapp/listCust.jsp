@@ -5,14 +5,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>客户列表</title>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	function checkAll(allC) {
 		var otherCs = document.getElementsByName("delId");
 		for (var i = 0; i < otherCs.length; i++) {
 			otherCs[i].checked = allC.checked;
 		}
 	}
-</script>
+</script> -->
 </head>
 <body style="text-align: center;">
 	<h1>客户列表页面</h1>
@@ -30,7 +30,7 @@
 	
 	<table border="1" width="100%">
 		<tr>
-			<th><input type="checkbox" onclick="checkAll(this)" />客户 ID</th>
+			<th>客户 ID</th>
 			<th>客户名称</th>
 			<th>联系人姓名</th>
 			<th>联系电话</th>
@@ -42,8 +42,7 @@
 		</tr>
 		<c:forEach items="${requestScope.list}" var="cust">
 			<tr>
-				<td><input type="checkbox" name="delId"
-					value="${cust.customerID }" /> ${cust.customerID }</td>
+				<td><c:out value="${cust.customerID }" /></td>
 				<td><c:out value="${cust.customerName }" /></td>
 				<td><c:out value="${cust.relationName }" /></td>
 				<td><c:out value="${cust.relationPhone }" /></td>

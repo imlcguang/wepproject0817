@@ -22,10 +22,10 @@
 		<input type="submit" value="条件查询用户" />
 	</form>
 
-	<p>权限备注：1（有权限），0（无权限）。功能按顺序分别为借机登记、样机归还、客户信息维护、样机信息维护、借机明细查询、借机统计、用户信息管理。</p>
+	<p>权限备注：1（有权限），0（无权限）。功能按顺序分别为用户信息管理、借机统计、借机明细查询、样机信息维护、客户信息维护、样机归还、借机登记</p>
 	<table border="1" width="100%" >
 		<tr>
-			<th><input type="checkbox" onclick="checkAll(this)" />用户 ID</th>
+			<th>用户 ID</th>
 			<th>登录名</th>
 			<th>用户姓名</th>
 			<th>用户性别</th>
@@ -35,8 +35,7 @@
 		</tr>
 		<c:forEach items="${requestScope.list}" var="user">
 			<tr>
-				<td><input type="checkbox" name="delId" value="${user.userID }" />
-					${user.userID }</td>
+				<td> <c:out value="${user.userID }" /></td>
 				<td><c:out value="${user.loginName }" /></td>
 				<td><c:out value="${user.userName }" /></td>
 				<td><c:out value="${user.userSex }" /></td>

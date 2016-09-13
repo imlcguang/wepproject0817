@@ -66,6 +66,7 @@
 			    </tr>
 			  </table>
 			</form>
-			<a href=index.jsp>返回主页</a>
+			<a href=ListBorrowServlet>返回借机明细列表页面</a>
+			  	<a href=index.jsp>返回主页</a>
 </body>
 </html>

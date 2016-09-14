@@ -6,7 +6,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.imlc.demo.entity.T_User;
+import com.imlc.demo.logback.LogbackDemo;
 import com.imlc.demo.service.UserService;
 import com.imlc.demo.util.MD5Util;
 
@@ -41,6 +45,7 @@ public class UserLogin extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		Logger log = LoggerFactory.getLogger(LogbackDemo.class);  
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=utf-8");
 
@@ -56,11 +61,13 @@ public class UserLogin extends HttpServlet {
 			// 如果不正确则提示
 			request.setAttribute("msg", "用户名密码不正确!");
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			log.info("执行用户登录，登录失败");
 			return;
 		} else {
 			// 正确则登录用户后重定向回到主页
 			request.getSession().setAttribute("regUser", user);
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
+			log.info("执行用户登录，登录的用户为："+user);
 		}
 
 	}

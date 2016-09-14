@@ -9,11 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.imlc.demo.entity.T_BorrowRecord;
 import com.imlc.demo.entity.T_Customer;
 import com.imlc.demo.entity.T_Model;
 import com.imlc.demo.entity.T_User;
 import com.imlc.demo.exception.MsgException;
+import com.imlc.demo.logback.LogbackDemo;
 import com.imlc.demo.service.BorrowRecordService;
 
 /**
@@ -37,6 +41,7 @@ public class BorrowServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Logger log = LoggerFactory.getLogger(LogbackDemo.class);  
 		T_BorrowRecord b = new T_BorrowRecord();
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
@@ -117,7 +122,7 @@ public class BorrowServlet extends HttpServlet {
 			// 5提示注册成功3秒回到主页
 			response.getWriter().write("恭喜您注册成功!2秒回到主页....");
 			response.setHeader("refresh", "2;url=" + request.getContextPath() + "/index.jsp");
-
+			log.info("执行添加借机信息操作");
 		} catch (MsgException e) {
 			e.printStackTrace();
 			request.setAttribute("msg", e.getMessage());

@@ -7,7 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.imlc.demo.entity.T_BorrowRecord;
+import com.imlc.demo.logback.LogbackDemo;
 import com.imlc.demo.service.BorrowRecordService;
 
 
@@ -30,6 +34,7 @@ public class DelBorrowServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Logger log = LoggerFactory.getLogger(LogbackDemo.class);  
 		// 1.获取要查询的id
 		String id = request.getParameter("id");
 		// 2.调用Service中根据id查找的方法
@@ -37,6 +42,7 @@ public class DelBorrowServlet extends HttpServlet {
 		BorrowRecordService.getInstance().deleteBorrowRecord(borrow);
 		//3.请求转发到列表页面
 		request.getRequestDispatcher("/ListBorrowServlet").forward(request, response);
+		log.info("执行删除借机信息操作");
 	}
 	
 

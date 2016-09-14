@@ -11,8 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.tools.ForwardingFileObject;
 
 import org.apache.taglibs.standard.lang.jstl.UnaryMinusOperator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.imlc.demo.entity.T_User;
+import com.imlc.demo.logback.LogbackDemo;
 import com.imlc.demo.service.UserService;
 
 /**
@@ -34,7 +37,7 @@ public class FindUserByNameServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		Logger log = LoggerFactory.getLogger(LogbackDemo.class);  
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		try {
@@ -45,6 +48,7 @@ public class FindUserByNameServlet extends HttpServlet {
 			
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("/listUser.jsp").forward(request, response);
+			log.info("执行查询操作");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

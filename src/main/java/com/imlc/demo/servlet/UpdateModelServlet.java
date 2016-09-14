@@ -7,7 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.imlc.demo.entity.T_Model;
+import com.imlc.demo.logback.LogbackDemo;
 import com.imlc.demo.service.ModelService;
 
 /**
@@ -31,7 +35,7 @@ public class UpdateModelServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		Logger log = LoggerFactory.getLogger(LogbackDemo.class); 
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("utf-8");
 		try {
@@ -50,7 +54,7 @@ public class UpdateModelServlet extends HttpServlet {
 			
 			request.getRequestDispatcher("/ListModelServlet").forward(request, response);
 			
-			
+			log.info("执行样机信息修改");
 			
 			
 		} catch (Exception e) {

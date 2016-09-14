@@ -10,9 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.imlc.demo.entity.T_BorrowRecord;
 import com.imlc.demo.entity.T_User;
 import com.imlc.demo.exception.MsgException;
+import com.imlc.demo.logback.LogbackDemo;
 import com.imlc.demo.service.BorrowRecordService;
 
 /**
@@ -36,6 +40,7 @@ public class ReturnServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Logger log = LoggerFactory.getLogger(LogbackDemo.class);  
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 
@@ -59,6 +64,7 @@ public class ReturnServlet extends HttpServlet {
 			BorrowRecordService.getInstance().returnRecord(borrow);
 			// 3.请求转发到list.jsp页面展示
 			request.getRequestDispatcher("/ListBorrowServlet").forward(request, response);
+			log.info("执行归还操作");
 		} catch (MsgException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

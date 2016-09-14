@@ -7,8 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.imlc.demo.entity.T_Model;
 import com.imlc.demo.exception.MsgException;
+import com.imlc.demo.logback.LogbackDemo;
 import com.imlc.demo.service.ModelService;
 
 /**
@@ -32,7 +36,7 @@ public class ModelServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		Logger log = LoggerFactory.getLogger(LogbackDemo.class);  
 		T_Model model = new T_Model();
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
@@ -59,7 +63,7 @@ public class ModelServlet extends HttpServlet {
 			//提示注册成功3秒回到主页
 			response.getWriter().write("恭喜您注册成功!3秒回到主页....");
 			response.setHeader("refresh", "3;url="+request.getContextPath()+"/index.jsp");
-			
+			log.info("执行添加样机操作");
 		}catch (MsgException e) {
 			request.setAttribute("msg", e.getMessage());
 			request.getRequestDispatcher("/model.jsp").forward(request, response);

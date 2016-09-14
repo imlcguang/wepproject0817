@@ -10,7 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.imlc.demo.entity.T_BorrowRecord;
+import com.imlc.demo.logback.LogbackDemo;
 import com.imlc.demo.service.BorrowRecordService;
 
 /**
@@ -34,11 +38,12 @@ public class CountServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Logger log = LoggerFactory.getLogger(LogbackDemo.class);  
 		String countway = request.getParameter("Count");
 		List<Map<String, Object>> list =BorrowRecordService.getInstance().cusSum(countway);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/count.jsp").forward(request, response);
-		
+		log.info("执行统计借机信息操作");
 
 	}
 

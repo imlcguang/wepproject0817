@@ -9,8 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.imlc.demo.entity.T_User;
 import com.imlc.demo.exception.MsgException;
+import com.imlc.demo.logback.LogbackDemo;
 import com.imlc.demo.service.UserService;
 import com.imlc.demo.util.MD5Util;
 
@@ -61,8 +65,7 @@ public class UserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
+		Logger log = LoggerFactory.getLogger(LogbackDemo.class);  
 		T_User u = new T_User();
 		String loginName, password, password2, userName, userSex;
 		String[] functionPopedom1;
@@ -114,11 +117,7 @@ public class UserServlet extends HttpServlet {
 			u.setUserSex(userSex);
 			u.setFunctionPopedom(functionPopedom);
 			// 验证填入的信息是否为空
-
 			u.checkValue();
-
-			System.out.println(u.toString());
-
 			UserService.getInstance().registUser(u);
 			// 带数据过去,登录用户
 			request.getSession().setAttribute("regUser", u);
@@ -126,8 +125,9 @@ public class UserServlet extends HttpServlet {
 			// request.getRequestDispatcher("/userinfo.jsp").forward(request,
 			// response);
 			// 提示注册成功3秒回到主页
-			response.getWriter().write("恭喜您注册成功!3秒回到主页....");
-			response.setHeader("refresh", "3;url=" + request.getContextPath() + "/index.jsp");
+			response.getWriter().write("恭喜您注册成功!2秒回到主页....");
+			response.setHeader("refresh", "2;url=" + request.getContextPath() + "/index.jsp");
+			log.info("执行用户注册，添加的用户为："+u);
 		} catch (MsgException e) {
 			request.setAttribute("msg", e.getMessage());
 			request.getRequestDispatcher("/user.jsp").forward(request, response);

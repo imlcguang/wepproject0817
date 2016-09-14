@@ -12,11 +12,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.imlc.demo.entity.T_BorrowRecord;
 import com.imlc.demo.entity.T_Customer;
 import com.imlc.demo.entity.T_Model;
 import com.imlc.demo.entity.T_User;
 import com.imlc.demo.exception.MsgException;
+import com.imlc.demo.logback.LogbackDemo;
 import com.imlc.demo.service.BorrowRecordService;
 
 /**
@@ -40,6 +44,7 @@ public class FindBorrowByCondServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Logger log = LoggerFactory.getLogger(LogbackDemo.class);  
 		T_BorrowRecord b = new T_BorrowRecord();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		request.setCharacterEncoding("utf-8");
@@ -100,6 +105,7 @@ public class FindBorrowByCondServlet extends HttpServlet {
 			// 5提示注册成功3秒回到主页
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("/listBorrow.jsp").forward(request, response);
+			log.info("执行查询操作");
 		} catch (MsgException e) {
 			request.setAttribute("msg", e.getMessage());
 			request.getRequestDispatcher("/listBorrow.jsp").forward(request, response);

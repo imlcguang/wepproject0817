@@ -8,9 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.imlc.demo.entity.T_Customer;
 import com.imlc.demo.exception.MsgException;
+import com.imlc.demo.logback.LogbackDemo;
 import com.imlc.demo.service.BorrowRecordService;
 import com.imlc.demo.service.CustomerService;
 
@@ -34,7 +37,7 @@ public class CusServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		Logger log = LoggerFactory.getLogger(LogbackDemo.class);  
 		T_Customer customer = new T_Customer();
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
@@ -68,7 +71,7 @@ public class CusServlet extends HttpServlet {
 			//提示注册成功3秒回到主页
 			response.getWriter().write("恭喜您注册成功!3秒回到主页....");
 			response.setHeader("refresh", "3;url="+request.getContextPath()+"/index.jsp");
-			
+			log.info("执行添加客户操作");
 		}catch (MsgException e) {
 			request.setAttribute("msg", e.getMessage());
 			request.getRequestDispatcher("/customer.jsp").forward(request, response);

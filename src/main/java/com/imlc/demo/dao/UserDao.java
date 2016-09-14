@@ -81,7 +81,7 @@ public class UserDao {
 		init();
 		Query query = session.createQuery("from T_User ");
 		List result = query.list();
-		for (int i = 0; i < result.size(); i++) {
+		/*for (int i = 0; i < result.size(); i++) {
 			T_User c = new T_User();
 			T_User user = (T_User) result.get(i);
 
@@ -89,7 +89,7 @@ public class UserDao {
 			c = (T_User) session.get(T_User.class, userid);
 			System.out.println("查询成功！");
 			System.out.println(c);
-		}
+		}*/
 		destory();
 		return result;
 
@@ -125,7 +125,6 @@ public class UserDao {
 	public void testSaveUser(T_User u) {
 		init();
 		session.save(u);
-		System.out.println("新增成功！您的ID为：" + u.getUserID());
 		destory();
 	}
 

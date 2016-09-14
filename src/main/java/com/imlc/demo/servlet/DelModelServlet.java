@@ -7,7 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.imlc.demo.entity.T_Model;
+import com.imlc.demo.logback.LogbackDemo;
 import com.imlc.demo.service.ModelService;
 
 /**
@@ -29,7 +33,7 @@ public class DelModelServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		Logger log = LoggerFactory.getLogger(LogbackDemo.class);  
 		//1.获取要查询的样机id
 		String id1 = request.getParameter("id");
 		//2.调用Service中根据id查找样机，删除样机信息的方法
@@ -38,6 +42,7 @@ public class DelModelServlet extends HttpServlet {
 		ModelService.getInstance().DeleteModels(model);
 		//请求转发到样机列表页面
 		request.getRequestDispatcher("/ListModelServlet").forward(request, response);
+		log.info("执行删除样机操作");
 	}
 
 	/**

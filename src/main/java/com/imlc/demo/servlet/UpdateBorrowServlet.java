@@ -9,11 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.imlc.demo.entity.T_BorrowRecord;
 import com.imlc.demo.entity.T_Customer;
 import com.imlc.demo.entity.T_Model;
 import com.imlc.demo.entity.T_User;
 import com.imlc.demo.exception.MsgException;
+import com.imlc.demo.logback.LogbackDemo;
 import com.imlc.demo.service.BorrowRecordService;
 
 /**
@@ -37,6 +41,7 @@ public class UpdateBorrowServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Logger log = LoggerFactory.getLogger(LogbackDemo.class);  
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		try {
@@ -85,6 +90,7 @@ public class UpdateBorrowServlet extends HttpServlet {
 			request.getSession().setAttribute("Borrow", b);
 			// 3.重定向到客户列表页面
 			request.getRequestDispatcher("/ListBorrowServlet").forward(request, response);
+			log.info("执行借机信息修改");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);

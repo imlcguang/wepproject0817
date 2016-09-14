@@ -8,6 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.imlc.demo.logback.LogbackDemo;
+
 /**
  * Servlet implementation class OutServlet
  */
@@ -41,15 +46,12 @@ public class OutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at:
-		// ").append(request.getContextPath());
-		// response.setHeader("content-Type", "text/html;charset=utf-8");
-		// response.getOutputStream().write("加油".getBytes("utf-8"));
+		Logger log = LoggerFactory.getLogger(LogbackDemo.class);  
 		if(request.getSession(false)!=null && request.getSession().getAttribute("regUser")!=null){
 			request.getSession().invalidate();
 		}
 		response.sendRedirect(request.getContextPath()+"/index.jsp");
+		log.info("执行注销操作");
 	}
 
 	/**

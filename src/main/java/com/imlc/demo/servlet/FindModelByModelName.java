@@ -9,7 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.imlc.demo.entity.T_Model;
+import com.imlc.demo.logback.LogbackDemo;
 import com.imlc.demo.service.ModelService;
 
 /**
@@ -33,12 +37,14 @@ public class FindModelByModelName extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Logger log = LoggerFactory.getLogger(LogbackDemo.class);  
 		try {
 			String ModelName = request.getParameter("ModelName");
 			List<T_Model> list = ModelService.getInstance().findByModelName(ModelName);
 			//请求转发
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("/listModel.jsp").forward(request, response);
+			log.info("执行查询操作");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

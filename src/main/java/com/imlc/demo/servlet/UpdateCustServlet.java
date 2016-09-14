@@ -7,7 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.imlc.demo.entity.T_Customer;
+import com.imlc.demo.logback.LogbackDemo;
 import com.imlc.demo.service.CustomerService;
 
 /**
@@ -31,7 +35,7 @@ public class UpdateCustServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		Logger log = LoggerFactory.getLogger(LogbackDemo.class);  
 		T_Customer customer = new T_Customer();
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
@@ -61,7 +65,7 @@ public class UpdateCustServlet extends HttpServlet {
 
 			// 3.重定向到客户列表页面
 			request.getRequestDispatcher("/ListCustServlet").forward(request, response);
-
+			log.info("执行客户信息修改");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);

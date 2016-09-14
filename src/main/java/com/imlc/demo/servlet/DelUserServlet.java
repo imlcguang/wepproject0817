@@ -7,7 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.imlc.demo.entity.T_User;
+import com.imlc.demo.logback.LogbackDemo;
 import com.imlc.demo.service.UserService;
 
 /**
@@ -29,7 +33,7 @@ public class DelUserServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		Logger log = LoggerFactory.getLogger(LogbackDemo.class);  
 		// 1.获取要查询的用户id
 				String id1 = request.getParameter("id");
 				Integer id = Integer.parseInt(id1);
@@ -38,6 +42,7 @@ public class DelUserServlet extends HttpServlet {
 				UserService.getInstance().deleteUser(u);
 				//3.请求转发到用户列表页面
 				request.getRequestDispatcher("/ListUserServlet").forward(request, response);
+				log.info("执行删除用户操作");
 	}
 
 	/**

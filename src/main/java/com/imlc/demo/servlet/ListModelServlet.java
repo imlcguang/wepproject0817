@@ -9,7 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.imlc.demo.entity.T_Model;
+import com.imlc.demo.logback.LogbackDemo;
 import com.imlc.demo.service.ModelService;
 
 /**
@@ -31,10 +35,11 @@ public class ListModelServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		Logger log = LoggerFactory.getLogger(LogbackDemo.class);  
 		List<T_Model> list =ModelService.getInstance().findAllModel();
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/listModel.jsp").forward(request, response);
+		log.info("执行样机列表操作");
 	}
 
 	/**

@@ -1,88 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>客户注册</title>
-<style>
-.label {
-	width:20%;
-}
-
-.controler {
-width:80%;
-	
-}
-
-.head {
-	/* width: 960px;
-	 font-weight: bold padding-top:3px; */
-	margin: 0 auto;
-	height: 140px;
-	line-height: 15px;
-	font-size: 25px;
-	background: #FFFFCC;
-	font-weight: bold;
-	border-style: solid;
-	border-color: #FFFFCC;
-}
-.table{
-width:40%;
-}
-.datalist {
-	border: 1px solid #0058a3;  /* 表格边框 */ 
-	font-family: Arial;
-	border-collapse: collapse; /* 边框重叠 */
-	background-color: #eaf5ff; /* 表格背景色 */
-	font-size: 14px;
-	width:333px;
-}
-.datalist td {
-	/* border: 1px solid #0058a3; */  /* 单元格边框 */
-	text-align: left;
-	padding-top: 4px;
-	padding-bottom: 4px;
-	padding-left: 10px;
-	padding-right: 10px;
-	font-weight: bold;
-} 
-
-.datalist tr.altrow {
-	background-color: #c7e5ff; /* 隔行变色 */
-}
-
-a {
-	font-weight: bold;
-}
-
-a:hover {
-	color: red;
-	font-size: 14px;
-}
-
-body {
-	font-family: "Microsoft Yahei";
-	font-size: 10.5pt;
-	line-height: 1.5;
-}
-.main{
-width:40%;
-text-align:left;
-}
-</style>
+  <style type="text/css">
+	 .label{
+		  width: 20%	
+	 }
+	 .controler{
+		  width: 80%	
+	 }
+   </style>  
 </head>
 <body>
-	<div class="head">
-		<h2>客户信息维护</h2>
-		<hr>
-		<h3>客户注册</h3>
-	</div>
-	<br>
-<font color="red">${msg }</font>
-   <form name="CusForm" action="${pageContext.request.contextPath}/CusServlet" method="post" class="datalist">
+<h1>客户信息维护</h1><hr>
+ <h2>客户注册</h2>
+  <font color="red">${msg }</font>
+   <form name="CusForm" action="${pageContext.request.contextPath}/CusServlet" method="post" >
     <%-- <%=request.getContextPath()%>  --%>
-			  <table border="0" width="800" cellspacing="0" cellpadding="0" >
+			  <table border="0" width="800" cellspacing="0" cellpadding="0">
 			    <tr>
 			    	<td class="lalel">客户名：</td>
 			    	<td class="controler"><input type="text" name="CustomerName"value="${param.CustomerName }"/></td>
@@ -111,10 +49,15 @@ text-align:left;
 			    	<td class="label">备注：</td>
 			    	<td class="controler"><input type="text" name="Remark" value="${param.Remark }"></td>
 			    </tr>
+			   <tr>
 			  
-			  </table>
+			    	<td colspan="1" align="center">
+			    	<br>
 			    		&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="注册"/>&nbsp;&nbsp;
 			    	   &nbsp; <input type="reset" value="取消"/>&nbsp;
+			    	</td>
+			    </tr>
+			  </table>
 			</form>
 			<a href=index.jsp>返回主页</a>
 </body>

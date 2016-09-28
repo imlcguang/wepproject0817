@@ -3,6 +3,8 @@ package com.imlc.demo.servlet;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,7 +31,18 @@ public class ListCustServlet extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	/**
+	 * @see Servlet#init(ServletConfig)
+	 */
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		List<T_Customer> listc =CustomerService.getInstance().findAllCus();
+		 ServletContext sc=this.getServletContext();  
+			sc.setAttribute("listc", listc);
+	}
+	
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -37,8 +50,9 @@ public class ListCustServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Logger log = LoggerFactory.getLogger(LogbackDemo.class);  
-		List<T_Customer> list =CustomerService.getInstance().findAllCus();
-		request.setAttribute("list", list);
+		List<T_Customer> listc =CustomerService.getInstance().findAllCus();
+		 ServletContext sc=this.getServletContext();  
+			sc.setAttribute("listc", listc);
 		request.getRequestDispatcher("/listCust.jsp").forward(request, response);
 		log.info("执行客户列表操作");
 	}

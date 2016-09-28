@@ -29,7 +29,12 @@ public class BorrowRecordDao {
 	public static void init() {
 		session = SessionFactoryUtil.getInstance().getCurrentSession();
 		// 开启事务
-		transaction = session.beginTransaction();
+		 session.beginTransaction();
+	}
+	
+	
+	private Session getSession(){
+		return  SessionFactoryUtil.getInstance().getCurrentSession();
 	}
 
 	public static void destory() {
@@ -133,14 +138,14 @@ public class BorrowRecordDao {
 	public List<T_BorrowRecord> findAllBorrow() {
 
 		try {
-			init();
-			Query query = session.createQuery("from T_BorrowRecord order by BorrowNo");
+			Session  session2= SessionFactoryUtil.getInstance().openSession();
+			Query query = session2.createQuery("from T_BorrowRecord order by BorrowNo");
 			List result = query.list();
 			/*
 			 * for (int i = 0; i < result.size(); i++) { T_BorrowRecord b =
 			 * (T_BorrowRecord) result.get(i); System.out.println(b); }
 			 */
-			destory();
+			session2.close();
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();

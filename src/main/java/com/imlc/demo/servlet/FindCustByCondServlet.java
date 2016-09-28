@@ -52,11 +52,11 @@ public class FindCustByCondServlet extends HttpServlet {
 			customer.setRelationPhone(RelationPhone);
 
 			// 2.调用Service中模糊客户信息的方法
-			List<T_Customer> list = (List<T_Customer>) CustomerService.getInstance().findCustByCond(customer);
-			if(list==null){
+			List<T_Customer> listc = (List<T_Customer>) CustomerService.getInstance().findCustByCond(customer);
+			if(listc==null){
 				throw new MsgException("找不到该客户!");
 			}
-			request.setAttribute("list", list);
+			request.setAttribute("listc", listc);
 			request.getRequestDispatcher("/listCust.jsp").forward(request, response);
 			log.info("执行查询操作");
 		} catch (MsgException e) {

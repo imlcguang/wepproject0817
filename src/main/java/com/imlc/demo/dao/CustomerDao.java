@@ -120,15 +120,6 @@ public class CustomerDao {
 		init();
 		Query query = session.createQuery("from T_Customer ");
 		List result = query.list();
-		for (int i = 0; i < result.size(); i++) {
-			T_Customer c = new T_Customer();
-			T_Customer customer = (T_Customer) result.get(i);
-
-			int customerid = customer.getCustomerID();
-			c = (T_Customer) session.get(T_Customer.class, customerid);
-			System.out.println("查询成功！");
-			System.out.println(c);
-		}
 		destory();
 		return result;
 

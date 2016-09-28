@@ -16,8 +16,13 @@
     <input type="hidden" name="id" value="${borrow.borrowNo }">
 			  <table border="0" width="800" cellspacing="0" cellpadding="0">
 			    <tr>
-			    	<td class="lalel">客户ID：</td>
-			    	<td class="controler"><input type="text" id="CustomerID" name="CustomerID"value="${borrow.customerID.customerID }"/></td>
+			    	<td class="lalel">客户：</td>
+			    	<td class="controler"><select name="CustomerID">
+						<option value="${borrow.customerID.customerID}">${borrow.customerID.customerName }</option>
+						<c:forEach items="${listc}" var="cust">
+							<option value="${cust.customerID }">${cust.customerName }</option>
+						</c:forEach>
+				</select></td>
 			    </tr>
 			    <tr>
 			    	<td class="label">发货时间： </td>
@@ -25,13 +30,23 @@
 			    	
 			    </tr>
 			    <tr>
-			    	<td class="label">批准人ID：</td>
-			    	<td class="controler"><input type="text" id="BorrowPermitPerson" name="BorrowPermitPerson" value="${borrow.borrowPermitPerson.userID }"></td>
+			    	<td class="label">批准人：</td>
+			    	<td class="controler"><select name="BorrowPermitPerson">
+						<option value="${borrow.borrowPermitPerson.userID}">${borrow.borrowPermitPerson.userName}</option>
+						<c:forEach items="${listu}" var="user">
+							<option value="${user.userID }">${user.userName }</option>
+						</c:forEach>
+				</select></td>
 			    	
 			    </tr>
 			    <tr>
-			    	<td class="label">借机操作员ID：</td>
-			    	<td class="controler"><input type="text" id="BorrowOperator" name="BorrowOperator" value="${borrow.borrowOperator.userID }"></td>
+			    	<td class="label">借机操作员：</td>
+			    	<td class="controler"><select name="BorrowOperator">
+						<option value="${borrow.borrowOperator.userID}">${borrow.borrowOperator.userName}</option>
+						<c:forEach items="${listu}" var="user">
+							<option value="${user.userID }">${user.userName }</option>
+						</c:forEach>
+				</select></td>
 			    </tr>
 			    
 			    <tr>
@@ -40,8 +55,13 @@
 			    </tr>
 			    
 			    <tr>
-			    	<td class="label">样机ID：</td>
-			    	<td class="controler"><input type="text" id="ModelID" name="ModelID" value="${borrow.modelID.modelID }"></td>
+			    	<td class="label">样机：</td>
+			    	<td class="controler"><select name="ModelID">
+						<option value="${borrow.modelID.modelID}">${borrow.modelID.modelName}</option>
+						<c:forEach items="${listm}" var="model">
+							<option value="${model.modelID }">${model.modelName }</option>
+						</c:forEach>
+				</select></td>
 			    </tr>
 			     <tr>
 			    	<td class="label">借机数量：</td>
@@ -54,7 +74,12 @@
 			     
 			     <tr>
 			    	<td class="label">归还操作员：</td>
-			    	<td class="controler"><input type="text" id="ReturnOperator" name="ReturnOperator" value="${borrow.returnOperator.userID }"></td>
+			    	<td class="controler"><select name="ReturnOperator">
+						<option value="${borrow.returnOperator.userID}">${borrow.returnOperator.userName}</option>
+						<c:forEach items="${listu}" var="user">
+							<option value="${user.userID }">${user.userName }</option>
+						</c:forEach>
+				</select></td>
 			    </tr>
 			   <tr>
 			  

@@ -5,30 +5,95 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>客户列表</title>
-<!-- <script type="text/javascript">
-	function checkAll(allC) {
-		var otherCs = document.getElementsByName("delId");
-		for (var i = 0; i < otherCs.length; i++) {
-			otherCs[i].checked = allC.checked;
-		}
-	}
-</script> -->
+<style>
+.head {
+	/* width: 960px;
+	 font-weight: bold padding-top:3px; */
+	margin: 0 auto;
+	height: 140px;
+	line-height: 15px;
+	font-size: 25px;
+	background: #FFFFCC;
+	font-weight: bold;
+	border-style: solid;
+	border-color: #FFFFCC;
+}
+
+.datalist {
+	border: 1px solid #0058a3; /* 表格边框 */
+	font-family: Arial;
+	border-collapse: collapse; /* 边框重叠 */
+	background-color: #eaf5ff; /* 表格背景色 */
+	font-size: 14px;
+	line-height: 25px;
+}
+
+.datalist caption {
+	padding-bottom: 5px;
+	font: bold 1.4em;
+	text-align: left;
+}
+
+.datalist th {
+	border: 1px solid #0058a3; /* 行名称边框 */
+	background-color: #4bacff; /* 行名称背景色 */
+	color: #FFFFFF; /* 行名称颜色 */
+	font-weight: bold;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 12px;
+	padding-right: 12px;
+	text-align: center;
+}
+
+.datalist td {
+	border: 1px solid #0058a3; /* 单元格边框 */
+	text-align: left;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.datalist tr.altrow {
+	background-color: #c7e5ff; /* 隔行变色 */
+}
+
+a {
+	font-weight: bold;
+}
+
+a:hover {
+	color: red;
+	font-size: 16px;
+}
+
+body {
+	font-family: "Microsoft Yahei";
+	font-size: 10.5pt;
+	line-height: 1.5;
+}
+</style>
 </head>
 <body style="text-align: center;">
-	<h1>客户列表页面</h1>
-	<hr>
-	<font color="red">${msg }</font>
+	<div class="head" style="text-align: left;">
+		<h2>客户信息</h2>
+		<hr>
+		<h3>客户列表页面</h3>
+	</div>
+	<br>
 	<form
 		action="${pageContext.request.contextPath }/FindCustByCondServlet"
 		method="POST">
+	<font color="red">${msg }</font>
 		客户名称:<input type="text" name="customerName" value="${param.customerName }" /> 
 			联系人姓名:<input type="text" name="relationName" value="${param.relationName }" /> 
 			联系电话:<input type="text" name="relationPhone" value="${param.relationPhone }" />
 		<input type="submit" value="条件查询客户" />
 	</form>
-
+<br>
 	
-	<table border="1" width="100%">
+	<table border="1" width="100%" class="datalist">
 		<tr>
 			<th>客户 ID</th>
 			<th>客户名称</th>
@@ -40,7 +105,7 @@
 			<th>修改</th>
 			<th>删除</th>
 		</tr>
-		<c:forEach items="${requestScope.list}" var="cust">
+		<c:forEach items="${listc}" var="cust">
 			<tr>
 				<td><c:out value="${cust.customerID }" /></td>
 				<td><c:out value="${cust.customerName }" /></td>

@@ -6,14 +6,87 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>借机明细查询</title>
+<style>
+.head {
+	/* width: 960px;
+	 font-weight: bold padding-top:3px; */
+	margin: 0 auto;
+	height: 140px;
+	line-height: 15px;
+	font-size: 25px;
+	background: #FFFFCC;
+	font-weight: bold;
+	border-style: solid;
+	border-color: #FFFFCC;
+}
+
+.datalist {
+	border: 1px solid #0058a3; /* 表格边框 */
+	font-family: Arial;
+	border-collapse: collapse; /* 边框重叠 */
+	background-color: #eaf5ff; /* 表格背景色 */
+	font-size: 14px;
+	line-height: 25px;
+}
+
+.datalist caption {
+	padding-bottom: 5px;
+	font: bold 1.4em;
+	text-align: left;
+}
+
+.datalist th {
+	border: 1px solid #0058a3; /* 行名称边框 */
+	background-color: #4bacff; /* 行名称背景色 */
+	color: #FFFFFF; /* 行名称颜色 */
+	font-weight: bold;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 12px;
+	padding-right: 12px;
+	text-align: center;
+}
+
+.datalist td {
+	border: 1px solid #0058a3; /* 单元格边框 */
+	text-align: left;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.datalist tr.altrow {
+	background-color: #c7e5ff; /* 隔行变色 */
+}
+
+a {
+	font-weight: bold;
+}
+
+a:hover {
+	color: red;
+	font-size: 16px;
+}
+
+body {
+	font-family: "Microsoft Yahei";
+	font-size: 10.5pt;
+	line-height: 1.5;
+}
+</style>
 </head>
 <body style="text-align: center;">
-	<h1>借机明细查询</h1>
-	<hr>
-	<font color="red">${msg }</font>
+	<div class="head" style="text-align: left;">
+		<h2>借还信息</h2>
+		<hr>
+		<h3>借机明细查询</h3>
+	</div>
+	<br>
 	<form
 		action="${pageContext.request.contextPath }/FindBorrowByCondServlet"
 		method="POST">
+	<font color="red">${msg }</font>
 		<%--   <p>客户：</p>
 		<select name="CustomerID"  >
 		<option value="">请选择客户</option>
@@ -21,25 +94,23 @@
 				<option value="${cust.customerID.customerID}">${cust.customerID.customerName}</option>
 			</c:forEach>
 		</select>  --%>
-		
+
 		客户ID:<input type="text" name="CustomerID" value="${param.CustomerID }" />
-		
+
 		样机ID:<input type="text" name="ModelID" value="${param.ModelID }" />
-		
+
 		借机时间:<input type="text" name="BorrowOperatDatetime"
 			value="${param.BorrowOperatDatetime }" /><br> <br>
-		
+
 		借机批准人ID:<input type="text" name="BorrowPermitPerson"
-			value="${param.BorrowPermitPerson}" /> 
-		借条编号:<input type="text"
-			name="BorrowCheckNo" value="${param.BorrowCheckNo}" /> 
-		归还日期:<input
-			type="text" name="ReturnDatetime" value="${param.ReturnDatetime}" /><br><br> 
-		是否已归还:<input type="radio" name="Return" value="yes"
-			<c:if test="${param.Return=='yes'}">checked='checked'</c:if> />是 
-			<input type="radio" name="Return" value="no"
+			value="${param.BorrowPermitPerson}" /> 借条编号:<input type="text"
+			name="BorrowCheckNo" value="${param.BorrowCheckNo}" /> 归还日期:<input
+			type="text" name="ReturnDatetime" value="${param.ReturnDatetime}" /><br>
+		<br> 是否已归还:<input type="radio" name="Return" value="yes"
+			<c:if test="${param.Return=='yes'}">checked='checked'</c:if> />是 <input
+			type="radio" name="Return" value="no"
 			<c:if test="${param.Return=='no'}">checked='checked'</c:if>>否
-		    <input type="radio" name="Return" value="any"
+		<input type="radio" name="Return" value="any"
 			<c:if test="${param.Return=='any'}">checked='checked'</c:if>>无
 		<input type="submit" value="查询借机明细" /> <input type="reset" value="取消" />
 
@@ -47,7 +118,7 @@
 	<br>
 
 
-	<table border="1" width="100%">
+	<table border="1" width="100%" class="datalist">
 		<tr>
 			<th>借机编号</th>
 			<th>客户名称</th>
@@ -71,8 +142,8 @@
 				<td><c:out value="${borrow.borrowNo }" /></td>
 				<td><c:out value="${borrow.customerID.customerName }" /></td>
 				<td><c:out value="${borrow.sendDatetime }" /></td>
-				<td><c:out value="${borrow.borrowPermitPerson.loginName }" /></td>
-				<td><c:out value="${borrow.borrowOperator.loginName }" /></td>
+				<td><c:out value="${borrow.borrowPermitPerson.userName }" /></td>
+				<td><c:out value="${borrow.borrowOperator.userName }" /></td>
 				<td><fmt:formatDate type="time"
 						value="${borrow.borrowOperatDatetime}" pattern="yyyy-MM-dd" /></td>
 				<%-- <td><c:out value="${borrow.borrowOperatDatetime }" /></td> --%>

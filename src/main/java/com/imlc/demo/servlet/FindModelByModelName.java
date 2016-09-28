@@ -40,9 +40,9 @@ public class FindModelByModelName extends HttpServlet {
 		Logger log = LoggerFactory.getLogger(LogbackDemo.class);  
 		try {
 			String ModelName = request.getParameter("ModelName");
-			List<T_Model> list = ModelService.getInstance().findByModelName(ModelName);
+			List<T_Model> listm = ModelService.getInstance().findByModelName(ModelName);
 			//请求转发
-			request.setAttribute("list", list);
+			request.setAttribute("listm", listm);
 			request.getRequestDispatcher("/listModel.jsp").forward(request, response);
 			log.info("执行查询操作");
 		} catch (Exception e) {

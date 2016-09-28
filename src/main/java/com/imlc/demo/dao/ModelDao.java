@@ -116,15 +116,6 @@ public class ModelDao {
 		init();
 		Query query = session.createQuery("from T_Model ");
 		List result = query.list();
-		for (int i = 0; i < result.size(); i++) {
-			T_Model c = new T_Model();
-			T_Model model = (T_Model) result.get(i);
-
-			int modelid = model.getModelID();
-			c = (T_Model) session.get(T_Model.class, modelid);
-			System.out.println("查询成功！");
-			System.out.println(c);
-		}
 		destory();
 		return result;
 

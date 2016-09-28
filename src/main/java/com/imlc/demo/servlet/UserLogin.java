@@ -1,6 +1,10 @@
 package com.imlc.demo.servlet;
 
 import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -9,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.imlc.demo.entity.T_Model;
 import com.imlc.demo.entity.T_User;
 import com.imlc.demo.logback.LogbackDemo;
+import com.imlc.demo.service.ModelService;
 import com.imlc.demo.service.UserService;
 import com.imlc.demo.util.MD5Util;
 
@@ -27,7 +33,13 @@ public class UserLogin extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	/**
+	 * @see Servlet#init(ServletConfig)
+	 */
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		
+	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)

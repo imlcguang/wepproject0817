@@ -78,8 +78,8 @@ public class UserDao {
 	 * @return
 	 */
 	public List<T_User> findAllUser() {
-		init();
-		Query query = session.createQuery("from T_User ");
+		Session  session2= SessionFactoryUtil.getInstance().openSession();
+		Query query = session2.createQuery("from T_User ");
 		List result = query.list();
 		/*for (int i = 0; i < result.size(); i++) {
 			T_User c = new T_User();
@@ -90,7 +90,7 @@ public class UserDao {
 			System.out.println("查询成功！");
 			System.out.println(c);
 		}*/
-		destory();
+		session2.close();
 		return result;
 
 	}

@@ -162,8 +162,8 @@ public class BorrowRecordDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> cusSum() {
-		init();
-		Criteria criteria = session.createCriteria(T_BorrowRecord.class);
+		Session  session2= SessionFactoryUtil.getInstance().openSession();
+		Criteria criteria = session2.createCriteria(T_BorrowRecord.class);
 		ProjectionList plist = Projections.projectionList();
 		// 分组统计
 		plist.add(Projections.sum("BorrowNumber"));
@@ -191,7 +191,7 @@ public class BorrowRecordDao {
 			// 把一条记录信息的map：item存入list
 			result.add(item);
 		}
-		destory();
+		session2.close();
 		return result;
 
 	}

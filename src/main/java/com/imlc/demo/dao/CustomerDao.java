@@ -117,10 +117,10 @@ public class CustomerDao {
 	 * @return
 	 */
 	public List<T_Customer> findAllCus() {
-		init();
-		Query query = session.createQuery("from T_Customer ");
+		Session  session2= SessionFactoryUtil.getInstance().openSession();
+		Query query = session2.createQuery("from T_Customer ");
 		List result = query.list();
-		destory();
+		session2.close();
 		return result;
 
 	}

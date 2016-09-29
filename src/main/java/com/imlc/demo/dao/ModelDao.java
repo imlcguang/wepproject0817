@@ -113,10 +113,10 @@ public class ModelDao {
 	 * @return
 	 */
 	public List<T_Model> findAllModel() {
-		init();
-		Query query = session.createQuery("from T_Model ");
+		Session  session2= SessionFactoryUtil.getInstance().openSession();
+		Query query = session2.createQuery("from T_Model ");
 		List result = query.list();
-		destory();
+		session2.close();
 		return result;
 
 	}

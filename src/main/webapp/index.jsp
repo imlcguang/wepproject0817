@@ -16,9 +16,11 @@
 				text-align: center;
 				line-height: 40px
 			}
+			a{ text-decoration:none;}
 			a:hover{
                  color:red;
                  font-size:33px;
+                 text-decoration:none;
                 
             }
 			.head,
@@ -107,9 +109,9 @@
 
 			<div class="quarter-div right2">
 				<p>借还信息</p>
-				<a href=borrow.jsp>借机登记</a><br />
+				<a href=borrow.jsp>登记借机记录</a><br />
 				<a href=${pageContext.request.contextPath}/ListBorrowServlet>借机明细查询</a><br />
-				<a href=count.jsp>借机统计</a>
+				<a href=count.jsp>借机统计列表</a>
 			</div>
 			</c:if>
 		</div>

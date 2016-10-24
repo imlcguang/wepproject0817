@@ -40,6 +40,7 @@ public class BorrowInfoServlet extends HttpServlet {
 		Logger log = LoggerFactory.getLogger(LogbackDemo.class);  
 		// 1.获取要查询的id
 		String id = request.getParameter("id");
+		
 		// 2.调用Service中根据id查找客户的方法
 		T_BorrowRecord borrow = BorrowRecordService.getInstance().findBorrowByID(id);
 		

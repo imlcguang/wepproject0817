@@ -62,6 +62,7 @@
 
 a {
 	font-weight: bold;
+	  text-decoration:none;
 }
 
 a:hover {

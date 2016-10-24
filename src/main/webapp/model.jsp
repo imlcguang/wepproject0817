@@ -13,12 +13,85 @@
 		  width: 80%	
 	 }
    </style>  
+   <style>
+.label {
+	width:20%;
+}
+
+.controler {
+width:80%;
+	
+}
+
+.head {
+	/* width: 960px;
+	 font-weight: bold padding-top:3px; */
+	margin: 0 auto;
+	height: 140px;
+	line-height: 15px;
+	font-size: 25px;
+	background: #FFFFCC;
+	font-weight: bold;
+	border-style: solid;
+	border-color: #FFFFCC;
+}
+.table{
+width:30%;
+}
+.datalist {
+border-radius:8px;
+	border: 1px solid #0058a3;  /* 表格边框 */ 
+	font-family: Arial;
+	border-collapse: collapse; /* 边框重叠 */
+	background-color: #eaf5ff; /* 表格背景色 */
+	font-size: 14px;
+	width:333px;
+}
+.datalist td {
+	/* border: 1px solid #0058a3; */  /* 单元格边框 */
+	text-align: left;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-weight: bold;
+} 
+
+.datalist tr.altrow {
+	background-color: #c7e5ff; /* 隔行变色 */
+}
+
+a {
+	font-weight: bold;
+	  text-decoration:none;
+}
+
+a:hover {
+	color: red;
+	font-size: 14px;
+}
+
+body {
+	font-family: "Microsoft Yahei";
+	font-size: 10.5pt;
+	line-height: 1.5;
+}
+.main{
+width:40%;
+text-align:left;
+}
+</style>
+   
 </head>
 <body>
-<h1>样机信息维护</h1><hr>
- <h2>样机注册</h2>
+<div class="head">
+		<h2>样机信息</h2>
+		<hr>
+		<h3>样机注册</h3>
+	</div>
+	<br>
   <font color="red">${msg }</font>
-   <form name="ModelForm" action="${pageContext.request.contextPath}/ModelServlet" method="post" >
+   <form name="ModelForm" action="${pageContext.request.contextPath}/ModelServlet" method="post" class="datalist">
     <%-- <%=request.getContextPath()%>  --%>
 			  <table border="0" width="800" cellspacing="0" cellpadding="0">
 			    <tr>

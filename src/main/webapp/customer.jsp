@@ -31,6 +31,7 @@ width:80%;
 width:40%;
 }
 .datalist {
+border-radius:8px;
 	border: 1px solid #0058a3;  /* 表格边框 */ 
 	font-family: Arial;
 	border-collapse: collapse; /* 边框重叠 */
@@ -39,6 +40,7 @@ width:40%;
 	width:333px;
 }
 .datalist td {
+border-radius:8px;
 	/* border: 1px solid #0058a3; */  /* 单元格边框 */
 	text-align: left;
 	padding-top: 4px;
@@ -54,6 +56,7 @@ width:40%;
 
 a {
 	font-weight: bold;
+	  text-decoration:none;
 }
 
 a:hover {
@@ -74,7 +77,7 @@ text-align:left;
 </head>
 <body>
 	<div class="head">
-		<h2>客户信息维护</h2>
+		<h2>客户信息</h2>
 		<hr>
 		<h3>客户注册</h3>
 	</div>

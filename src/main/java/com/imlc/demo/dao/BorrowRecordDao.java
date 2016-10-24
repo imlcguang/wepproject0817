@@ -29,17 +29,13 @@ public class BorrowRecordDao {
 	public static void init() {
 		session = SessionFactoryUtil.getInstance().getCurrentSession();
 		// 开启事务
-		 session.beginTransaction();
-	}
-	
-	
-	private Session getSession(){
-		return  SessionFactoryUtil.getInstance().getCurrentSession();
+		session.beginTransaction();
 	}
 
 	public static void destory() {
 		// 事务提交
 		transaction.commit();
+
 	}
 
 	/**
@@ -66,15 +62,15 @@ public class BorrowRecordDao {
 	 */
 	public T_BorrowRecord findBorrowByID(String id) {
 		try {
-			init();
+			Session session1 = SessionFactoryUtil.getInstance().openSession();
 			Integer i = Integer.parseInt(id);
-			T_BorrowRecord b = session.get(T_BorrowRecord.class, i);
-			destory();
+			T_BorrowRecord b = session1.get(T_BorrowRecord.class, i);
+			session1.close();
 			return b;
 		} catch (Exception e) {
 			e.printStackTrace();
 			transaction.rollback();
-			T_BorrowRecord br=new T_BorrowRecord();
+			T_BorrowRecord br = new T_BorrowRecord();
 			return br;
 		}
 	}
@@ -91,7 +87,7 @@ public class BorrowRecordDao {
 			destory();
 		} catch (Exception e) {
 			e.printStackTrace();
-			transaction.rollback();
+			// transaction.rollback();
 		}
 
 	}
@@ -108,7 +104,7 @@ public class BorrowRecordDao {
 			destory();
 		} catch (Exception e) {
 			e.printStackTrace();
-			transaction.rollback();
+			// transaction.rollback();
 		}
 
 	}
@@ -138,7 +134,7 @@ public class BorrowRecordDao {
 	public List<T_BorrowRecord> findAllBorrow() {
 
 		try {
-			Session  session2= SessionFactoryUtil.getInstance().openSession();
+			Session session2 = SessionFactoryUtil.getInstance().openSession();
 			Query query = session2.createQuery("from T_BorrowRecord order by BorrowNo");
 			List result = query.list();
 			/*
@@ -162,8 +158,8 @@ public class BorrowRecordDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> cusSum() {
-		Session  session2= SessionFactoryUtil.getInstance().openSession();
-		Criteria criteria = session2.createCriteria(T_BorrowRecord.class);
+		Session session3 = SessionFactoryUtil.getInstance().openSession();
+		Criteria criteria = session3.createCriteria(T_BorrowRecord.class);
 		ProjectionList plist = Projections.projectionList();
 		// 分组统计
 		plist.add(Projections.sum("BorrowNumber"));
@@ -182,28 +178,30 @@ public class BorrowRecordDao {
 			item.put("cal", c);
 			// 通过客户名找该用户的多条记录的详细信息
 			String hql = "FROM T_BorrowRecord WHERE CustomerID = :cid ";
-			List<T_BorrowRecord> result1 = session.createQuery(hql).setParameter("cid", (T_Customer) d[1]).list();
-			/*
-			 * for (int i = 0; i < result1.size(); i++) { T_BorrowRecord b =
-			 * (T_BorrowRecord) result1.get(i); }
-			 */
+			List<T_BorrowRecord> result1 = session3.createQuery(hql).setParameter("cid", (T_Customer) d[1]).list();
+
+			for (int i = 0; i < result1.size(); i++) {
+				T_BorrowRecord b = (T_BorrowRecord) result1.get(i);
+				System.out.println(b);
+			}
+
 			item.put("detail", result1);
 			// 把一条记录信息的map：item存入list
 			result.add(item);
 		}
-		session2.close();
+		session3.close();
 		return result;
 
 	}
 
 	/**
-	 * 统计 按客户
+	 * 统计 按样机
 	 * 
 	 * @return
 	 */
 	public List<Map<String, Object>> modleSum() {
-		init();
-		Criteria criteria = session.createCriteria(T_BorrowRecord.class);
+		Session session2 = SessionFactoryUtil.getInstance().openSession();
+		Criteria criteria = session2.createCriteria(T_BorrowRecord.class);
 		ProjectionList plist = Projections.projectionList();
 		// 分组统计
 		plist.add(Projections.sum("BorrowNumber"));
@@ -222,14 +220,13 @@ public class BorrowRecordDao {
 			item.put("cal", c);
 			// 通过客户名找该用户的多条记录的详细信息
 			String hql = "FROM T_BorrowRecord WHERE ModelID = :cid ";
-			List<T_BorrowRecord> result1 = session.createQuery(hql).setParameter("cid", (T_Model) d[1]).list();
+			List<T_BorrowRecord> result1 = session2.createQuery(hql).setParameter("cid", (T_Model) d[1]).list();
 			item.put("detail", result1);
 			// 把一条记录信息的map：item存入list
 			result.add(item);
 		}
-		destory();
+		session2.close();
 		return result;
-
 	}
 
 	/**

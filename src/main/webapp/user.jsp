@@ -6,9 +6,76 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>用户注册</title>
+<style>
+.label {
+	width:20%;
+}
+
+.controler {
+width:80%;
+	
+}
+
+.head {
+	/* width: 960px;
+	 font-weight: bold padding-top:3px; */
+	margin: 0 auto;
+	height: 140px;
+	line-height: 15px;
+	font-size: 25px;
+	background: #FFFFCC;
+	font-weight: bold;
+	border-style: solid;
+	border-color: #FFFFCC;
+}
+.table{
+width:30%;
+}
+.datalist {
+border-radius:8px;
+	border: 1px solid #0058a3;  /* 表格边框 */ 
+	font-family: Arial;
+	border-collapse: collapse; /* 边框重叠 */
+	background-color: #eaf5ff; /* 表格背景色 */
+	font-size: 14px;
+	width:666px;
+}
+.datalist td {
+	/* border: 1px solid #0058a3; */  /* 单元格边框 */
+	text-align: left;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-weight: bold;
+} 
+
+.datalist tr.altrow {
+	background-color: #c7e5ff; /* 隔行变色 */
+}
+
+a {
+	font-weight: bold;
+	  text-decoration:none;
+}
+
+a:hover {
+	color: red;
+	font-size: 14px;
+}
+
+body {
+	font-family: "Microsoft Yahei";
+	font-size: 10.5pt;
+	line-height: 1.5;
+}
+.main{
+width:40%;
+text-align:left;
+}
+</style>
 <head>
     
     <base href="<%=basePath%>">
@@ -40,11 +107,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body >
-    <h1>用户信息管理</h1>
-    <h2>用户注册</h2>
-    <hr>
+  <div class="head">
+		<h2>用户信息</h2>
+		<hr>
+		<h3>用户注册</h3>
+	</div>
+	<br>
     <font color="red">${msg }</font>
-    <form name="regForm" action="${pageContext.request.contextPath}/UserServlet" method="post" >
+    <form name="regForm" action="${pageContext.request.contextPath}/UserServlet" method="post" class="datalist">
     <%-- <%=request.getContextPath()%>  --%>
 			  <table border="0" width="800" cellspacing="0" cellpadding="0">
 			    <tr>
@@ -98,11 +168,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			   
 			    <tr>
   				     <td>验证码</td>
-  				     <td><input type="text" name="valistr" /></td>
-  				     <td><img src="${pageContext.request.contextPath }/ValiImg" style="cursor: pointer" onclick="changeImg(this)"/></td>
+  				     <td><input type="text" name="valistr" /> <img src="${pageContext.request.contextPath }/ValiImg" style="cursor: pointer" onclick="changeImg(this)"/></td>
   			    </tr>
-  			    
   			
+  				    
+  			      
+  			 <tr>
 			    	<td colspan="2" align="center">
 			    		<input type="submit" value="注册"/>&nbsp;&nbsp;
 			    	    <input type="reset" value="取消"/>&nbsp;&nbsp;

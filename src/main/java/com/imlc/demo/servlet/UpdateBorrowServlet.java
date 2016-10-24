@@ -80,12 +80,11 @@ public class UpdateBorrowServlet extends HttpServlet {
 
 			T_User returnop = BorrowRecordService.getInstance().findUserById(ReturnOperator);
 			b.setReturnOperator(returnop);
-			System.out.println(b.toString());
 			// 3 检查是否为空
 			b.checkValue();
 			// 4调用service中的修改方法
 			BorrowRecordService.getInstance().updateBorrowRecord(b);
-			System.out.println(b.toString());
+			System.out.println("更新："+b.toString());
 
 			request.getSession().setAttribute("Borrow", b);
 			// 3.重定向到客户列表页面

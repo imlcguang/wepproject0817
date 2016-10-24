@@ -62,6 +62,7 @@ public class ReturnServlet extends HttpServlet {
 			System.out.println(borrow.toString());
 			// 调用service中的return方法
 			BorrowRecordService.getInstance().returnRecord(borrow);
+			
 			// 3.请求转发到list.jsp页面展示
 			request.getRequestDispatcher("/ListBorrowServlet").forward(request, response);
 			log.info("执行归还操作");

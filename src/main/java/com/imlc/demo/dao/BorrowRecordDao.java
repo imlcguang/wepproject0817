@@ -29,7 +29,7 @@ public class BorrowRecordDao {
 	public static void init() {
 		session = SessionFactoryUtil.getInstance().getCurrentSession();
 		// 开启事务
-		session.beginTransaction();
+		transaction =session.beginTransaction();
 	}
 
 	public static void destory() {

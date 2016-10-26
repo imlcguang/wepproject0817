@@ -49,7 +49,6 @@ public class ReturnServlet extends HttpServlet {
 			String id = request.getParameter("id");
 			// 2.调用Service中根据id查找借机表的方法
 			T_BorrowRecord borrow = BorrowRecordService.getInstance().findBorrowByID(id);
-			System.out.println(borrow.toString());
 			// 获取数据并封装
 			String ReturnOperator = request.getParameter("ReturnOperator");
 			T_User returnop = BorrowRecordService.getInstance().findUserById(ReturnOperator);
@@ -59,7 +58,6 @@ public class ReturnServlet extends HttpServlet {
 			 borrow.setReturnDatetime(df.format(new Date()));*/
 			borrow.setReturnDatetime(new Date());
 
-			System.out.println(borrow.toString());
 			// 调用service中的return方法
 			BorrowRecordService.getInstance().returnRecord(borrow);
 			

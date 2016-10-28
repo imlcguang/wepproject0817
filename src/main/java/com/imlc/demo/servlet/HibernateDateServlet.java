@@ -44,7 +44,8 @@ public class HibernateDateServlet extends HttpServlet {
 			pageIndex = Integer.parseInt(strIndex);// 将得到的页面数据转换成Integer保存到pageIndex中
 		}
 
-		List<T_BorrowRecord> recordResult = HibernateRecordService.findRecord(pageIndex, pageSize);// 调用方法得到的数据封装到list
+		List<T_BorrowRecord> recordResult = HibernateRecordService.getInstance().findRecord(pageIndex, pageSize);// 调用方法得到的数据封装到list
+		
 		request.getSession().setAttribute("pageIndex", pageIndex);// 将页面数据保存到session中
 		request.getSession().setAttribute("pageList", recordResult);// 将list保存到session中
 		request.getRequestDispatcher("hibernateRecord.jsp").forward(request, response);

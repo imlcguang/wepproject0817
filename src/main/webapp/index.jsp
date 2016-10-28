@@ -95,6 +95,7 @@
 				<p>用户信息</p>
 				<a href=user.jsp>注册用户信息</a><br />
 				<a href=${pageContext.request.contextPath}/ListUserServlet>用户信息管理</a>
+				<a href=${pageContext.request.contextPath}/HibernateDateServlet>分页测试</a>
 			</div>
 			<div class="quarter-div left2">
 				<p>客户信息</p>

@@ -50,6 +50,17 @@ public class HibernateRecordDao {
 			
 			// 获取查询的结果
 			List<T_BorrowRecord> recordResult = hqlQuery.list();
+			
+			for (int i = 0; i < recordResult.size(); i++) {
+				T_BorrowRecord c = new T_BorrowRecord();
+				T_BorrowRecord user = (T_BorrowRecord) recordResult.get(i);
+
+				int userid = user.getBorrowNo();
+				c = (T_BorrowRecord) session2.get(T_BorrowRecord.class, userid);
+				System.out.println("看这边~~~");
+				System.out.println(c);
+			}
+			
 			session2.close();
 			return recordResult;
 			

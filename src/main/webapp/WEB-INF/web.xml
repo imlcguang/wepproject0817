@@ -36,7 +36,7 @@
     <servlet-name>CusServlet</servlet-name>
     <servlet-class>com.imlc.demo.servlet.CusServlet</servlet-class>
   </servlet>
-    <servlet>
+  <servlet>
     <description>
 		</description>
     <display-name>ListUserServlet</display-name>
@@ -71,7 +71,6 @@
   <servlet-mapping>
     <servlet-name>ListCustServlet</servlet-name>
     <url-pattern>/ListCustServlet</url-pattern>
-    
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>CusServlet</servlet-name>

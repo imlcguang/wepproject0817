@@ -50,7 +50,12 @@ public class ReturnServlet extends HttpServlet {
 			// 2.调用Service中根据id查找借机表的方法
 			T_BorrowRecord borrow = BorrowRecordService.getInstance().findBorrowByID(id);
 			// 获取数据并封装
+			
 			String ReturnOperator = request.getParameter("ReturnOperator");
+			if(ReturnOperator==null || "".equals(ReturnOperator)){
+				throw new MsgException("归还操作员不能为空!");
+			}
+			else{
 			T_User returnop = BorrowRecordService.getInstance().findUserById(ReturnOperator);
 			borrow.setReturnOperator(returnop);
 
@@ -60,7 +65,7 @@ public class ReturnServlet extends HttpServlet {
 
 			// 调用service中的return方法
 			BorrowRecordService.getInstance().returnRecord(borrow);
-			
+			}
 			// 3.请求转发到list.jsp页面展示
 			request.getRequestDispatcher("/ListBorrowServlet").forward(request, response);
 			log.info("执行归还操作");

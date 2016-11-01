@@ -38,7 +38,7 @@ public class FindCustByCondServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Logger log = LoggerFactory.getLogger(LogbackDemo.class);  
+		Logger log = LoggerFactory.getLogger(LogbackDemo.class);
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		try {
@@ -46,18 +46,30 @@ public class FindCustByCondServlet extends HttpServlet {
 			String CustomerName = request.getParameter("customerName");
 			String RelationName = request.getParameter("relationName");
 			String RelationPhone = request.getParameter("relationPhone");
+			int nulltmp = 0;
+
 			// 1.封装
 			customer.setCustomerName(CustomerName);
 			customer.setRelationName(RelationName);
 			customer.setRelationPhone(RelationPhone);
 
-			// 2.调用Service中模糊客户信息的方法
-			List<T_Customer> listc = (List<T_Customer>) CustomerService.getInstance().findCustByCond(customer);
-			if(listc==null){
-				throw new MsgException("找不到该客户!");
+			if (CustomerName != null && (!"".equals(CustomerName)) || RelationName != null && (!"".equals(RelationName))
+					|| RelationPhone != null && (!"".equals(RelationPhone))) {
+				nulltmp = 1;
 			}
-			request.setAttribute("listc", listc);
-			request.getRequestDispatcher("/listCust.jsp").forward(request, response);
+
+			if (nulltmp == 1) {
+				// 2.调用Service中模糊客户信息的方法
+				List<T_Customer> listc = (List<T_Customer>) CustomerService.getInstance().findCustByCond(customer);
+				if (listc == null) {
+					throw new MsgException("找不到该客户!");
+				}
+				request.setAttribute("recordResult", listc);
+				request.getRequestDispatcher("/listCust.jsp").forward(request, response);
+			} else {
+				request.getRequestDispatcher("/ListCustServlet").forward(request, response);
+			}
+
 			log.info("执行查询操作");
 		} catch (MsgException e) {
 			request.setAttribute("msg", e.getMessage());

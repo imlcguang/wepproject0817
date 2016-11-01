@@ -37,13 +37,16 @@ public class FindModelByModelName extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Logger log = LoggerFactory.getLogger(LogbackDemo.class);  
+		Logger log = LoggerFactory.getLogger(LogbackDemo.class);
 		try {
 			String ModelName = request.getParameter("ModelName");
 			List<T_Model> listm = ModelService.getInstance().findByModelName(ModelName);
-			//请求转发
-			request.setAttribute("listm", listm);
-			request.getRequestDispatcher("/listModel.jsp").forward(request, response);
+			// 请求转发
+			if (ModelName != null && !"".equals(ModelName)) {
+				request.setAttribute("recordResult", listm);
+				request.getRequestDispatcher("/listModel.jsp").forward(request, response);
+			} else
+				request.getRequestDispatcher("/ListModelServlet").forward(request, response);
 			log.info("执行查询操作");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -36,7 +36,7 @@ public class HibernateDateServlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html");
 		int pageIndex = 1;
-		int pageSize = 2;
+		int pageSize = 9;
 		String strIndex = request.getParameter("pageIndex");
 		if (strIndex == null) {
 			pageIndex = 1;

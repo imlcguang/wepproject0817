@@ -55,6 +55,16 @@ public class UserService {
 	public T_User isUser(String loginname,String password){
 		return dao.findUserByLNandPsd(loginname, password);
 	}
+	
+	/**
+	 * 分页查询所有的用户信息
+	 * 
+	 * @return
+	 */
+	public List<T_User> findAllUser(int pageIndex, int pageSize) {
+		return dao.findAllUser( pageIndex,  pageSize);
+	}
+	
 	/**
 	 * 查询所有的用户信息
 	 * 
@@ -63,6 +73,17 @@ public class UserService {
 	public List<T_User> findAllUser() {
 		return dao.findAllUser();
 	}
+	
+	
+	/**
+	 * 统计总记录数
+	 * @return
+	 */
+	public int  countrecord() {
+		return dao.countrecord();
+	}
+	
+	
 	/**
 	 * 按用户ID查找用户
 	 * @param id

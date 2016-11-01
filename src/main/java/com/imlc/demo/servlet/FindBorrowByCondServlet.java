@@ -58,18 +58,22 @@ public class FindBorrowByCondServlet extends HttpServlet {
 			String BorrowCheckNo = request.getParameter("BorrowCheckNo");
 			String ReturnDatetime = request.getParameter("ReturnDatetime");
 			String isreturn = request.getParameter("Return");
+			int nulltmp=0;
 			// 2封装
 			if (CustomerID != null && (!"".equals(CustomerID))) {
 				T_Customer customer = new T_Customer();
 				Integer i = Integer.parseInt(CustomerID);
 				customer.setCustomerID(i);
 				b.setCustomerID(customer);
+				nulltmp=1;
 			}
+		
 			if (ModelID != null && (!"".equals(ModelID))) {
 				T_Model model = new T_Model();
 				Integer i2 = Integer.parseInt(ModelID);
 				model.setModelID(i2);
 				b.setModelID(model);
+				nulltmp=1;
 			}
 			if (BorrowOperatDatetime != null && (!"".equals(BorrowOperatDatetime))) {
 				if(!BorrowOperatDatetime.matches("(([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-02-29)")){
@@ -77,6 +81,7 @@ public class FindBorrowByCondServlet extends HttpServlet {
 				}
 				Date date = sdf.parse(BorrowOperatDatetime);
 				b.setBorrowOperatDatetime(date);
+				nulltmp=1;
 			}
 
 			if (BorrowPermitPerson != null && (!"".equals(BorrowPermitPerson))) {
@@ -84,9 +89,11 @@ public class FindBorrowByCondServlet extends HttpServlet {
 				Integer i2 = Integer.parseInt(BorrowPermitPerson);
 				user.setUserID(i2);
 				b.setBorrowPermitPerson(user);
+				nulltmp=1;
 			}
 			if (BorrowCheckNo != null && (!"".equals(BorrowCheckNo))) {
 				b.setBorrowCheckNo(BorrowCheckNo);
+				nulltmp=1;
 			}
 			if (ReturnDatetime != null && (!"".equals(ReturnDatetime))) {
 				if(!ReturnDatetime.matches("(([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-02-29)")){
@@ -94,16 +101,23 @@ public class FindBorrowByCondServlet extends HttpServlet {
 				}
 				Date date2 = sdf.parse(ReturnDatetime);
 				b.setReturnDatetime(date2);
+				nulltmp=1;
 			}
 			
-			// 4调用service中的增加方法
+			if ( (!"any".equals(isreturn))) {
+				nulltmp=1;
+			}
+			
+			if(nulltmp==0)
+			{
+				request.getRequestDispatcher("/ListBorrowServlet").forward(request, response);
+			}
+			// 4调用service中的条件查询方法
 			List<T_BorrowRecord> list = (List<T_BorrowRecord>) BorrowRecordService.getInstance().findBorrowByCond(b, isreturn);
 			
-			System.out.println(b.toString());
-			System.out.println("list"+list);
 
 			// 5提示注册成功3秒回到主页
-			request.setAttribute("list", list);
+			request.setAttribute("recordResult", list);
 			request.getRequestDispatcher("/listBorrow.jsp").forward(request, response);
 			log.info("执行查询操作");
 		} catch (MsgException e) {

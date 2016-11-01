@@ -26,6 +26,47 @@ public class ModelDao {
 	}
 	
 	/**
+	 * 查询总记录数
+	 * 
+	 * @return
+	 */
+	public int  countrecord() {
+		try {
+			init();
+			 int total = ((Long)this.session.createQuery("select count(id) from T_Model ").uniqueResult()).intValue();
+			 destory();
+			 return total;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+
+	}
+	
+	/**
+	 * 分页查询所有的信息
+	 * 
+	 * @return
+	 */
+	public List<T_Model> findAllModel(int pageIndex, int pageSize) {
+		Session session2 = SessionFactoryUtil.getInstance().openSession();
+		// 获取query对象
+		String hql = "from T_Model order by ModelID";
+		Query hqlQuery = session2.createQuery(hql);
+
+		// 从第几条记录开始查询
+		hqlQuery.setFirstResult((pageIndex - 1) * pageSize);
+
+		// 一共查询多少条记录
+		hqlQuery.setMaxResults(pageSize);
+
+		// 获取查询的结果
+		List<T_Model> result = hqlQuery.list();
+		session2.close();
+		return result;
+	}
+	
+	/**
 	 * 添加样机
 	 * 
 	 * @param c

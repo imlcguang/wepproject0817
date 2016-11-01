@@ -3,6 +3,7 @@ package com.imlc.demo.service;
 import java.util.List;
 
 import com.imlc.demo.dao.ModelDao;
+import com.imlc.demo.entity.T_Customer;
 import com.imlc.demo.entity.T_Model;
 import com.imlc.demo.exception.MsgException;
 
@@ -23,6 +24,25 @@ public class ModelService {
 	
 	private  ModelDao dao = new ModelDao();
 
+	
+	/**
+	 * 统计总记录数
+	 * @return
+	 */
+	public int  countrecord() {
+		return dao.countrecord();
+	}
+	
+	
+	/**
+	 * 分页查询所有的样机信息
+	 * 
+	 * @return
+	 */
+	public List<T_Model> findAllModel(int pageIndex, int pageSize) {
+		return dao.findAllModel( pageIndex,  pageSize);
+	}
+	
 	/**
 	 * 添加样机
 	 * 

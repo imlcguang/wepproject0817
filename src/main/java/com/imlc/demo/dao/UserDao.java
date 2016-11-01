@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import com.imlc.demo.entity.T_BorrowRecord;
+import com.imlc.demo.entity.T_Customer;
 import com.imlc.demo.entity.T_User;
 import com.imlc.demo.hibernate.SessionFactoryUtil;
 
@@ -24,6 +26,29 @@ public class UserDao {
 		transaction.commit();
 	}
 
+	
+	/**
+	 * 查询总记录数
+	 * 
+	 * @return
+	 */
+	public int  countrecord() {
+		try {
+			init();
+			 int total = ((Long)this.session.createQuery("select count(id) from T_User ").uniqueResult()).intValue();
+			 destory();
+			 return total;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+
+	}
+	
+	
+	
+	
+	
 	/**
 	 * 根据用户ID查找用户
 	 * 
@@ -72,6 +97,7 @@ public class UserDao {
 		return user;
 	}
 
+	
 	/**
 	 * 查询所有的信息
 	 * 
@@ -81,19 +107,46 @@ public class UserDao {
 		Session  session2= SessionFactoryUtil.getInstance().openSession();
 		Query query = session2.createQuery("from T_User ");
 		List result = query.list();
-		/*for (int i = 0; i < result.size(); i++) {
-			T_User c = new T_User();
-			T_User user = (T_User) result.get(i);
-
-			int userid = user.getUserID();
-			c = (T_User) session.get(T_User.class, userid);
-			System.out.println("查询成功！");
-			System.out.println(c);
-		}*/
 		session2.close();
 		return result;
 
 	}
+
+	
+	
+	
+	/**
+	 * 分页查询所有的信息
+	 * 
+	 * @return
+	 */
+	public List<T_User> findAllUser(int pageIndex, int pageSize) {
+		Session session2 = SessionFactoryUtil.getInstance().openSession();
+		// 获取query对象
+		String hql = "from T_User order by UserID";
+		Query hqlQuery = session2.createQuery(hql);
+
+		// 从第几条记录开始查询
+		hqlQuery.setFirstResult((pageIndex - 1) * pageSize);
+
+		// 一共查询多少条记录
+		hqlQuery.setMaxResults(pageSize);
+
+		// 获取查询的结果
+		List<T_User> result = hqlQuery.list();
+
+		/*for (int i = 0; i < recordResult.size(); i++) {
+			T_BorrowRecord c = new T_BorrowRecord();
+			T_BorrowRecord user = (T_BorrowRecord) recordResult.get(i);
+
+			int userid = user.getBorrowNo();
+			c = (T_BorrowRecord) session2.get(T_BorrowRecord.class, userid);
+			System.out.println(c);
+		}*/
+		session2.close();
+		return result;
+	}
+	
 	/**
 	 * 更新用户信息
 	 * @param u

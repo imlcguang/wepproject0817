@@ -6,6 +6,7 @@ import javax.enterprise.inject.New;
 
 import com.imlc.demo.dao.CustomerDao;
 import com.imlc.demo.entity.T_Customer;
+import com.imlc.demo.entity.T_User;
 import com.imlc.demo.exception.MsgException;
 
 public class CustomerService {
@@ -43,6 +44,23 @@ public class CustomerService {
 		dao.AddCustomer(customer);
 	}
 
+	/**
+	 * 统计总记录数
+	 * @return
+	 */
+	public int  countrecord() {
+		return dao.countrecord();
+	}
+	
+	
+	/**
+	 * 分页查询所有的用户信息
+	 * 
+	 * @return
+	 */
+	public List<T_Customer> findAllCus(int pageIndex, int pageSize) {
+		return dao.findAllCus( pageIndex,  pageSize);
+	}
 	/**
 	 * 查询所有的顾客信息
 	 * 

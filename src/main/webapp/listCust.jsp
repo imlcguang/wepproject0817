@@ -106,7 +106,7 @@ body {
 			<th>修改</th>
 			<th>删除</th>
 		</tr>
-		<c:forEach items="${listc}" var="cust">
+		<c:forEach items="${recordResult}" var="cust">
 			<tr>
 				<td><c:out value="${cust.customerID }" /></td>
 				<td><c:out value="${cust.customerName }" /></td>
@@ -123,6 +123,16 @@ body {
 			</tr>
 		</c:forEach>
 	</table>
+	<div>
+	<a href="ListCustServlet?pageIndex=1">首页</a>  
+	<c:if test="${pageIndex>1}">
+	<a href="ListCustServlet?pageIndex=${pageIndex-1}">上一页</a>  
+	</c:if>
+	<c:out value="第${pageIndex}页/共${totalPage}页    共${totalCount}条记录" />
+	<c:if test="${totalPage>pageIndex}">
+     <a href="ListCustServlet?pageIndex=${pageIndex+1}">下一页</a>  
+     </c:if>
 	<a href=index.jsp>返回主页</a>
+</div>
 </body>
 </html>

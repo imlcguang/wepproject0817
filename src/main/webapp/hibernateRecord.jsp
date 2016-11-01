@@ -102,7 +102,7 @@ body {
 			<th>修改</th>
 			<th>删除</th>
 		</tr>
-		<c:forEach items="${requestScope.recordList}" var="borrow">
+		<c:forEach items="${pageList}" var="borrow">
 			<tr>
 				<td><c:out value="${borrow.borrowNo }" /></td>
 				<td><c:out value="${borrow.customerID.customerName }" /></td>
@@ -138,7 +138,7 @@ body {
 		
 	</table>
 		<a href="HibernateDateServlet?pageIndex=${pageIndex-1}">上一页</a>  
-      <a href="HibernateDateServlet=${pageIndex+1}">下一页</a>  
+      <a href="HibernateDateServlet?pageIndex=${pageIndex+1}">下一页</a>  
 	<a href=index.jsp>返回主页</a>
 
 </body>

@@ -28,7 +28,7 @@ public class BorrowRecordDao {
 	public static void init() {
 		session = SessionFactoryUtil.getInstance().getCurrentSession();
 		// 开启事务
-		transaction =session.beginTransaction();
+		transaction = session.beginTransaction();
 	}
 
 	public static void destory() {
@@ -136,10 +136,10 @@ public class BorrowRecordDao {
 			Session session2 = SessionFactoryUtil.getInstance().openSession();
 			Query query = session2.createQuery("from T_BorrowRecord order by BorrowNo");
 			List result = query.list();
-			/*
-			 * for (int i = 0; i < result.size(); i++) { T_BorrowRecord b =
-			 * (T_BorrowRecord) result.get(i); System.out.println(b); }
-			 */
+			
+			  for (int i = 0; i < result.size(); i++) { T_BorrowRecord b =
+			  (T_BorrowRecord) result.get(i); System.out.println(b); }
+			 
 			session2.close();
 			return result;
 		} catch (Exception e) {
@@ -149,6 +149,69 @@ public class BorrowRecordDao {
 			return result1;
 		}
 
+	}
+	
+	
+	/**
+	 * 查询总记录数
+	 * 
+	 * @return
+	 */
+	public int  countrecord() {
+		try {
+			init();
+			 int total = ((Long)this.session.createQuery("select count(id) from T_BorrowRecord ").uniqueResult()).intValue();
+			 destory();
+			 return total;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+
+	}
+	
+
+	/**
+	 * 查询所有信息分页显示
+	 * 
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public List<T_BorrowRecord> findRecord(int pageIndex, int pageSize) {
+
+		// 存放所有查询出的对象
+
+		try {
+			Session session2 = SessionFactoryUtil.getInstance().openSession();
+
+			// 获取query对象
+			String hql = "from T_BorrowRecord order by BorrowNo";
+			Query hqlQuery = session2.createQuery(hql);
+
+			// 从第几条记录开始查询
+			hqlQuery.setFirstResult((pageIndex - 1) * pageSize);
+
+			// 一共查询多少条记录
+			hqlQuery.setMaxResults(pageSize);
+
+			// 获取查询的结果
+			List<T_BorrowRecord> recordResult = hqlQuery.list();
+
+			/*for (int i = 0; i < recordResult.size(); i++) {
+				T_BorrowRecord c = new T_BorrowRecord();
+				T_BorrowRecord user = (T_BorrowRecord) recordResult.get(i);
+
+				int userid = user.getBorrowNo();
+				c = (T_BorrowRecord) session2.get(T_BorrowRecord.class, userid);
+				System.out.println(c);
+			}*/
+			session2.close();
+			return recordResult;
+
+		} catch (Exception e) {
+			throw new RuntimeException("查询所有数据异常！", e);
+		}
 	}
 
 	/**

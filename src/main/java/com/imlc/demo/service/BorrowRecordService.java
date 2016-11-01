@@ -90,6 +90,24 @@ UserDao daou=new UserDao();
 	}
 	
 	/**
+	 * 查询所有信息分页显示
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public   List<T_BorrowRecord> findRecord(int pageIndex,int pageSize) {
+		return daob.findRecord(pageIndex,pageSize);
+	}
+	
+	/**
+	 * 查询所有记录总数
+	 */
+	public int  countrecord() {
+		return daob.countrecord();
+	}
+	
+	
+	/**
 	 * 统计，按客户
 	 * @return
 	 */

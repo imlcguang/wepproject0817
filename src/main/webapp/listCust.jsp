@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -66,7 +67,7 @@ a {
 
 a:hover {
 	color: red;
-	font-size: 16px;
+
 }
 
 body {
@@ -74,8 +75,40 @@ body {
 	font-size: 10.5pt;
 	line-height: 1.5;
 }
+#News-Pagination{
+width: 180px;
+margin: 0 auto;
+}
 </style>
 </head>
+<%
+	// 获取请求的上下文
+	String context = request.getContextPath();
+%>
+<link href="pagination.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery-1.11.3.js"></script>
+<script type="text/javascript" src="jquery.pagination.js"></script>
+<script type="text/javascript">
+
+// 点击分页按钮以后触发的动作
+function handlePaginationClick(pageIndex, pagination_container) {
+    $("#cusForm").attr("action", "<%=context %>/ListCustServlet?pageIndex=" + (pageIndex+1));
+    $("#cusForm").submit();
+    return false;
+}
+
+$(function(){
+	$("#News-Pagination").pagination(${totalCount}, {
+        items_per_page:10, // 每页显示多少条记录
+        current_page:${pageIndex} - 1,// 当前显示第几页数据
+        num_display_entries:8, // 分页显示的条目数
+        next_text:"下一页",
+        prev_text:"上一页",
+        num_edge_entries:2, // 连接分页主体，显示的条目数
+        callback:handlePaginationClick
+	});
+});
+</script>
 <body style="text-align: center;">
 	<div class="head" style="text-align: left;">
 		<h2>客户信息</h2>
@@ -85,7 +118,7 @@ body {
 	<br>
 	<form
 		action="${pageContext.request.contextPath }/FindCustByCondServlet"
-		method="POST">
+		method="POST" id="cusForm">
 	<font color="red">${msg }</font>
 		客户名称:<input type="text" name="customerName" value="${param.customerName }" /> 
 			联系人姓名:<input type="text" name="relationName" value="${param.relationName }" /> 
@@ -123,16 +156,9 @@ body {
 			</tr>
 		</c:forEach>
 	</table>
-	<div>
-	<a href="ListCustServlet?pageIndex=1">首页</a>  
-	<c:if test="${pageIndex>1}">
-	<a href="ListCustServlet?pageIndex=${pageIndex-1}">上一页</a>  
-	</c:if>
-	<c:out value="第${pageIndex}页/共${totalPage}页    共${totalCount}条记录" />
-	<c:if test="${totalPage>pageIndex}">
-     <a href="ListCustServlet?pageIndex=${pageIndex+1}">下一页</a>  
-     </c:if>
-	<a href=index.jsp>返回主页</a>
-</div>
+	<br/>
+	<div  id="News-Pagination" align="center" ></div>
+	<br/><br/>
+	共${totalCount}条记录    <a href=index.jsp >返回主页</a>
 </body>
 </html>

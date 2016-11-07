@@ -11,6 +11,14 @@
 	text-align: center;
 }
 
+.pagination a:hover {
+	background: #4bacff;
+	/* 	#26B */
+	color: #fff;
+	border: solid 1px #4bacff;
+	text-align: center;
+}
+
 .pagination a, .pagination span {
 	display: block;
 	float: left;

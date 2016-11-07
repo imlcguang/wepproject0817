@@ -123,12 +123,13 @@ text-align:left;
 			    	<td class="label">权限：</td>
 			    	<td class="controler">
 			    	<!-- 复选框回显 -->
-			    	<input type="checkbox" name="FunctionPopedom" value="1" 
-			    	<c:if test="${fn:contains(1,fn:substring(user.functionPopedom, 6, 7))==true}">checked='checked'></c:if>
-			    	/> 借机登记 &nbsp;
+			    	
+			    	 <input type="checkbox" name="FunctionPopedom" value="1" 
+			    	  <c:if test="${fn:contains(1,fn:substring(user.functionPopedom, 6, 7))==true}">checked='checked'</c:if>
+			    	 /> 借机登记 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			    	  <input type="checkbox" name="FunctionPopedom" value="2" 
 			    	  <c:if test="${fn:contains(1,fn:substring(user.functionPopedom, 5, 6))==true}">checked='checked'</c:if>
-			    	 /> 样机归还 &nbsp;
+			    	 /> 样机归还 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			    	  <input type="checkbox" name="FunctionPopedom" value="3" 
 			    	  <c:if test="${fn:contains(1,fn:substring(user.functionPopedom, 4, 5))==true}">checked='checked'</c:if>
 			    	 />客户信息维护 &nbsp;<br/>
@@ -140,7 +141,7 @@ text-align:left;
 			    	 /> 借机明细查询 &nbsp;
 			    	  <input type="checkbox" name="FunctionPopedom" value="6" 
 			    	  <c:if test="${fn:contains(1,fn:substring(user.functionPopedom, 1, 2))==true}">checked='checked'</c:if>
-			    	 /> 借机统计 &nbsp;
+			    	 /> 借机统计 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			    	  <input type="checkbox" name="FunctionPopedom" value="7" 
 			    	  <c:if test="${fn:contains(1,fn:substring(user.functionPopedom, 0, 1))==true}">checked='checked'</c:if>
 			    	 /> 用户信息管理 &nbsp;

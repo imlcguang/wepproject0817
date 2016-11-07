@@ -156,12 +156,12 @@ text-align:left;
 			    <tr>
 			    	<td class="label">权限：</td>
 			    	<td class="controler">
-			    	<input type="checkbox" name="FunctionPopedom" value="1" > 借机登记 &nbsp;
-			    	  <input type="checkbox" name="FunctionPopedom" value="2" > 样机归还 &nbsp;
+			    	<input type="checkbox" name="FunctionPopedom" value="1" > 借机登记 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    	  <input type="checkbox" name="FunctionPopedom" value="2" > 样机归还 &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			    	  <input type="checkbox" name="FunctionPopedom" value="3" >客户信息维护 &nbsp;<br/>
 			    	  <input type="checkbox" name="FunctionPopedom" value="4" > 样机信息维护 &nbsp;
 			    	  <input type="checkbox" name="FunctionPopedom" value="5" > 借机明细查询 &nbsp;
-			    	  <input type="checkbox" name="FunctionPopedom" value="6" > 借机统计 &nbsp;
+			    	  <input type="checkbox" name="FunctionPopedom" value="6" > 借机统计 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			    	  <input type="checkbox" name="FunctionPopedom" value="7" > 用户信息管理 &nbsp;
 			    	</td>
 			    </tr>

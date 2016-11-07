@@ -76,8 +76,10 @@ body {
 	line-height: 1.5;
 }
 #News-Pagination{
-width: 180px;
-margin: 0 auto;
+margin-left:0;
+margin-right:0;
+display:inline-block;
+text-align:right;
 }
 </style>
 </head>

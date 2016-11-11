@@ -52,10 +52,10 @@ border-radius:8px;
 border-radius:8px;
 	/* border: 1px solid #0058a3; */  /* 单元格边框 */
 	text-align: left;
-	padding-top: 4px;
-	padding-bottom: 4px;
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	padding-left: 13px;
+	padding-right: 13px;
 	font-weight: bold;
 } 
 
@@ -82,6 +82,29 @@ body {
 width:40%;
 text-align:left;
 }
+
+#button {
+  display: inline-block;
+  padding: 3px 9px;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;   
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #3798F9;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px #999;
+}
+
+#button:hover {background-color:  #CBCBCB} 
+#button:active {
+  background-color:   #CBCBCB;
+  box-shadow: 0 3px #666;
+  transform: translateY(2px);
+}
+
 </style>
 
 </head>
@@ -161,13 +184,13 @@ text-align:left;
 					name="BorrowCheckNo" value="${param.BorrowCheckNo }"></td>
 			</tr>
 			<tr>
-
-				<td colspan="1" align="center"><br>
-					&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="注册" />&nbsp;&nbsp;
-					&nbsp; <input type="reset" value="取消" />&nbsp;</td>
-			</tr>
+			    	<td colspan="2" align="center">
+			    		<input type="submit" value="注册" id="button"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    	    <input type="reset" value="取消" id="button"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    	    <a href=index.jsp><input type="button" id="button" value="返回主页"></input></a>
+			    	</td>
+			    </tr>
 		</table>
 	</form>
-	<a href=index.jsp>返回主页</a>
 </body>
 </html>

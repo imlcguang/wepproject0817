@@ -84,6 +84,29 @@ body {
 	font-size: 10.5pt;
 	line-height: 1.5;
 }
+
+#button {
+  display: inline-block;
+  padding: 3px 9px;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;   
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #3798F9;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px #999;
+}
+
+#button:hover {background-color:  #CBCBCB} 
+#button:active {
+  background-color:   #CBCBCB;
+  box-shadow: 0 3px #666;
+  transform: translateY(2px);
+}
+
 </style>
 </head>
 <body>
@@ -98,7 +121,7 @@ body {
 			<c:if test="${param.Count=='Cus'}">checked='checked'</c:if> />按客户 <input
 			type="radio" name="Count" value="Model"
 			<c:if test="${param.Count=='Model'}">checked='checked'</c:if>>按样机
-		<input type="submit" value="排序" />
+		<input type="submit" value="排序" id="button"/>
 	</form>
 	<br>
 
@@ -153,6 +176,6 @@ body {
 		</table>
 	</c:if>
 	<br />
-	<a href=index.jsp>返回主页</a>
+	<a href=index.jsp><input type="button" id="button" value="返回主页"></input></a>
 </body>
 </html>

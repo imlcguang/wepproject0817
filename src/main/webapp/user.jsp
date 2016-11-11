@@ -40,15 +40,15 @@ border-radius:8px;
 	border-collapse: collapse; /* 边框重叠 */
 	background-color: #eaf5ff; /* 表格背景色 */
 	font-size: 14px;
-	width:666px;
+	width:680px;
 }
 .datalist td {
 	/* border: 1px solid #0058a3; */  /* 单元格边框 */
 	text-align: left;
-	padding-top: 4px;
-	padding-bottom: 4px;
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	padding-left: 13px;
+	padding-right: 13px;
 	font-weight: bold;
 } 
 
@@ -56,15 +56,6 @@ border-radius:8px;
 	background-color: #c7e5ff; /* 隔行变色 */
 }
 
-a {
-	font-weight: bold;
-	  text-decoration:none;
-}
-
-a:hover {
-	color: red;
-	font-size: 14px;
-}
 
 body {
 	font-family: "Microsoft Yahei";
@@ -75,6 +66,29 @@ body {
 width:40%;
 text-align:left;
 }
+#button {
+  display: inline-block;
+  padding: 3px 9px;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;   
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #3798F9;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px #999;
+}
+
+#button:hover {background-color:  #CBCBCB} 
+#button:active {
+  background-color:   #CBCBCB;
+  box-shadow: 0 3px #666;
+  transform: translateY(2px);
+}
+
+
 </style>
 <head>
     
@@ -157,7 +171,7 @@ text-align:left;
 			    	<td class="label">权限：</td>
 			    	<td class="controler">
 			    	<input type="checkbox" name="FunctionPopedom" value="1" > 借机登记 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			    	  <input type="checkbox" name="FunctionPopedom" value="2" > 样机归还 &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    	  <input type="checkbox" name="FunctionPopedom" value="2" > 样机归还 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			    	  <input type="checkbox" name="FunctionPopedom" value="3" >客户信息维护 &nbsp;<br/>
 			    	  <input type="checkbox" name="FunctionPopedom" value="4" > 样机信息维护 &nbsp;
 			    	  <input type="checkbox" name="FunctionPopedom" value="5" > 借机明细查询 &nbsp;
@@ -175,13 +189,14 @@ text-align:left;
   			      
   			 <tr>
 			    	<td colspan="2" align="center">
-			    		<input type="submit" value="注册"/>&nbsp;&nbsp;
-			    	    <input type="reset" value="取消"/>&nbsp;&nbsp;
+			    		<input type="submit" value="注册" id="button"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    	    <input type="reset" value="取消" id="button"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    	    <a href=index.jsp><input type="button" id="button" value="返回主页"></input></a>
 			    	</td>
 			    </tr>
+			
 			  </table>
 			</form>
-			<a href=index.jsp>返回主页</a>
-			
+		
   </body>
 </html>

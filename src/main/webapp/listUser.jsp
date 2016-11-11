@@ -70,6 +70,28 @@ a:hover {
 /* 	font-size: 16px; */
 }
 
+#button {
+  display: inline-block;
+  padding: 3px 9px;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;   
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #3798F9;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px #999;
+}
+
+#button:hover {background-color:  #CBCBCB} 
+#button:active {
+  background-color:   #CBCBCB;
+  box-shadow: 0 3px #666;
+  transform: translateY(2px);
+}
+
 body {
 	font-family: "Microsoft Yahei";
 	font-size: 10.5pt;
@@ -84,6 +106,11 @@ margin-left:0;
 margin-right:0;
 display:inline-block;text-align:right;
 }
+
+
+
+
+
 </style>
 </head>
 <%
@@ -125,13 +152,13 @@ $(function(){
 	<form
 		action="${pageContext.request.contextPath }/FindUserByNameServlet"
 		method="POST" id="userForm">
-		<select name="getid"  >
+		<select id="getid"  >
 		<option value="">请选择用户姓名</option>
 			<c:forEach items="${listu}" var="user" >
 				<option value="${user.userName }">${user.userName }</option>
 			</c:forEach>
 		</select> 
-		<input type="submit" value="条件查询用户" />
+		<input type="submit" value="条件查询用户" id="button"/>
 	</form>
 
 	<p>权限备注：1（有权限），0（无权限）。功能按顺序分别为用户信息管理、借机统计、借机明细查询、样机信息维护、客户信息维护、样机归还、借机登记</p>
@@ -163,6 +190,6 @@ $(function(){
 	<br/>
 	<div  id="News-Pagination" align="center" ></div>
 	<br/><br/>
-	共${totalCount}条记录    <a href=index.jsp >返回主页</a>
+	共${totalCount}条记录      <a href=index.jsp><input type="button" id="button" value="返回主页"></input></a>
 </body>
 </html>

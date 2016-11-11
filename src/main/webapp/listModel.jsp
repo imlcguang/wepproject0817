@@ -81,6 +81,29 @@ margin-right:0;
 display:inline-block;
 text-align:right;
 }
+
+#button {
+  display: inline-block;
+  padding: 3px 9px;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;   
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #3798F9;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px #999;
+}
+
+#button:hover {background-color:  #CBCBCB} 
+#button:active {
+  background-color:   #CBCBCB;
+  box-shadow: 0 3px #666;
+  transform: translateY(2px);
+}
+
 </style>
 </head>
 <%
@@ -113,7 +136,7 @@ $(function(){
 </script>
 <body style="text-align: center;">
 	<div class="head" style="text-align: left;">
-		<h2>借还信息</h2>
+		<h2>样机信息</h2>
 		<hr>
 		<h3>样机列表</h3>
 	</div>
@@ -122,10 +145,11 @@ $(function(){
 	<form action="${pageContext.request.contextPath }/FindModelByModelName"
 		method="POST" id="modelForm">
 		样机名称:<input type="text" name="ModelName" value="${param.ModelName }" />
-		<input type="submit" value="条件查询样机" />
+		<input type="submit" value="条件查询样机" id="button"/>
+		<br>
 	</form>
 
-
+<br>
 	<table border="1" width="100%" class="datalist">
 		<tr>
 			<th>样机 ID</th>
@@ -151,8 +175,8 @@ $(function(){
 	</table>
 	<br/>
 	<div  id="News-Pagination" align="center" ></div>
-	<br/><br/>
-	共${totalCount}条记录    <a href=index.jsp >返回主页</a>
+	<br/>
+	共${totalCount}条记录    <a href=index.jsp><input type="button" id="button" value="返回主页"></input></a>
 	
 	
 	

@@ -42,10 +42,10 @@ border-radius:8px;
 .datalist td {
 	/* border: 1px solid #0058a3; */  /* 单元格边框 */
 	text-align: left;
-	padding-top: 4px;
-	padding-bottom: 4px;
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-top: 6px;
+	padding-bottom: 15px;
+	padding-left: 13px;
+	padding-right: 13px;
 	font-weight: bold;
 } 
 
@@ -72,6 +72,29 @@ body {
 width:40%;
 text-align:left;
 }
+
+#button {
+  display: inline-block;
+  padding: 3px 9px;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;   
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #3798F9;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px #999;
+}
+
+#button:hover {background-color:  #CBCBCB} 
+#button:active {
+  background-color:   #CBCBCB;
+  box-shadow: 0 3px #666;
+  transform: translateY(2px);
+}
+
 </style>
 </head>
 <body>
@@ -92,17 +115,18 @@ text-align:left;
 			    <tr>
 			    	<td class="label">借机操作员ID：</td>
 			    	<td class="controler"><input type="text" id="ReturnOperator" name="ReturnOperator" value="${param.ReturnOperator }"></td>
-			    </tr>
-			    	<td colspan="1" align="center">
-			    	<br>
-			    		&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="归还"/>&nbsp;&nbsp;
-			    	   &nbsp; <input type="reset" value="取消"/>&nbsp;
+			 <tr>
+			    	<td colspan="2" align="center">
+			    		<input type="submit" value="注册" id="button"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    	    <input type="reset" value="取消" id="button"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    	   
 			    	</td>
 			    </tr>
 			  </table>
 			</form>
 			<br>
-			<a href=ListBorrowServlet>返回借机明细列表</a>
-			<a href=index.jsp>返回主页</a>
+			   <a href=index.jsp><input type="button" id="button" value="返回主页"></input></a>
+			    	     <a href=ListBorrowServlet><input type="button" id="button" value="返回借机明细列表"></input></a>
+			
 </body>
 </html>
